@@ -6,7 +6,7 @@ connection();
 
 // servidor
 const app = express();
-const port = 3001;
+const port = 3900;
 
 // config CORS
 app.use(cors());
@@ -18,3 +18,7 @@ app.use(express.urlencoded({extended: true}));
 
 
 //listen server
+
+app.listen(port, () => {
+    console.log("Server listening on PORT : ", port)
+})

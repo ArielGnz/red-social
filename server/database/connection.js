@@ -1,10 +1,10 @@
 
-const mongose = require("mongose");
+const mongoose = require("mongoose");
 
 const connection = async() => {
 
     try {
-        await mongose.connect("mongodb://localhost:27017/red-social");
+        await mongoose.connect("mongodb://localhost:27017/red-social");
         console.log('Conectado a la DB')
 
     } catch (error) {
@@ -13,6 +13,4 @@ const connection = async() => {
     }
 }
 
-module.exports = {
-    connection
-};
+module.exports = connection;
