@@ -36,4 +36,6 @@ const UserSchema = Schema({
         default: Date.now
     }
 
-})
+});
+
+module.exports = model("User", UserSchema, "users");
