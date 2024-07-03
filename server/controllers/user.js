@@ -21,6 +21,13 @@ const register = (req, res) => {
         if (error) return res.status(500).json({status:"error", message:"Ya existe Emial"})
     })
 
+    if(users && users.length >=1){
+        return res.status(200).send({
+            status: "success",
+            message: "El usuario ya esxiste"
+        })
+    }
+
 
     return res.status(200).json({
         status: "success",
