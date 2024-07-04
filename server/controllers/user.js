@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
 
 const register = (req, res) => {
@@ -28,6 +29,12 @@ const register = (req, res) => {
         })
     }
 
+    //cifrar contraseña
+    bcrypt.hash(userSave.password, 10, (error, pwd) => {
+        userSave.password = pwd;
+    })
+
+    //guardar usuario en DB
 
     return res.status(200).json({
         status: "success",
