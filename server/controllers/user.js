@@ -4,8 +4,10 @@ const bcrypt = require("bcrypt");
 
 const register = (req, res) => {
     
+    //registro de usuario
     let params = req.body;
 
+    //comprobacion de que llegan los parametros
     if(!params.name || !params.email || !params.password || !params.surname || !params.nick ){
         return res.status(400).json({
             status: "error",
@@ -18,22 +20,25 @@ const register = (req, res) => {
     User.find({$or: [
         {email: userSave.email.toLowerCase()},
         {nick: userSave.nick.toLowerCase()}
-    ]}).exec((error, users) => {
-        if (error) return res.status(500).json({status:"error", message:"Ya existe Emial"})
-    })
+    ]}).exec(async(error, users) => {
 
-    if(users && users.length >=1){
-        return res.status(200).send({
-            status: "success",
-            message: "El usuario ya esxiste"
+            if (error) return res.status(500).json({status:"error", message:"Ya existe Emial"})
+        
+            if(users && users.length >=1){
+                return res.status(200).send({
+                    status: "success",
+                    message: "El usuario ya esxiste"
+                })
+            }
+
+            //cifrar contraseña
+
+            let pwd = await bcrypt.hash(userSave.password, 10);
+
         })
-    }
 
-    //cifrar contraseña
-    bcrypt.hash(userSave.password, 10, (error, pwd) => {
-        userSave.password = pwd;
-    })
-
+   
+    
     //guardar usuario en DB
 
     return res.status(200).json({
