@@ -15,11 +15,9 @@ const register = (req, res) => {
         })
     }
 
-    let userSave = new User(params);
-
     User.find({$or: [
-        {email: userSave.email.toLowerCase()},
-        {nick: userSave.nick.toLowerCase()}
+        {email: params.email.toLowerCase()},
+        {nick: params.nick.toLowerCase()}
     ]}).exec(async(error, users) => {
 
             if (error) return res.status(500).json({status:"error", message:"Ya existe Emial"})
@@ -32,20 +30,29 @@ const register = (req, res) => {
             }
 
             //cifrar contraseña
+            let pwd = await bcrypt.hash(params.password, 10);
+            params.password = pwd;
 
-            let pwd = await bcrypt.hash(userSave.password, 10);
+            // Creo el objeto de usuario
+            let userSave = new User(params);
 
+            //guardar usuario en DB
+            userSave.save((err, userStored) => {
+                if (err || !userStored) return res.status(500).send({status:"error", message:"Error al guardar el usuario"})
+            
+                 // Devuelvo el resultado
+                return res.status(200).json({
+                    status: "success",
+                    message: "Accion de registro",
+                    userSave
+                });
+            });
+           
         })
 
    
     
-    //guardar usuario en DB
-
-    return res.status(200).json({
-        status: "success",
-        message: "Accion de registro",
-        userSave
-    });
+   
     
 }
 

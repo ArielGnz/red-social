@@ -2,7 +2,7 @@ const connection = require("./database/connection");
 const express = require("express");
 const cors = require("cors");
 const router = require("./routes/user");
-const UserRoutes = require("./routes/user")
+
 
 connection();
 
@@ -20,13 +20,13 @@ app.use(express.urlencoded({extended: true}));
 
 //app.use(router);
 
-const UserRoutes = require("./routes/");
-const PublicationRoutes = require("./routes/");
-const FollowRoutes = require("./routes/");
+const UserRoutes = require("./routes/user");
+//const PublicationRoutes = require("./routes/");
+//const FollowRoutes = require("./routes/");
 
 app.use("/api/user", UserRoutes);
-app.use("/api/publication", PublicationRoutes)
-app.use("/api/follow", FollowRoutes);
+//app.use("/api/publication", PublicationRoutes)
+//app.use("/api/follow", FollowRoutes);
 
 
 //listen server
