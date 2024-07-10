@@ -79,9 +79,19 @@ const login = (req, res) => {
         }
 
         // Devolver datos de usuario
+        return res.status(200).send({
+            status: "Success",
+            message: "Ingreso correctamente",
+            user:{
+                id: user._id,
+                name: user.name,
+                nick: user.nick
+            }
+        })
     })
 }
 
 module.exports = {
-    register
+    register,
+    login
 };
