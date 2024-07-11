@@ -53,45 +53,60 @@ const register = async (req, res) => {
     }
 }
 
-const login = (req, res) => {
-    // Recoger parametros
-    let params = req.body;
 
-    if(!params.email || !params.password){
+const login = async (req, res) => {
+    try {
+      // Registrar parámetros
+      let params = req.body;
+  
+      if (!params.email || !params.password) {
         return res.status(400).send({
-            status: "error",
-            message: "Faltan datos por enviar"
-        })
-    }
-
-    // Buscar en la DB si existe usuario
-    User.findOne({email: params.email}).exec((error, user) => {
-        if(error || !user) return res.status(404).send({status: "error", message:"No existe el usuario"});
-
-        // Comprobar contraseña
-        const pwd = bcrypt.compareSync(params.password, user.password);
-
-        if(!pwd) {
-            return res.status(400).send({
-                status: "error",
-                mesagge: "Error en datos de ingreso"
-            })
+          status: "error",
+          message: "Faltan datos por enviar"
+        });
+      }
+  
+      // Buscar en la BD si existe usuario
+      let user = await User.findOne({ email: params.email });
+  
+      if (!user) {
+        return res.status(404).send({
+          status: "error",
+          message: "No existe el usuario"
+        });
+      }
+  
+      // Comprobar contraseña
+      const pwd = bcrypt.compareSync(params.password, user.password);
+  
+      if (!pwd) {
+        return res.status(400).send({
+          status: "error",
+          mensaje: "Error en datos de ingreso"
+        });
+      }
+  
+      // Devolver datos de usuario
+      return res.status(200).send({
+        status: "Success",
+        message: "Ingreso correctamente",
+        usuario: {
+          id: user._id,
+          nombre: user.name,
+          nick: user.nick
         }
+      });
 
-        // Devolver datos de usuario
-        return res.status(200).send({
-            status: "Success",
-            message: "Ingreso correctamente",
-            user:{
-                id: user._id,
-                name: user.name,
-                nick: user.nick
-            }
-        })
-    })
-}
-
-module.exports = {
-    register,
-    login
+    } catch (error) {
+      return res.status(500).send({
+        status: "error",
+        message: "Error del servidor"
+      });
+    }
 };
+  
+module.exports = { 
+    register, 
+    login 
+};
+  
