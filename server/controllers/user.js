@@ -1,6 +1,7 @@
 
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("../services/jwt");
 
 const register = async (req, res) => {
     // Registro de usuario
