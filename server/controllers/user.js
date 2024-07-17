@@ -119,27 +119,53 @@ const login = async (req, res) => {
     }
 };
 
-const profile = (req, res) => {
+// const profile = (req, res) => {
+//   const id = req.params.id;
+
+//   User.findById(id)
+//     .select({password:0, role:0})
+//     .exec(async(error, userProfile) => {
+//       if(error || !userProfile){
+//         return res.status(404).send({
+//           status: "Error",
+//           message: "El usuario no existe o hay un error"
+//         })
+//       }
+
+//       return res.status(200).send({
+//         status: "Succes",
+//         user: userProfile
+//       })
+
+//     })
+ 
+// }
+
+const profile = async (req, res) => {
   const id = req.params.id;
 
-  User.findById(id)
-    .select({password:0, role:0})
-    .exec(async(error, userProfile) => {
-      if(error || !userProfile){
-        return res.status(404).send({
-          status: "Error",
-          message: "El usuario no existe o hay un error"
-        })
-      }
+  try {
+    const userProfile = await User.findById(id).select({ password: 0, role: 0 }).exec();
 
-      return res.status(200).send({
-        status: "Succes",
-        user: userProfile
-      })
+    if (!userProfile) {
+      return res.status(404).send({
+        status: "Error",
+        message: "El usuario no existe o hay un error"
+      });
+    }
 
-    })
- 
-}
+    return res.status(200).send({
+      status: "Success",
+      user: userProfile
+    });
+  } catch (error) {
+    return res.status(500).send({
+      status: "Error",
+      message: "Hay un error en la solicitud"
+    });
+  }
+};
+
   
 module.exports = { 
     pruebaUser,
