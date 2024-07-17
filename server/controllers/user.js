@@ -3,6 +3,13 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("../services/jwt");
 
+const pruebaUser = (req, res) => {
+    return res.status(200).send({
+        message: "Mensaje enviado desde: controllers/user.js",
+        usuario: req.user
+    });
+}
+
 const register = async (req, res) => {
     // Registro de usuario
     let params = req.body;
@@ -86,6 +93,9 @@ const login = async (req, res) => {
           mensaje: "Error en datos de ingreso"
         });
       }
+
+      // Conseguir Token
+      const token = jwt.createToken(user);
   
       // Devolver datos de usuario
       return res.status(200).send({
@@ -107,6 +117,7 @@ const login = async (req, res) => {
 };
   
 module.exports = { 
+    pruebaUser,
     register, 
     login 
 };
