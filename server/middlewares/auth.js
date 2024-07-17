@@ -7,7 +7,7 @@ const secret = libjwt.secret;
 
 exports.auth = (req, res, next) => {
 
-    if(!req.headers.autorization){
+    if(!req.headers.authorization){
         return res.status(403).send({
             status: "Error",
             message: "La peticion no contine la cabecera de auth"
@@ -15,7 +15,7 @@ exports.auth = (req, res, next) => {
     }
     
     // Limpiamos el Token
-    let token = req.headers.autorization.replace(/['"]+/g, '');
+    let token = req.headers.authorization.replace(/['"]+/g, '');
 
     // Decodificando el Token 
     try{

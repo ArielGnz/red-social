@@ -104,8 +104,11 @@ const login = async (req, res) => {
         usuario: {
           id: user._id,
           nombre: user.name,
+          surname: user.surname,
           nick: user.nick
-        }
+        },
+
+        token
       });
 
     } catch (error) {
@@ -115,10 +118,33 @@ const login = async (req, res) => {
       });
     }
 };
+
+const profile = (req, res) => {
+  const id = req.params.id;
+
+  User.findById(id)
+    .select({password:0, role:0})
+    .exec(async(error, userProfile) => {
+      if(error || !userProfile){
+        return res.status(404).send({
+          status: "Error",
+          message: "El usuario no existe o hay un error"
+        })
+      }
+
+      return res.status(200).send({
+        status: "Succes",
+        user: userProfile
+      })
+
+    })
+ 
+}
   
 module.exports = { 
     pruebaUser,
     register, 
-    login 
+    login,
+    profile,
 };
   
