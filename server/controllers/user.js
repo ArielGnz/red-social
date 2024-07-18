@@ -2,6 +2,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("../services/jwt");
+//const mongoosePagination = require("mongoose-pagination");
 
 const pruebaUser = (req, res) => {
     return res.status(200).send({
@@ -144,26 +145,43 @@ const profile = async (req, res) => {
   }
 };
 
-const list = (req, res) => {
-  
+const list = async (req, res) => {
   let page = 1;
-  if (req.params.page){
-    page = req.params.page;
+  if (req.params.page) {
+    page = parseInt(req.params.page, 10);
   }
 
   let itemPerPage = 5;
 
-  User.find().sort('_id').paginate(page, itemPerPage, async(error, users, total) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    const users = await User.find()
+                            .sort('_id')
+                            .skip((page - 1) * itemPerPage)
+                            .limit(itemPerPage);
 
-    if(error || !users){
+    if (!users || users.length === 0) {
       return res.status(404).send({
         status: "Error",
         message: "No hay usuarios disponibles"
-      })
+      });
     }
 
-  })
-}
+    return res.status(200).send({
+      status: "Success",
+      users: users,
+      total: totalUsers,
+      page: page,
+      pages: Math.ceil(totalUsers / itemPerPage)
+    });
+  } catch (error) {
+    return res.status(500).send({
+      status: "Error",
+      message: "Error al listar usuarios"
+    });
+  }
+};
+
 
   
 module.exports = { 
@@ -171,5 +189,6 @@ module.exports = {
     register, 
     login,
     profile,
+    list,
 };
   
