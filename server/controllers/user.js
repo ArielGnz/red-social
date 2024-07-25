@@ -182,6 +182,22 @@ const list = async (req, res) => {
   }
 };
 
+const update = (req, res) => {  
+  //recoger info del usuario a actualizar
+  let userIdentity = req.user;
+  let userToUpdate = req.body;
+
+  //ELiminar campos sobrantes
+  delete userToUpdate.iat;
+  delete userToUpdate.exp;
+  delete userToUpdate.role;
+  delete userToUpdate.image;
+  
+  // Comprobar si el usuario ya existe
+  
+
+}
+
 
   
 module.exports = { 
