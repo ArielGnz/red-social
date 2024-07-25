@@ -182,19 +182,72 @@ const list = async (req, res) => {
   }
 };
 
-const update = (req, res) => {  
-  //recoger info del usuario a actualizar
+const update = async (req, res) => {  
+  // Recoger info del usuario a actualizar
   let userIdentity = req.user;
   let userToUpdate = req.body;
 
-  //ELiminar campos sobrantes
+  // ELiminar campos sobrantes
   delete userToUpdate.iat;
   delete userToUpdate.exp;
   delete userToUpdate.role;
   delete userToUpdate.image;
   
   // Comprobar si el usuario ya existe
-  
+  try {
+    const users = await User.find({
+      $or: [
+        { email:  userToUpdate.toLowerCase() },
+        { nick: userToUpdate.toLowerCase() }
+      ]
+    }).exec();
+
+    if (users && users.length >= 1) {
+      return res.status(200).send({
+        status: "success",
+        message: "El usuario ya existe"
+      });
+    }
+
+    // Cifrar contraseña
+    if(userToUpdate.password){
+      let pwd = await bcrypt.hash(userToUpdate.password, 10);
+      userToUpdate.password = pwd;
+    } else {
+      delete userToUpdate.password;
+    }
+
+    try {
+      let userUpdate = await User.findByIdAndUpdate({_id: userIdentity.id}, userToUpdate, {new: true});
+
+      if(!userUpdate){
+        return res.status(400).json({
+          status: "error",
+          message: "Error al actualizar"
+        })
+      }
+
+      // Devolver el resultado
+      return res.status(200).send({
+        status: "succes",
+        message: "Usuario Actualizado",
+        user: userUpdate
+      })
+
+    } catch (error) {
+        return res.status(500).send({
+          status: "error",
+          message: "Error al actualizar",
+        });
+    }
+
+  } catch (error) {
+    return res.status(500).json({
+      status: "error",
+      message: error.message
+    });
+  }
+
 
 }
 
