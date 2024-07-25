@@ -197,8 +197,8 @@ const update = async (req, res) => {
   try {
     const users = await User.find({
       $or: [
-        { email:  userToUpdate.toLowerCase() },
-        { nick: userToUpdate.toLowerCase() }
+        { email:  userToUpdate.email.toLowerCase() },
+        { nick: userToUpdate.nick.toLowerCase() }
       ]
     }).exec();
 
@@ -222,7 +222,7 @@ const update = async (req, res) => {
 
       if(!userUpdate){
         return res.status(400).json({
-          status: "error",
+          status: "error lala",
           message: "Error al actualizar"
         })
       }
@@ -259,5 +259,6 @@ module.exports = {
     login,
     profile,
     list,
+    update,
 };
   
