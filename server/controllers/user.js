@@ -251,6 +251,13 @@ const update = async (req, res) => {
 
 }
 
+const upload = (req, res) => {
+  return res.status(200).send({
+    status: "success",
+    message: "Archivo subido correctamente"
+  })
+}
+
 
   
 module.exports = { 
@@ -260,5 +267,6 @@ module.exports = {
     profile,
     list,
     update,
+    upload,
 };
   
