@@ -252,9 +252,27 @@ const update = async (req, res) => {
 }
 
 const upload = (req, res) => {
+
+  // Comprobar si existe la imagen
+  if(!req.file){
+    return res.status(404).send({
+      status: "Error",
+      message: "No se ha recibido la imagen"
+    })
+  }
+
+  let image = req.file.originalname;
+
+  // extension del archivo
+  const imageSplit = image.split("\.");
+  const extension = imageSplit[1];
+
   return res.status(200).send({
     status: "success",
-    message: "Archivo subido correctamente"
+    message: "Archivo subido correctamente",
+    user: req.user,
+    file: req.file,
+    files: req.files
   })
 }
 
