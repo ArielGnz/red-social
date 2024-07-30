@@ -2,6 +2,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("../services/jwt");
+const fs = require("fs");
 //const mongoosePagination = require("mongoose-pagination");
 
 const pruebaUser = (req, res) => {
@@ -266,6 +267,19 @@ const upload = (req, res) => {
   // extension del archivo
   const imageSplit = image.split("\.");
   const extension = imageSplit[1];
+
+  // comprobar extension 
+  if(extension != "png" && extension != "jpg" && extension != "jpeg" && extension != "gif"){
+
+    // Borrar archivo subido
+    const filePath = req.file.path;
+    const fileDeleted = fs.unlinkSync(filePath);
+
+    return res.status(400).send({
+      status: "Error",
+      message: "Extension del ficehro invalida"
+    })
+  }
 
   return res.status(200).send({
     status: "success",
