@@ -16,4 +16,5 @@ const save = (req, res) => {
 
 module.exports = {
     pruebaFollow,
+    save,
 }
