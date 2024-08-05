@@ -41,8 +41,16 @@ const save = async (req, res) => {
     }
 }
 
+const unfollow = (req, res) => {
+    return res.status(200).send({
+        status: "Succes",
+        identity: req.user,
+        message: "Ha dejado de seguir al usuario"
+    })
+}
 
 module.exports = {
     pruebaFollow,
     save,
+    unfollow,
 }
