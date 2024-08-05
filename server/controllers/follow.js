@@ -29,12 +29,15 @@ const save = (req, res) => {
                 message: "No se ha podido seguir al usuario"
             });
         }
+
+        return res.status(200).send({
+            status: "success",
+            identity: req.user,
+            follow: followStored,
+        });
+        
     })
 
-    return res.status(200).send({
-        status: "success",
-        message: "siguiendo"
-    })
 }
 
 module.exports = {
