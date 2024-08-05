@@ -269,7 +269,7 @@ const upload = async (req, res) => {
     const extension = imageSplit[1];
   
     // Check extension 
-    if (extension !== "png" && extension !== "jpg" && extension !== "jpeg" && extension !== "gif") {
+    if (extension !== "png" && extension !== "jpg" && extension !== "jpeg" && extension !== "gif" && extension !== "JPG") {
       // Delete uploaded file
       const filePath = req.file.path;
       fs.unlinkSync(filePath);
