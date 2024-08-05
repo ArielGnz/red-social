@@ -7,27 +7,25 @@ const pruebaFollow = (req, res) => {
     });
 }
 
-const save = (req, res) => {
+const save = async (req, res) => {
+    try {
+        // Recoger datos
+        const params = req.body;
 
-    // Recoger datos
-    const params = req.body;
+        // Obtener id del usuario identificado
+        const identity = req.user;
 
-    // Obtener id del usuario identificado
-    const identity = req.user;
+        // Crear objeto con el modelo follow
+        let userToFollow = new Follow({
+            user: identity.id,
+            followed: params.followed
+        });
 
-    // Crear objeto con el modelo follow
-    let userToFollow = new Follow({
-        user: identity.id,
-        followed: params.followed
-    });
+        // Guardar objeto en BBDD
+        const followStored = await userToFollow.save();
 
-    // Guardar objeto en BBDD
-    userToFollow.save((error, followStored) => {
-        if(error || !followStored){
-            return res.status(500).send({
-                status: "Error",
-                message: "No se ha podido seguir al usuario"
-            });
+        if (!followStored) {
+            throw new Error("No se ha podido seguir al usuario");
         }
 
         return res.status(200).send({
@@ -35,10 +33,14 @@ const save = (req, res) => {
             identity: req.user,
             follow: followStored,
         });
-        
-    })
-
+    } catch (error) {
+        return res.status(500).send({
+            status: "Error",
+            message: error.message || "Error al seguir al usuario"
+        });
+    }
 }
+
 
 module.exports = {
     pruebaFollow,
