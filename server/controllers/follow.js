@@ -41,36 +41,44 @@ const save = async (req, res) => {
     }
 }
 
-const unfollow = (req, res) => {
+const unfollow = async (req, res) => {
+    try {
+        // Id usuario
+        const userId = req.user.id;
 
-    // Id usuario
-    const userId = req.user.id;
+        // Id del usuario que voy a dejar de seguir
+        const followId = req.params.id;
 
-    // Id del usuario que voy a dejar de seguir
-    const followId = req.params.id;
+        // Encontrar las coincidencias de Id y eliminar el seguimiento
+        const followDelete = await Follow.findOneAndDelete({
+            user: userId,
+            followed: followId 
+        });
 
-    // Encontrar las coincidencias de Id
-    Follow.find({
-        "user": userId,
-        "followId": followId 
-    }).remove((error, followDelete) =>{
-        
-        if(error || !followDelete){
-            return res.status(500).send({
+        if (!followDelete) {
+            return res.status(404).send({
                 status: "Error",
-                message: "Ha ocurrido un error"
-            })
+                message: "No se encontró el seguimiento para eliminar",
+                followDelete,
+                userId,
+                followId,
+            });
         }
 
         return res.status(200).send({
-            status: "Succes",
+            status: "Success",
             identity: req.user,
             message: "Ha dejado de seguir al usuario"
-        })
+        });
+    } catch (error) {
+        return res.status(500).send({
+            status: "Error",
+            message: "Ha ocurrido un error al dejar de seguir al usuario"
+        });
+    }
+};
 
-    })
 
-}
 
 module.exports = {
     pruebaFollow,
