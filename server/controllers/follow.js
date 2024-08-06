@@ -42,11 +42,34 @@ const save = async (req, res) => {
 }
 
 const unfollow = (req, res) => {
-    return res.status(200).send({
-        status: "Succes",
-        identity: req.user,
-        message: "Ha dejado de seguir al usuario"
+
+    // Id usuario
+    const userId = req.user.id;
+
+    // Id del usuario que voy a dejar de seguir
+    const followId = req.params.id;
+
+    // Encontrar las coincidencias de Id
+    Follow.find({
+        "user": userId,
+        "followId": followId 
+    }).remove((error, followDelete) =>{
+        
+        if(error || !followDelete){
+            return res.status(500).send({
+                status: "Error",
+                message: "Ha ocurrido un error"
+            })
+        }
+
+        return res.status(200).send({
+            status: "Succes",
+            identity: req.user,
+            message: "Ha dejado de seguir al usuario"
+        })
+
     })
+
 }
 
 module.exports = {
