@@ -81,14 +81,14 @@ const unfollow = async (req, res) => {
 const following = (req, res) => {
     return res.status(200).send({
         status: "Success",
-        message: "Listados de seguidos"
+        message: "Listados de usuarios que estoy siguiendo"
     });
 }
 
-const followed = (req, res) => {
+const followers = (req, res) => {
     return res.status(200).send({
         status: "Success",
-        message: "Listados de seguidores"
+        message: "Listados de usuarios que me siguen"
     });
 }
 
@@ -98,4 +98,6 @@ module.exports = {
     pruebaFollow,
     save,
     unfollow,
+    following,
+    followers,
 }
