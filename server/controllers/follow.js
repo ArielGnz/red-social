@@ -78,6 +78,13 @@ const unfollow = async (req, res) => {
     }
 };
 
+const following = (req, res) => {
+    return res.status(200).send({
+        status: "Success",
+        message: "Listados de seguidos"
+    });
+}
+
 
 
 module.exports = {
