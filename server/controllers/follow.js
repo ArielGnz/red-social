@@ -85,6 +85,13 @@ const following = (req, res) => {
     });
 }
 
+const followed = (req, res) => {
+    return res.status(200).send({
+        status: "Success",
+        message: "Listados de seguidores"
+    });
+}
+
 
 
 module.exports = {
