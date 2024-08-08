@@ -79,6 +79,22 @@ const unfollow = async (req, res) => {
 };
 
 const following = (req, res) => {
+
+    // Id del usuario identificado
+    let userId = req.user.id;
+
+    // Id del user por parametro
+    if(req.params.id) userId = req.params.id;
+
+    // Comprobar si llega el numero de pagina por parametro
+    let page = 1;
+
+    if(req.params.page) page = req.params.page;
+
+    // Cantidad de usuarios que quiero mostrar por paginas
+    itemPerPage = 5;
+    
+
     return res.status(200).send({
         status: "Success",
         message: "Listados de usuarios que estoy siguiendo"
