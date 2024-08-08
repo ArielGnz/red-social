@@ -93,12 +93,23 @@ const following = (req, res) => {
 
     // Cantidad de usuarios que quiero mostrar por paginas
     itemPerPage = 5;
-    
 
-    return res.status(200).send({
-        status: "Success",
-        message: "Listados de usuarios que estoy siguiendo"
-    });
+    Follow.find({user: userId})
+    .populate("user followed", "-password -role -__v, -email")
+    .paginate(page, itemPerPage, async(error, follows, total) =>{
+        
+        return res.status(200).send({
+            status: "Success",
+            message: "Listados de usuarios que estoy siguiendo",
+            follows,
+            total,
+            pages: Math.ceil(total / itemPerPage),
+            
+        });
+    })
+
+
+    
 }
 
 const followers = (req, res) => {
