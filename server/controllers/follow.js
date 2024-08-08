@@ -1,5 +1,7 @@
 const Follow = require("../models/follow");
 const User = require("../models/user");
+//const followService = require("../services/followService");
+const mongoosePaginate = require("mongoose-pagination");
 
 const pruebaFollow = (req, res) => {
     return res.status(200).send({
@@ -78,39 +80,50 @@ const unfollow = async (req, res) => {
     }
 };
 
+
 const following = (req, res) => {
-
-    // Id del usuario identificado
     let userId = req.user.id;
+    if (req.params.id) userId = req.params.id;
 
-    // Id del user por parametro
-    if(req.params.id) userId = req.params.id;
-
-    // Comprobar si llega el numero de pagina por parametro
     let page = 1;
+    if (req.params.page) page = req.params.page;
 
-    if(req.params.page) page = req.params.page;
+    const itemPerPage = 5;
 
-    // Cantidad de usuarios que quiero mostrar por paginas
-    itemPerPage = 5;
-
-    Follow.find({user: userId})
-    .populate("user followed", "-password -role -__v, -email")
-    .paginate(page, itemPerPage, async(error, follows, total) =>{
-        
-        return res.status(200).send({
-            status: "Success",
-            message: "Listados de usuarios que estoy siguiendo",
-            follows,
-            total,
-            pages: Math.ceil(total / itemPerPage),
-            
+    Follow.find({ user: userId })
+        .populate("user followed", "-password -role -__v -email")
+        .skip((page - 1) * itemPerPage)
+        .limit(itemPerPage)
+        .exec()
+        .then((follows) => {
+            Follow.countDocuments({ user: userId })
+            .exec()
+                .then((total) => {
+                    return res.status(200).send({
+                        status: "Success",
+                        message: "Listados de usuarios que estoy siguiendo",
+                        follows,
+                        total,
+                        pages: Math.ceil(total / itemPerPage),
+                    });
+                })
+                .catch((error) => {
+                    return res.status(500).send({
+                        status: "Error",
+                        message: "Error al contar los follows.",
+                        error,
+                    });
+                });
+        })
+        .catch((error) => {
+            return res.status(500).send({
+                status: "Error",
+                message: "Error al buscar follows.",
+                error,
+            });
         });
-    })
+};
 
-
-    
-}
 
 const followers = (req, res) => {
     return res.status(200).send({
