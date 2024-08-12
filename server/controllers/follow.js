@@ -126,6 +126,7 @@ const following = (req, res) => {
 
 
 const followers = (req, res) => {
+
     let userId = req.user.id;
     if (req.params.id) userId = req.params.id;
 
@@ -134,18 +135,18 @@ const followers = (req, res) => {
 
     const itemPerPage = 5;
 
-    Follow.find({ user: userId })
-        .populate("user followed", "-password -role -__v -email")
+    Follow.find({ followed: userId })
+        .populate("user", "-password -role -__v -email")
         .skip((page - 1) * itemPerPage)
         .limit(itemPerPage)
         .exec()
         .then((follows) => {
-            Follow.countDocuments({ user: userId })
+            Follow.countDocuments({ followed: userId })
             .exec()
                 .then((total) => {
                     return res.status(200).send({
                         status: "Success",
-                        message: "Listados de usuarios que estoy siguiendo",
+                        message: "Listados de usuarios que me siguen",
                         follows,
                         total,
                         pages: Math.ceil(total / itemPerPage),
