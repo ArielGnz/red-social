@@ -126,10 +126,46 @@ const following = (req, res) => {
 
 
 const followers = (req, res) => {
-    return res.status(200).send({
-        status: "Success",
-        message: "Listados de usuarios que me siguen"
-    });
+    let userId = req.user.id;
+    if (req.params.id) userId = req.params.id;
+
+    let page = 1;
+    if (req.params.page) page = req.params.page;
+
+    const itemPerPage = 5;
+
+    Follow.find({ user: userId })
+        .populate("user followed", "-password -role -__v -email")
+        .skip((page - 1) * itemPerPage)
+        .limit(itemPerPage)
+        .exec()
+        .then((follows) => {
+            Follow.countDocuments({ user: userId })
+            .exec()
+                .then((total) => {
+                    return res.status(200).send({
+                        status: "Success",
+                        message: "Listados de usuarios que estoy siguiendo",
+                        follows,
+                        total,
+                        pages: Math.ceil(total / itemPerPage),
+                    });
+                })
+                .catch((error) => {
+                    return res.status(500).send({
+                        status: "Error",
+                        message: "Error al contar los follows.",
+                        error,
+                    });
+                });
+        })
+        .catch((error) => {
+            return res.status(500).send({
+                status: "Error",
+                message: "Error al buscar follows.",
+                error,
+            });
+        });
 }
 
 
