@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("../services/jwt");
 const fs = require("fs");
 const path = require("path");
+const followService = require("../services/followService");
 //const mongoosePagination = require("mongoose-pagination");
 
 const pruebaUser = (req, res) => {
@@ -123,9 +124,11 @@ const login = async (req, res) => {
 };
 
 const profile = async (req, res) => {
+  
   const id = req.params.id;
 
   try {
+
     const userProfile = await User.findById(id).select({ password: 0, role: 0 }).exec();
 
     if (!userProfile) {
@@ -135,10 +138,15 @@ const profile = async (req, res) => {
       });
     }
 
+    const followInfo = await followService.followThisUser(req.user.id, id);
+
     return res.status(200).send({
       status: "Success",
-      user: userProfile
+      user: userProfile,
+      following: followInfo.following,
+      follower: followInfo.follower
     });
+
   } catch (error) {
     return res.status(500).send({
       status: "Error",
