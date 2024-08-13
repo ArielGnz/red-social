@@ -1,6 +1,6 @@
 const Follow = require("../models/follow");
 const User = require("../models/user");
-//const followService = require("../services/followService");
+const followService = require("../services/followService");
 const mongoosePaginate = require("mongoose-pagination");
 
 const pruebaFollow = (req, res) => {
@@ -98,13 +98,18 @@ const following = (req, res) => {
         .then((follows) => {
             Follow.countDocuments({ user: userId })
             .exec()
-                .then((total) => {
+                .then( async (total) => {
+
+                    let followUserIds = await followService.followUserIds(req.user.id);
+
                     return res.status(200).send({
                         status: "Success",
                         message: "Listados de usuarios que estoy siguiendo",
                         follows,
                         total,
                         pages: Math.ceil(total / itemPerPage),
+                        user_following: followUserIds.following,
+                        user_follow_me: followUserIds.followers
                     });
                 })
                 .catch((error) => {
@@ -143,13 +148,18 @@ const followers = (req, res) => {
         .then((follows) => {
             Follow.countDocuments({ followed: userId })
             .exec()
-                .then((total) => {
+                .then( async (total) => {
+
+                    let followUserIds = await followService.followUserIds(req.user.id);
+
                     return res.status(200).send({
                         status: "Success",
                         message: "Listados de usuarios que me siguen",
                         follows,
                         total,
                         pages: Math.ceil(total / itemPerPage),
+                        user_following: followUserIds.following,
+                        user_follow_me: followUserIds.followers
                     });
                 })
                 .catch((error) => {
