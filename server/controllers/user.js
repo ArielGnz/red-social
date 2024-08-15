@@ -131,29 +131,33 @@ const profile = async (req, res) => {
 
     const userProfile = await User.findById(id).select({ password: 0, role: 0 }).exec();
 
-    if (!userProfile) {
-      return res.status(404).send({
-        status: "Error",
-        message: "El usuario no existe o hay un error"
+      if (!userProfile) {
+        return res.status(404).send({
+          status: "Error",
+          message: "El usuario no existe o hay un error"
+        });
+      }
+
+      const followInfo = await followService.followThisUser(req.user.id, id);
+
+      return res.status(200).send({
+        status: "Success",
+        user: userProfile,
+        following: followInfo.following,
+        follower: followInfo.follower
       });
-    }
-
-    const followInfo = await followService.followThisUser(req.user.id, id);
-
-    return res.status(200).send({
-      status: "Success",
-      user: userProfile,
-      following: followInfo.following,
-      follower: followInfo.follower
-    });
 
   } catch (error) {
     return res.status(500).send({
-      status: "Error",
-      message: "Hay un error en la solicitud"
+      status: "error",
+      message: "Hay un error en solicitud",
+      
     });
   }
 };
+
+
+
 
 const list = async (req, res) => {
   let page = 1;
@@ -177,13 +181,19 @@ const list = async (req, res) => {
       });
     }
 
+    const followInfo = await followService.followThisUser(req.user.id, id);
+
     return res.status(200).send({
       status: "Success",
       users: users,
       total: totalUsers,
       page: page,
-      pages: Math.ceil(totalUsers / itemPerPage)
+      pages: Math.ceil(totalUsers / itemPerPage),
+      following: followInfo.following,
+      follower: followInfo.follower
+
     });
+    
   } catch (error) {
     return res.status(500).send({
       status: "Error",
