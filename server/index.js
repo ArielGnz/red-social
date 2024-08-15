@@ -21,11 +21,11 @@ app.use(express.urlencoded({extended: true}));
 //app.use(router);
 
 const UserRoutes = require("./routes/user");
-//const PublicationRoutes = require("./routes/");
+const PublicationRoutes = require("./routes/publication");
 const FollowRoutes = require("./routes/follow");
 
 app.use("/api/user", UserRoutes);
-//app.use("/api/publication", PublicationRoutes)
+app.use("/api/publication", PublicationRoutes)
 app.use("/api/follow", FollowRoutes);
 
 
