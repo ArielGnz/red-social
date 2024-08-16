@@ -36,8 +36,39 @@ const save = async (req, res) => {
     }
 };
 
+const detail = async (req, res) => {
+    
+    try {
+        // Sacar id de publicacion de la url
+        const publicationId = req.params.id;
+
+        // Find con la condicion del id
+        const publicationStored = await Publication.findById(publicationId);
+
+        if (!publicationStored) {
+            return res.status(404).send({
+                status: "error",
+                message: "No existe la publicacion"
+            });
+        }
+
+        // Devolver respuesta
+        return res.status(200).send({
+            status: "success",
+            message: "Mostrar publicacion",
+            publication: publicationStored
+        });
+    } catch (error) {
+        return res.status(500).send({
+            status: "error",
+            message: "Error en la petición"
+        });
+    }
+};
+
 
 module.exports = {
     pruebaPublication,
     save,
+    detail,
 }
