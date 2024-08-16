@@ -1,5 +1,5 @@
 //const publication = require("../models/publication");
-const Publication = require ("../models/publication");
+const Publication = require("../models/publication");
 
 const pruebaPublication = (req, res) => {
     return res.status(200).send({
@@ -37,7 +37,7 @@ const save = async (req, res) => {
 };
 
 const detail = async (req, res) => {
-    
+
     try {
         // Sacar id de publicacion de la url
         const publicationId = req.params.id;
@@ -58,6 +58,7 @@ const detail = async (req, res) => {
             message: "Mostrar publicacion",
             publication: publicationStored
         });
+
     } catch (error) {
         return res.status(500).send({
             status: "error",
@@ -66,9 +67,41 @@ const detail = async (req, res) => {
     }
 };
 
+const remove = async (req, res) => {
+
+    try {
+
+        const publicationId = req.params.id;
+
+        const deletePublication = await Publication.deleteOne({ "user": req.user.id, "_id": publicationId });
+
+        if (!deletePublication) {
+            return res.status(500).send({
+                status: "Error",
+                message: "No se ha podido borrar la publicacion"
+            })
+        };
+
+        return res.status(200).send({
+            status: "succes",
+            message: "Publicaion eliminada",
+            publication: publicationId
+        });
+
+    } catch (error) {
+
+        return res.status(500).send({
+            status: "Error",
+            message: "Error en la peticion de borrado"
+        })
+
+    }
+
+}
 
 module.exports = {
     pruebaPublication,
     save,
     detail,
+    remove,
 }
