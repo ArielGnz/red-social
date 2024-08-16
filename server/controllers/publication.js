@@ -1,4 +1,5 @@
 //const publication = require("../models/publication");
+const publication = require("../models/publication");
 const Publication = require("../models/publication");
 
 const pruebaPublication = (req, res) => {
@@ -99,24 +100,50 @@ const remove = async (req, res) => {
 
 }
 
-const user = (req, res) => {
+const user = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        let page = 1;
 
-    const userId = req.params.id;
+        if (req.params.page) page = req.params.page;
 
-    let page = 1;
+        const itemsPerPage = 5;
 
-    if(req.params.page) page = req.params.page;
+        const query = Publication.find({ "user": userId })
+            .sort("-created_at")
+            .populate('user', '-password -__v -role -email');
 
-    return res.status(200).send({
-        status: "succes",
-        message: "Publicaciones del perfil del usuario",
-        user: req.user
-    })
+        const publications = await query.skip((page - 1) * itemsPerPage).limit(itemsPerPage).exec();
+        const total = await Publication.countDocuments({ "user": userId });
+
+        if (!publications || publications.length <= 0) {
+            return res.status(404).send({
+                status: "error",
+                message: "No hay publicaciones para mostrar"
+            });
+        }
+
+        return res.status(200).send({
+            status: "success",
+            message: "Publicaciones del perfil del usuario",
+            page,
+            total,
+            pages: Math.ceil(total / itemsPerPage),
+            publications
+        });
+    } catch (error) {
+        return res.status(500).send({
+            status: "error",
+            message: "Error en la petición"
+        });
+    }
 }
+
 
 module.exports = {
     pruebaPublication,
     save,
     detail,
     remove,
+    user,
 }

@@ -7,5 +7,6 @@ router.get("/pruebaPublication", publicationController.pruebaPublication);
 router.post("/save", check.auth, publicationController.save);
 router.get("/detail/:id", check.auth, publicationController.detail);
 router.delete("/remove/:id", check.auth, publicationController.remove);
+router.get("/user/:id/:page?", check.auth, publicationController.user);
 
 module.exports = router;
