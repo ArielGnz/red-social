@@ -1,4 +1,4 @@
-const publication = require("../models/publication");
+//const publication = require("../models/publication");
 const Publication = require ("../models/publication");
 
 const pruebaPublication = (req, res) => {
@@ -6,11 +6,12 @@ const pruebaPublication = (req, res) => {
         message: "Mensaje enviado desde: controllers/publication.js"
     });
 }
-const save = (req, res) => {
 
+
+const save = async (req, res) => {
     const params = req.body;
 
-    if(!params.text){
+    if (!params.text) {
         return res.status(400).send({
             status: "Error",
             message: "No hay texto en la publicacion"
@@ -20,21 +21,21 @@ const save = (req, res) => {
     let newPublication = new Publication(params);
     newPublication.user = req.user.id;
 
-    newPublication.save((error, publicationStored) => {
-        if(error || !publicationStored){
-            return res.status(400).send({
-                status: "error", 
-                message: "No se ha guardado la publicación." });
-        }
-
+    try {
+        const publicationStored = await newPublication.save();
         return res.status(200).send({
             status: "success",
             message: "Publicación guardada",
             publicationStored
         });
-    })
+    } catch (error) {
+        return res.status(400).send({
+            status: "error",
+            message: "No se ha guardado la publicación."
+        });
+    }
+};
 
-}
 
 module.exports = {
     pruebaPublication,
