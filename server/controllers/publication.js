@@ -99,6 +99,21 @@ const remove = async (req, res) => {
 
 }
 
+const user = (req, res) => {
+
+    const userId = req.params.id;
+
+    let page = 1;
+
+    if(req.params.page) page = req.params.page;
+
+    return res.status(200).send({
+        status: "succes",
+        message: "Publicaciones del perfil del usuario",
+        user: req.user
+    })
+}
+
 module.exports = {
     pruebaPublication,
     save,
