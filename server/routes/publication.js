@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
         cb(null, "./uploads/publications/")
     },
     filename: (req, file, cb) => {
-        cb(null, "avatar-"+Date.now()+"-"+file.originalname);
+        cb(null, "pub-"+Date.now()+"-"+file.originalname);
     }
 });
 

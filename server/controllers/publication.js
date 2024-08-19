@@ -139,6 +139,63 @@ const user = async (req, res) => {
     }
 }
 
+const upload = async (req, res) => {
+    // Check if the image exists
+    if (!req.file) {
+      return res.status(404).send({
+        status: "Error",
+        message: "No se ha recibido la imagen"
+      });
+    }
+  
+    let image = req.file.originalname;
+  
+    // File extension
+    const imageSplit = image.split(".");
+    const extension = imageSplit[1];
+  
+    // Check extension 
+    if (extension !== "png" && extension !== "jpg" && extension !== "jpeg" && extension !== "gif" && extension !== "JPG") {
+      // Delete uploaded file
+      const filePath = req.file.path;
+      fs.unlinkSync(filePath);
+  
+      return res.status(400).send({
+        status: "Error",
+        message: "Extensión del archivo inválida"
+      });
+    }
+  
+    try {
+      // Save image in the database
+      const userUpdate = await Publication.findOneAndUpdate(
+        { "user": req.user.id },
+        { image: req.file.filename },
+        { new: true }
+      ).exec();
+  
+      if (!userUpdate) {
+        return res.status(500).send({
+          status: "Error",
+          message: "Error en la subida de archivo"
+        });
+      }
+  
+      return res.status(200).send({
+        status: "success",
+        message: "Archivo subido correctamente",
+        user: req.userUpdate,
+        file: req.file,
+        
+      });
+  
+    } catch (error) {
+      return res.status(500).send({
+        status: "Error",
+        message: "Error en la subida de archivo"
+      });
+    }
+};
 
 module.exports = {
     pruebaPublication,
