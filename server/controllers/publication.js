@@ -1,5 +1,6 @@
 //const publication = require("../models/publication");
-const publication = require("../models/publication");
+const fs = require("fs");
+const path = require("path");
 const Publication = require("../models/publication");
 
 const pruebaPublication = (req, res) => {
@@ -186,7 +187,7 @@ const upload = async (req, res) => {
       return res.status(200).send({
         status: "success",
         message: "Archivo subido correctamente",
-        publication: req.publicationUpdate,
+        publication: publicationUpdate,
         file: req.file,
         
       });
@@ -199,6 +200,27 @@ const upload = async (req, res) => {
     }
 };
 
+const media = (req, res) => {
+    // Obtener parametros
+    const file = req.params.file;
+  
+    // Obtener el path real de la imagen
+    const filePath = "./uploads/publications/" + file;
+    
+    // Comprobar que existe la imagen
+    fs.stat(filePath, (error, exists) =>{
+      if (!exists) {
+        return res.status(404).send({
+            status: "error",
+            message: "No existe la imagen"
+        });
+      }
+  
+      return res.sendFile(path.resolve(filePath));
+    })
+  
+}
+
 module.exports = {
     pruebaPublication,
     save,
@@ -206,4 +228,5 @@ module.exports = {
     remove,
     user,
     upload,
+    media,
 }

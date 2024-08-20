@@ -21,5 +21,6 @@ router.get("/detail/:id", check.auth, publicationController.detail);
 router.delete("/remove/:id", check.auth, publicationController.remove);
 router.get("/user/:id/:page?", check.auth, publicationController.user);
 router.post("/upload/:id", [check.auth, uploads.single("file0")], publicationController.upload);
+router.get("/media/:file", check.auth, publicationController.media);
 
 module.exports = router;
