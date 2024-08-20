@@ -170,13 +170,13 @@ const upload = async (req, res) => {
   
     try {
       // Save image in the database
-      const userUpdate = await Publication.findOneAndUpdate(
+      const publicationUpdate = await Publication.findOneAndUpdate(
         { "user": req.user.id, "_id": publicationId},
         { file: req.file.filename },
         { new: true }
       ).exec();
   
-      if (!userUpdate) {
+      if (!publicationUpdate) {
         return res.status(500).send({
           status: "Error",
           message: "Error en la subida de archivo"
@@ -186,7 +186,7 @@ const upload = async (req, res) => {
       return res.status(200).send({
         status: "success",
         message: "Archivo subido correctamente",
-        user: req.userUpdate,
+        publication: req.publicationUpdate,
         file: req.file,
         
       });
