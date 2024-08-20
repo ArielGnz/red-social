@@ -140,6 +140,8 @@ const user = async (req, res) => {
 }
 
 const upload = async (req, res) => {
+
+    const publicationId = req.params.id;
     // Check if the image exists
     if (!req.file) {
       return res.status(404).send({
@@ -169,8 +171,8 @@ const upload = async (req, res) => {
     try {
       // Save image in the database
       const userUpdate = await Publication.findOneAndUpdate(
-        { "user": req.user.id },
-        { image: req.file.filename },
+        { "user": req.user.id, "_id": publicationId},
+        { file: req.file.filename },
         { new: true }
       ).exec();
   
