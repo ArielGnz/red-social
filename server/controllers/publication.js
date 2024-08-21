@@ -221,6 +221,14 @@ const media = (req, res) => {
   
 }
 
+const feed = (req, res) => {
+    
+    return res.status(200).send({
+        status: "succes",
+        message: "Feed de Publicaciones"
+    })
+}
+
 module.exports = {
     pruebaPublication,
     save,
@@ -229,4 +237,5 @@ module.exports = {
     user,
     upload,
     media,
+    feed,
 }
