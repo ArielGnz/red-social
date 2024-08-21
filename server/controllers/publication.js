@@ -2,6 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 const Publication = require("../models/publication");
+const followService = require("../services/followService");
 
 const pruebaPublication = (req, res) => {
     return res.status(200).send({
@@ -221,8 +222,23 @@ const media = (req, res) => {
   
 }
 
-const feed = (req, res) => {
-    
+const feed = async(req, res) => {
+
+    let page = 1;
+    if(req.params.page){
+        page = req.params.page;
+    }
+
+    let itemsPerPage = 5;
+
+    try {
+
+        const myFollows = await foll
+
+    } catch (error) {
+        
+    }
+
     return res.status(200).send({
         status: "succes",
         message: "Feed de Publicaciones"
