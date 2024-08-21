@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const Publication = require("../models/publication");
 const followService = require("../services/followService");
+const { error } = require("console");
 
 const pruebaPublication = (req, res) => {
     return res.status(200).send({
@@ -233,10 +234,36 @@ const feed = async(req, res) => {
 
     try {
 
-        const myFollows = await foll
+        const myFollows = await followService.followUserIds(req.user.id);
+
+        const publications = Publication.find({user: myFollows.following})
+            .populate("user", "-password -role -__v -email")
+            .sort("-created_at")
+            .paginate(page, itemsPerPage, (error, publications, total) => {
+                if(error || !publications){
+                    return res.status(500).send({
+                        status: "error",
+                        message: "No hay publicaciones para mostrar",
+                    });
+                }
+
+                return res.status(200).send({
+                    status: "success",
+                    message: "Feed de publicaciones",
+                    following: myFollows.following,
+                    total,
+                    page,
+                    pages: Math.ceil(total / itemsPerPage),
+                    publications
+                });
+
+            })
 
     } catch (error) {
-        
+        return res.status(500).send({
+            status: "error",
+            message: "Error al obtener usuarios que sigues",
+        });
     }
 
     return res.status(200).send({
