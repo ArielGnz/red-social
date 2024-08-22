@@ -1,12 +1,13 @@
+import { Header } from "./components/layout/general/Header"
 
 
 function App() {
  
 
   return (
-    <>
-      <h1>Hola Arielo</h1>
-    </>
+    <div className="layout">
+      <Header />
+    </div>
   )
 }
 
