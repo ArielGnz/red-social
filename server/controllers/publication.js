@@ -3,7 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const Publication = require("../models/publication");
 const followService = require("../services/followService");
-const { error } = require("console");
+const mongoosePagination = require("mongoose-pagination");
+//const { error } = require("console");
 
 const pruebaPublication = (req, res) => {
     return res.status(200).send({
@@ -223,11 +224,11 @@ const media = (req, res) => {
   
 }
 
-const feed = async(req, res) => {
-
+const feed = async (req, res) => {
+   
     let page = 1;
-    if(req.params.page){
-        page = req.params.page;
+    if (req.params.page) {
+        page = parseInt(req.params.page, 10);
     }
 
     let itemsPerPage = 5;
@@ -236,28 +237,30 @@ const feed = async(req, res) => {
 
         const myFollows = await followService.followUserIds(req.user.id);
 
-        const publications = Publication.find({user: myFollows.following})
+        const publication =  await Publication.find({ user: myFollows.following })
             .populate("user", "-password -role -__v -email")
             .sort("-created_at")
-            .paginate(page, itemsPerPage, (error, publications, total) => {
-                if(error || !publications){
-                    return res.status(500).send({
-                        status: "error",
-                        message: "No hay publicaciones para mostrar",
-                    });
-                }
+            .skip((page - 1) * itemsPerPage)
+            .limit(itemsPerPage)
+                   
+        const total = await Publication.countDocuments({ user: myFollows.following });
 
-                return res.status(200).send({
-                    status: "success",
-                    message: "Feed de publicaciones",
-                    following: myFollows.following,
-                    total,
-                    page,
-                    pages: Math.ceil(total / itemsPerPage),
-                    publications
-                });
+        if (!publication || publication.length === 0) {
+            return res.status(500).send({
+                status: "error",
+                message: "No hay publicaciones para mostrar",
+            });
+        }
 
-            })
+        return res.status(200).send({
+            status: "success",
+            message: "Feed de publicaciones",
+            following: myFollows.following,
+            total,
+            page,
+            pages: Math.ceil(total / itemsPerPage),
+            publication
+        });
 
     } catch (error) {
         return res.status(500).send({
@@ -265,12 +268,7 @@ const feed = async(req, res) => {
             message: "Error al obtener usuarios que sigues",
         });
     }
-
-    return res.status(200).send({
-        status: "succes",
-        message: "Feed de Publicaciones"
-    })
-}
+};
 
 module.exports = {
     pruebaPublication,
