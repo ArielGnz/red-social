@@ -8,14 +8,14 @@ export const Nav = () => {
             <ul className="container-lists__menu-list">
                 <li className="menu-list__item">
                     <a href="#" className="menu-list__link">
-                        <i className="fa-solid fa-house"></i>
+                        <i className="fa-solid fa-user"></i>
                         <span className="menu-list__title">Login</span>
                     </a>
                 </li>
 
                 <li className="menu-list__item">
                     <a href="#" className="menu-list__link">
-                        <i className="fa-solid fa-list"></i>
+                        <i className="fa-solid fa-users"></i>
                         <span className="menu-list__title">Register</span>
                     </a>
                 </li>
