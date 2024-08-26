@@ -1,4 +1,4 @@
-import { Header } from "./components/layout/general/Header"
+import { Header } from "./components/layout/public/Header"
 
 
 function App() {
