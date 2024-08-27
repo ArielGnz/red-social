@@ -1,6 +1,6 @@
-import {Routing} from './router/Routing';
+import Routing from './router/Routing'
 
-function App() {
+const App = () => {
  
 
   return (
