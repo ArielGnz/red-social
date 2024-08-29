@@ -5,6 +5,14 @@ export default function Register() {
 
     const {form, changed} = useForm({})
 
+    const saveUser = (e) => {
+        e.preventDefault();
+
+        let newUSer = form;
+        console.log(newUSer);
+
+    }
+
     return (
         <>
             <header className="content__header content__header--public">
@@ -12,7 +20,8 @@ export default function Register() {
             </header>
 
             <div className="content__posts">
-                <form className='register-form'>
+
+                <form className='register-form' onSubmit={saveUser}>
                     
                     <div className='form-group'>
                         <label htmlFor="name">Nombre</label>
