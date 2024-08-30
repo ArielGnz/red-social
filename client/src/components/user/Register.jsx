@@ -38,8 +38,8 @@ export default function Register() {
 
             <div className="content__posts">
 
-                <strong className='alert alert-success'>{saved == "saved" ? "Usuario registrado correctamente!!" : " "}</strong>
-                <strong className='alert alert-danger'>{saved == "Error" ? "Error al registrar el usuario" : " "}</strong>
+            {saved == "saved" ? <strong className='alert alert-success'> "Usuario registrado correctamente!!" </strong>: " "}
+            {saved == "Error" ? <strong className='alert alert-danger'> "Error al registrar el usuario" </strong>: " "}
 
                 <form className='register-form' onSubmit={saveUser}>
                     
