@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from '../../hooks/useForm';
 import { Global }  from '../../helpers/Global';
 
 export default function Register() {
 
-    const {form, changed} = useForm({})
+    const {form, changed} = useForm({});
+    const [saved ,setSaved] = useState("not_saved");
 
     const saveUser = async (e) => {
         e.preventDefault();
 
         let newUSer = form;
-        console.log(newUSer)
         
         const request = await fetch(Global.url + "user/register", {
             method: "POST",
@@ -22,6 +22,12 @@ export default function Register() {
 
         const data = await request.json();
 
+        if(data.status == "success"){
+            setSaved("saved");
+        } else {
+            setSaved("Error")
+        }
+
     }
 
     return (
@@ -31,6 +37,9 @@ export default function Register() {
             </header>
 
             <div className="content__posts">
+
+                <strong className='alert alert-success'>{saved == "saved" ? "Usuario registrado correctamente!!" : " "}</strong>
+                <strong className='alert alert-danger'>{saved == "Error" ? "Error al registrar el usuario" : " "}</strong>
 
                 <form className='register-form' onSubmit={saveUser}>
                     
