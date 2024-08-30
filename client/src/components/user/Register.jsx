@@ -1,15 +1,26 @@
 import React from 'react'
-import { useForm } from '../../hooks/useForm'
+import { useForm } from '../../hooks/useForm';
+import { Global }  from '../../helpers/Global';
 
 export default function Register() {
 
     const {form, changed} = useForm({})
 
-    const saveUser = (e) => {
+    const saveUser = async (e) => {
         e.preventDefault();
 
         let newUSer = form;
-        console.log(newUSer);
+        console.log(newUSer)
+        
+        const request = await fetch(Global.url + "user/register", {
+            method: "POST",
+            body: JSON.stringify(newUSer),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        const data = await request.json();
 
     }
 
@@ -29,8 +40,8 @@ export default function Register() {
                     </div>
 
                     <div className='form-group'>
-                        <label htmlFor="surnname">Apellido</label>
-                        <input type="text" name='surnname' onChange={changed}/>
+                        <label htmlFor="surname">Apellido</label>
+                        <input type="text" name='surname' onChange={changed}/>
                     </div>
 
                     <div className='form-group'>

@@ -19,7 +19,7 @@ const register = async (req, res) => {
     let params = req.body;
 
     // Comprobacion de que llegan los parametros
-    if (!params.name || !params.email || !params.password || !params.surname || !params.nick) {
+    if (!params.name || !params.surname || !params.nick || !params.email || !params.password) {
         return res.status(400).json({
             status: "error",
             message: "Faltan Datos"
