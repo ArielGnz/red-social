@@ -105,7 +105,7 @@ const login = async (req, res) => {
       return res.status(200).send({
         status: "Success",
         message: "Ingreso correctamente",
-        usuario: {
+        user: {
           id: user._id,
           nombre: user.name,
           surname: user.surname,
