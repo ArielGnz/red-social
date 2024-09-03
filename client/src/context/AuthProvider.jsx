@@ -9,9 +9,21 @@ export const AuthProvider = ({ children }) => {
     
     const [auth, setAuth] = useState({});
 
-    useEffect(() => {
+    const authUser = async() => {
 
+        const token = localStorage.getItem("token");
+        const user = localStorage.getItem("user");
+
+        if(!token || !user){
+            return false;
+        }
+    }
+
+    useEffect(() => {
+        authUser()
     }, []);
+
+
     
     return (
 
