@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import { useState, useEffect, createContext } from 'react';
 
 
@@ -7,7 +7,11 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     
-    const [compartido, setCompartido] = useState("compartido en todos los componentes")
+    const [auth, setAuth] = useState({});
+
+    useEffect(() => {
+
+    }, []);
     
     return (
 
@@ -17,3 +21,5 @@ export const AuthProvider = ({ children }) => {
     
     )
 }
+
+export default AuthContext;

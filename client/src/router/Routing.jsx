@@ -11,6 +11,7 @@ const Routing = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
+
         <Routes>
           <Route path='/' element={<PublicLayout />}>
             <Route index element={<Login />} />
@@ -32,6 +33,7 @@ const Routing = () => {
             </>
           } />
         </Routes>
+        
       </AuthProvider>
     </BrowserRouter>
   )
