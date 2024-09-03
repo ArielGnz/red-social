@@ -1,12 +1,17 @@
 import React from 'react'
-import avatar from '../../../assets/img/user.png'
+import avatar from '../../../assets/img/user.png';
+import useAuth from '../../../hooks/useAuth'
 
 export const SideBar = () => {
+
+    const {auth} = useAuth();
+    console.log(auth);
+
     return (
         <aside className="layout__aside">
 
             <header className="aside__header">
-                <h1 className="aside__title">Hola, Victor</h1>
+                <h1 className="aside__title">Hola, {auth.name}</h1>
             </header>
 
             <div className="aside__container">
@@ -19,8 +24,8 @@ export const SideBar = () => {
                         </div>
 
                         <div className="general-info__container-names">
-                            <a href="#" className="container-names__name">Victor Robles</a>
-                            <p className="container-names__nickname">VictorWeb</p>
+                            <a href="#" className="container-names__name">{auth.name} {auth.surname}</a>
+                            <p className="container-names__nickname">{auth.nick}</p>
                         </div>
                     </div>
 
