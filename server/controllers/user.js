@@ -1,5 +1,7 @@
 
 const User = require("../models/user");
+const Follow = require("../models/follow");
+const Publication = require("../models/publication");
 const bcrypt = require("bcrypt");
 const jwt = require("../services/jwt");
 const fs = require("fs");
@@ -349,7 +351,7 @@ const avatar = (req, res) => {
   })
 
 }
-  
+
 const counters = async (req, res) => {
 
   let userId = req.user.id;
@@ -359,26 +361,28 @@ const counters = async (req, res) => {
   }
 
   try {
-      const following = await Follow.count({ "user": userId });
-
-      const followed = await Follow.count({ "followed": userId });
-
-      const publications = await Publication.count({ "user": userId });
+      const followingCount = await Follow.countDocuments({ user: userId });
+      const followedCount = await Follow.countDocuments({ followed: userId });
+      const publicationsCount = await Publication.countDocuments({ user: userId });
 
       return res.status(200).send({
           userId,
-          following: following,
-          followed: followed,
-          publications: publications
+          following: followingCount,
+          followed: followedCount,
+          publications: publicationsCount
       });
+
   } catch (error) {
+      console.error(error);
       return res.status(500).send({
           status: "error",
           message: "Error en los contadores",
-          error
+          error: error.message,
+          userId,
       });
   }
 }
+  
 
 module.exports = { 
     pruebaUser,
