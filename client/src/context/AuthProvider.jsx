@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const [auth, setAuth] = useState({});
     const [counters, setCounters] = useState({});
+    const [loading, setLoading] = useState(true);
 
     const authUser = async () => {
 
