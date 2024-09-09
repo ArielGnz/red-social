@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
         })
 
         const data = await request.json();
-        setAuth(data.user)
+        
        
         const requestCounters = await fetch(Global.url + "user/counters/" + userId, {
             method: "GET",
@@ -44,7 +44,11 @@ export const AuthProvider = ({ children }) => {
         })
 
         const dataCounters = await requestCounters.json();
+
+
+        setAuth(data.user);
         setCounters(dataCounters);
+        setLoading(false);
 
         
     }
