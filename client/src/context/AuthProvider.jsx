@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
         const user = localStorage.getItem("user");
 
         if (!token || !user) {
+            setLoading(false);
             return false;
         }
 
