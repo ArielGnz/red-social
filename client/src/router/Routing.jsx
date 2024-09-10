@@ -6,6 +6,7 @@ import Register from '../components/user/Register';
 import { Login } from '../components/user/Login';
 import { Feed } from '../components/publication/Feed';
 import { AuthProvider } from '../context/AuthProvider';
+import { Logout } from '../components/user/Logout';
 
 const Routing = () => {
   return (
@@ -22,6 +23,7 @@ const Routing = () => {
           <Route path='/social' element={<PrivateLayout />}>
             <Route index element={<Feed />} />
             <Route path='feed' element={<Feed />} />
+            <Route path='logout' element={<Logout />} />
           </Route>
 
           <Route path='*' element={
@@ -33,7 +35,7 @@ const Routing = () => {
             </>
           } />
         </Routes>
-        
+
       </AuthProvider>
     </BrowserRouter>
   )
