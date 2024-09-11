@@ -42,10 +42,10 @@ export const Nav = () => {
                     </a>
                 </li>
                 <li className="list-end__item">
-                    <a href="#" className="list-end__link">
+                    <NavLink to="/social/ajustes" className="list-end__link">
                         <i className='fa-solid fa-gear'></i>
                         <span className="list-end__name">Ajustes</span>
-                    </a>
+                    </NavLink>
                 </li>
                 <li className="list-end__item">
                     <NavLink to="/social/logout" className="list-end__link">

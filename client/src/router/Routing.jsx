@@ -7,6 +7,8 @@ import { Login } from '../components/user/Login';
 import { Feed } from '../components/publication/Feed';
 import { AuthProvider } from '../context/AuthProvider';
 import { Logout } from '../components/user/Logout';
+import { Peopel } from '../components/user/Peopel';
+import { Config } from '../components/user/Config';
 
 const Routing = () => {
   return (
@@ -24,6 +26,9 @@ const Routing = () => {
             <Route index element={<Feed />} />
             <Route path='feed' element={<Feed />} />
             <Route path='logout' element={<Logout />} />
+            <Route path='gente' element={<Peopel />} />
+            <Route path='ajustes' element={<Config />} />
+            
           </Route>
 
           <Route path='*' element={
