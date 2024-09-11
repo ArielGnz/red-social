@@ -1,7 +1,63 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export const Config = () => {
-  return (
-    <div>Config</div>
-  )
+
+    const [saved, setSaved] = useState("not_saved");
+
+    const updateUser = (e) => {
+        e.preventDefault();
+    }
+
+    return (
+        <>
+            <header className="content__header content__header--public">
+                <h1 className="content__title">Ajustes</h1>
+            </header>
+
+            <div className='content__posts'>
+
+                {saved == "saved" ? <strong className='alert alert-success'> "Usuario registrado correctamente!!" </strong> : " "}
+                {saved == "Error" ? <strong className='alert alert-danger'> "Error al registrar el usuario" </strong> : " "}
+
+                <form className='config-form' onSubmit={updateUser}>
+
+                    <div className='form-group'>
+                        <label htmlFor="name">Nombre</label>
+                        <input type="text" name='name' onChange={changed} />
+                    </div>
+
+                    <div className='form-group'>
+                        <label htmlFor="surname">Apellido</label>
+                        <input type="text" name='surname' onChange={changed} />
+                    </div>
+
+                    <div className='form-group'>
+                        <label htmlFor="nick">Nick</label>
+                        <input type="text" name='nick' onChange={changed} />
+                    </div>
+
+                    <div className='form-group'>
+                        <label htmlFor="email">Email</label>
+                        <input type="email" name='email' onChange={changed} />
+                    </div>
+
+                    <div className='form-group'>
+                        <label htmlFor="password">Contraseña</label>
+                        <input type="password" name='password' onChange={changed} />
+                    </div>
+
+                    <div className='form-group'>
+                        <label htmlFor="file0">Avatar</label>
+                        <div className='avatar'>
+
+                        </div>
+                        <input type="file" name='file0' id='file' />
+                    </div>
+
+                    <input type="submit" value="Registrate" className='btn btn-success' />
+                </form>
+
+            </div>
+        </>
+    )
 }
