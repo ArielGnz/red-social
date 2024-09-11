@@ -22,8 +22,7 @@ export const SideBar = () => {
                     <div className="profile-info__general-info">
                         <div className="general-info__container-avatar">
                             {auth.image != "default.png" && <img src={Global.url + "user/avatar/" + auth.image} className="container-avatar__img" alt="Foto de perfil" />}
-                            {auth.image == "default.png" && <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />}
-                            
+                            {auth.image == "default.png" && <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />} 
                         </div>
 
                         <div className="general-info__container-names">
