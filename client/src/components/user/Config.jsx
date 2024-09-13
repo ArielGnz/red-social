@@ -9,11 +9,21 @@ export const Config = () => {
 
     const [saved, setSaved] = useState("not_saved");
 
-    const updateUser = (e) => {
+    const updateUser = async (e) => {
         e.preventDefault();
 
         let newDataUser = SerializeForm(e.target);
         delete newDataUser.file0;
+
+        const request = await fetch(Global.url + "user/update", {
+            method: "PUT",
+            body: JSON.stringify(newDataUser),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }
+        })
+
     }
 
     return (
