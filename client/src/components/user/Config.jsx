@@ -22,7 +22,15 @@ export const Config = () => {
                 "Content-Type": "application/json",
                 "Authorization": localStorage.getItem("token")
             }
-        })
+        });
+
+        const data = await request.json();
+
+        if(data.status == "success"){
+            setSaved("saved")
+        } else {
+            setSaved("error")
+        }
 
     }
 
