@@ -5,7 +5,7 @@ import { SerializeForm } from '../../helpers/SerializeForm';
 
 export const Config = () => {
 
-    const { auth } = useAuth();
+    const {auth ,setAuth} = useAuth();
 
     const [saved, setSaved] = useState("not_saved");
 
@@ -25,11 +25,15 @@ export const Config = () => {
         });
 
         const data = await request.json();
+        console.log(data)
 
         if(data.status == "success"){
-            setSaved("saved")
+            delete data.user.password;
+            setAuth(data.user);
+            setSaved("saved");
+            console.log(auth)
         } else {
-            setSaved("error")
+            setSaved("Error")
         }
 
     }
@@ -42,8 +46,8 @@ export const Config = () => {
 
             <div className='content__posts'>
 
-                {saved == "saved" ? <strong className='alert alert-success'> "Usuario registrado correctamente!!" </strong> : " "}
-                {saved == "Error" ? <strong className='alert alert-danger'> "Error al registrar el usuario" </strong> : " "}
+                {saved == "saved" ? <strong className='alert alert-success'> "Usuario Actualizado correctamente!!" </strong> : " "}
+                {saved == "Error" ? <strong className='alert alert-danger'> "Error al Actualizar el usuario" </strong> : " "}
 
                 <form className='config-form' onSubmit={updateUser}>
 
@@ -88,7 +92,7 @@ export const Config = () => {
                     </div>
                     <br />
 
-                    <input type="submit" value="Registrate" className='btn btn-success' />
+                    <input type="submit" value="Actualizar" className='btn btn-success' />
                 </form>
 
             </div>

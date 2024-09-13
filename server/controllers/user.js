@@ -10,150 +10,150 @@ const followService = require("../services/followService");
 //const mongoosePagination = require("mongoose-pagination");
 
 const pruebaUser = (req, res) => {
-    return res.status(200).send({
-        message: "Mensaje enviado desde: controllers/user.js",
-        usuario: req.user
-    });
+  return res.status(200).send({
+    message: "Mensaje enviado desde: controllers/user.js",
+    usuario: req.user
+  });
 }
 
 const register = async (req, res) => {
-    // Registro de usuario
-    let params = req.body;
+  // Registro de usuario
+  let params = req.body;
 
-    // Comprobacion de que llegan los parametros
-    if (!params.name || !params.surname || !params.nick || !params.email || !params.password) {
-        return res.status(400).json({
-            status: "error",
-            message: "Faltan Datos"
-        });
+  // Comprobacion de que llegan los parametros
+  if (!params.name || !params.surname || !params.nick || !params.email || !params.password) {
+    return res.status(400).json({
+      status: "error",
+      message: "Faltan Datos"
+    });
+  }
+
+  try {
+    const users = await User.find({
+      $or: [
+        { email: params.email.toLowerCase() },
+        { nick: params.nick.toLowerCase() }
+      ]
+    }).exec();
+
+    if (users && users.length >= 1) {
+      return res.status(200).send({
+        status: "success",
+        message: "El usuario ya existe"
+      });
     }
 
-    try {
-        const users = await User.find({
-            $or: [
-                { email: params.email.toLowerCase() },
-                { nick: params.nick.toLowerCase() }
-            ]
-        }).exec();
+    // Cifrar contraseña
+    let pwd = await bcrypt.hash(params.password, 10);
+    params.password = pwd;
 
-        if (users && users.length >= 1) {
-            return res.status(200).send({
-                status: "success",
-                message: "El usuario ya existe"
-            });
-        }
+    // Crear el objeto de usuario
+    let userSave = new User(params);
 
-        // Cifrar contraseña
-        let pwd = await bcrypt.hash(params.password, 10);
-        params.password = pwd;
+    // Guardar usuario en DB
+    const userStored = await userSave.save();
 
-        // Crear el objeto de usuario
-        let userSave = new User(params);
-
-        // Guardar usuario en DB
-        const userStored = await userSave.save();
-
-        // Devolver el resultado
-        return res.status(200).json({
-            status: "success",
-            message: "Usuario registrado correctamente",
-            user: userStored
-        });
-    } catch (error) {
-        return res.status(500).json({
-            status: "error",
-            message: error.message
-        });
-    }
+    // Devolver el resultado
+    return res.status(200).json({
+      status: "success",
+      message: "Usuario registrado correctamente",
+      user: userStored
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "error",
+      message: error.message
+    });
+  }
 }
 
 
 const login = async (req, res) => {
-    try {
-      // Registrar parámetros
-      let params = req.body;
-  
-      if (!params.email || !params.password) {
-        return res.status(400).send({
-          status: "error",
-          message: "Faltan datos por enviar"
-        });
-      }
-  
-      // Buscar en la BD si existe usuario
-      let user = await User.findOne({ email: params.email });
-  
-      if (!user) {
-        return res.status(404).send({
-          status: "error",
-          message: "No existe el usuario"
-        });
-      }
-  
-      // Comprobar contraseña
-      const pwd = bcrypt.compareSync(params.password, user.password);
-  
-      if (!pwd) {
-        return res.status(400).send({
-          status: "error",
-          mensaje: "Error en datos de ingreso"
-        });
-      }
+  try {
+    // Registrar parámetros
+    let params = req.body;
 
-      // Conseguir Token
-      const token = jwt.createToken(user);
-  
-      // Devolver datos de usuario
-      return res.status(200).send({
-        status: "Success",
-        message: "Ingreso correctamente",
-        user: {
-          id: user._id,
-          nombre: user.name,
-          surname: user.surname,
-          nick: user.nick
-        },
-
-        token
-      });
-
-    } catch (error) {
-      return res.status(500).send({
+    if (!params.email || !params.password) {
+      return res.status(400).send({
         status: "error",
-        message: "Error del servidor"
+        message: "Faltan datos por enviar"
       });
     }
+
+    // Buscar en la BD si existe usuario
+    let user = await User.findOne({ email: params.email });
+
+    if (!user) {
+      return res.status(404).send({
+        status: "error",
+        message: "No existe el usuario"
+      });
+    }
+
+    // Comprobar contraseña
+    const pwd = bcrypt.compareSync(params.password, user.password);
+
+    if (!pwd) {
+      return res.status(400).send({
+        status: "error",
+        mensaje: "Error en datos de ingreso"
+      });
+    }
+
+    // Conseguir Token
+    const token = jwt.createToken(user);
+
+    // Devolver datos de usuario
+    return res.status(200).send({
+      status: "Success",
+      message: "Ingreso correctamente",
+      user: {
+        id: user._id,
+        nombre: user.name,
+        surname: user.surname,
+        nick: user.nick
+      },
+
+      token
+    });
+
+  } catch (error) {
+    return res.status(500).send({
+      status: "error",
+      message: "Error del servidor"
+    });
+  }
 };
 
 const profile = async (req, res) => {
-  
+
   const id = req.params.id;
 
   try {
 
     const userProfile = await User.findById(id).select({ password: 0, role: 0 }).exec();
 
-      if (!userProfile) {
-        return res.status(404).send({
-          status: "Error",
-          message: "El usuario no existe o hay un error"
-        });
-      }
-
-      const followInfo = await followService.followThisUser(req.user.id, id);
-
-      return res.status(200).send({
-        status: "Success",
-        user: userProfile,
-        following: followInfo.following,
-        follower: followInfo.follower
+    if (!userProfile) {
+      return res.status(404).send({
+        status: "Error",
+        message: "El usuario no existe o hay un error"
       });
+    }
+
+    const followInfo = await followService.followThisUser(req.user.id, id);
+
+    return res.status(200).send({
+      status: "Success",
+      user: userProfile,
+      following: followInfo.following,
+      follower: followInfo.follower
+    });
 
   } catch (error) {
     return res.status(500).send({
       status: "error",
       message: "Hay un error en solicitud",
-      
+
     });
   }
 };
@@ -172,9 +172,9 @@ const list = async (req, res) => {
   try {
     const totalUsers = await User.countDocuments();
     const users = await User.find()
-                            .sort('_id')
-                            .skip((page - 1) * itemPerPage)
-                            .limit(itemPerPage);
+      .sort('_id')
+      .skip((page - 1) * itemPerPage)
+      .limit(itemPerPage);
 
     if (!users || users.length === 0) {
       return res.status(404).send({
@@ -195,7 +195,7 @@ const list = async (req, res) => {
       follower: followInfo.follower
 
     });
-    
+
   } catch (error) {
     return res.status(500).send({
       status: "Error",
@@ -204,7 +204,7 @@ const list = async (req, res) => {
   }
 };
 
-const update = async (req, res) => {  
+const update = async (req, res) => {
   // Recoger info del usuario a actualizar
   let userIdentity = req.user;
   let userToUpdate = req.body;
@@ -214,25 +214,37 @@ const update = async (req, res) => {
   delete userToUpdate.exp;
   delete userToUpdate.role;
   delete userToUpdate.image;
-  
+
   // Comprobar si el usuario ya existe
   try {
     const users = await User.find({
       $or: [
-        { email:  userToUpdate.email.toLowerCase() },
+        { email: userToUpdate.email.toLowerCase() },
         { nick: userToUpdate.nick.toLowerCase() }
       ]
     }).exec();
 
-    if (users && users.length >= 1) {
+    let userIsset = false;
+    users.forEach(user => {
+      if (user && user._id != userIdentity.id) userIsset = true;
+    });
+
+    if (userIsset) {
       return res.status(200).send({
         status: "success",
         message: "El usuario ya existe"
       });
     }
 
+    // if (users && users.length >= 1) {
+    //   return res.status(200).send({
+    //     status: "success",
+    //     message: "El usuario ya existe"
+    //   });
+    // }
+
     // Cifrar contraseña
-    if(userToUpdate.password){
+    if (userToUpdate.password) {
       let pwd = await bcrypt.hash(userToUpdate.password, 10);
       userToUpdate.password = pwd;
     } else {
@@ -240,9 +252,9 @@ const update = async (req, res) => {
     }
 
     try {
-      let userUpdate = await User.findByIdAndUpdate({_id: userIdentity.id}, userToUpdate, {new: true});
+      let userUpdate = await User.findByIdAndUpdate({ _id: userIdentity.id }, userToUpdate, { new: true });
 
-      if(!userUpdate){
+      if (!userUpdate) {
         return res.status(400).json({
           status: "error lala",
           message: "Error al actualizar"
@@ -251,16 +263,16 @@ const update = async (req, res) => {
 
       // Devolver el resultado
       return res.status(200).send({
-        status: "succes",
+        status: "success",
         message: "Usuario Actualizado",
         user: userUpdate
       })
 
     } catch (error) {
-        return res.status(500).send({
-          status: "error",
-          message: "Error al actualizar",
-        });
+      return res.status(500).send({
+        status: "error",
+        message: "Error al actualizar",
+      });
     }
 
   } catch (error) {
@@ -274,61 +286,61 @@ const update = async (req, res) => {
 
 
 const upload = async (req, res) => {
-    // Check if the image exists
-    if (!req.file) {
-      return res.status(404).send({
-        status: "Error",
-        message: "No se ha recibido la imagen"
-      });
-    }
-  
-    let image = req.file.originalname;
-  
-    // File extension
-    const imageSplit = image.split(".");
-    const extension = imageSplit[1];
-  
-    // Check extension 
-    if (extension !== "png" && extension !== "jpg" && extension !== "jpeg" && extension !== "gif" && extension !== "JPG") {
-      // Delete uploaded file
-      const filePath = req.file.path;
-      fs.unlinkSync(filePath);
-  
-      return res.status(400).send({
-        status: "Error",
-        message: "Extensión del archivo inválida"
-      });
-    }
-  
-    try {
-      // Save image in the database
-      const userUpdate = await User.findOneAndUpdate(
-        { _id: req.user.id },
-        { image: req.file.filename },
-        { new: true }
-      ).exec();
-  
-      if (!userUpdate) {
-        return res.status(500).send({
-          status: "Error",
-          message: "Error en la subida de archivo"
-        });
-      }
-  
-      return res.status(200).send({
-        status: "success",
-        message: "Archivo subido correctamente",
-        user: req.userUpdate,
-        file: req.file,
-        
-      });
-  
-    } catch (error) {
+  // Check if the image exists
+  if (!req.file) {
+    return res.status(404).send({
+      status: "Error",
+      message: "No se ha recibido la imagen"
+    });
+  }
+
+  let image = req.file.originalname;
+
+  // File extension
+  const imageSplit = image.split(".");
+  const extension = imageSplit[1];
+
+  // Check extension 
+  if (extension !== "png" && extension !== "jpg" && extension !== "jpeg" && extension !== "gif" && extension !== "JPG") {
+    // Delete uploaded file
+    const filePath = req.file.path;
+    fs.unlinkSync(filePath);
+
+    return res.status(400).send({
+      status: "Error",
+      message: "Extensión del archivo inválida"
+    });
+  }
+
+  try {
+    // Save image in the database
+    const userUpdate = await User.findOneAndUpdate(
+      { _id: req.user.id },
+      { image: req.file.filename },
+      { new: true }
+    ).exec();
+
+    if (!userUpdate) {
       return res.status(500).send({
         status: "Error",
         message: "Error en la subida de archivo"
       });
     }
+
+    return res.status(200).send({
+      status: "success",
+      message: "Archivo subido correctamente",
+      user: req.userUpdate,
+      file: req.file,
+
+    });
+
+  } catch (error) {
+    return res.status(500).send({
+      status: "Error",
+      message: "Error en la subida de archivo"
+    });
+  }
 };
 
 const avatar = (req, res) => {
@@ -337,13 +349,13 @@ const avatar = (req, res) => {
 
   // Obtener el path real de la imagen
   const filePath = "./uploads/avatars/" + file;
-  
+
   // Comprobar que existe la imagen
-  fs.stat(filePath, (error, exists) =>{
+  fs.stat(filePath, (error, exists) => {
     if (!exists) {
       return res.status(404).send({
-          status: "error",
-          message: "No existe la imagen"
+        status: "error",
+        message: "No existe la imagen"
       });
     }
 
@@ -357,42 +369,42 @@ const counters = async (req, res) => {
   let userId = req.user.id;
 
   if (req.params.id) {
-      userId = req.params.id;
+    userId = req.params.id;
   }
 
   try {
-      const followingCount = await Follow.countDocuments({ user: userId });
-      const followedCount = await Follow.countDocuments({ followed: userId });
-      const publicationsCount = await Publication.countDocuments({ user: userId });
+    const followingCount = await Follow.countDocuments({ user: userId });
+    const followedCount = await Follow.countDocuments({ followed: userId });
+    const publicationsCount = await Publication.countDocuments({ user: userId });
 
-      return res.status(200).send({
-          userId,
-          following: followingCount,
-          followed: followedCount,
-          publications: publicationsCount
-      });
+    return res.status(200).send({
+      userId,
+      following: followingCount,
+      followed: followedCount,
+      publications: publicationsCount
+    });
 
   } catch (error) {
-      console.error(error);
-      return res.status(500).send({
-          status: "error",
-          message: "Error en los contadores",
-          error: error.message,
-          userId,
-      });
+    console.error(error);
+    return res.status(500).send({
+      status: "error",
+      message: "Error en los contadores",
+      error: error.message,
+      userId,
+    });
   }
 }
-  
 
-module.exports = { 
-    pruebaUser,
-    register, 
-    login,
-    profile,
-    list,
-    update,
-    upload,
-    avatar,
-    counters
+
+module.exports = {
+  pruebaUser,
+  register,
+  login,
+  profile,
+  list,
+  update,
+  upload,
+  avatar,
+  counters
 };
-  
+
