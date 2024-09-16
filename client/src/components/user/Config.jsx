@@ -36,6 +36,8 @@ export const Config = () => {
             setSaved("Error")
         }
 
+        const fileInput = document.querySelector("#file");
+
     }
 
     return (
