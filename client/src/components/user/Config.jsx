@@ -12,6 +12,8 @@ export const Config = () => {
     const updateUser = async (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+
         let newDataUser = SerializeForm(e.target);
         delete newDataUser.file0;
 
@@ -20,7 +22,7 @@ export const Config = () => {
             body: JSON.stringify(newDataUser),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
+                "Authorization": token
             }
         });
 
@@ -37,6 +39,23 @@ export const Config = () => {
         }
 
         const fileInput = document.querySelector("#file");
+
+        if(data.status == "success" && fileInput.file[0]){
+
+            const formData = new FormData();
+            formData.append('file0', fileInput.files[0]);
+
+            const uploadRequest = await fetch(Global.url + "user/upload", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "Authorization": token
+                }
+            });
+
+            const uploadData = await uploadRequest.json();
+
+        }
 
     }
 
