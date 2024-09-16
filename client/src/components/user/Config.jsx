@@ -94,6 +94,7 @@ export const Config = () => {
 
                     <input type="submit" value="Actualizar" className='btn btn-success' />
                 </form>
+                <br />
 
             </div>
         </>
