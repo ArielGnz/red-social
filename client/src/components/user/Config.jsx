@@ -29,7 +29,7 @@ export const Config = () => {
         const data = await request.json();
         console.log(data)
 
-        if(data.status == "success"){
+        if(data.status == "success" && data.user){
             delete data.user.password;
             setAuth(data.user);
             setSaved("saved");
@@ -40,7 +40,7 @@ export const Config = () => {
 
         const fileInput = document.querySelector("#file");
 
-        if(data.status == "success" && fileInput.file[0]){
+        if(data.status == "success" && fileInput.files[0]){
 
             const formData = new FormData();
             formData.append('file0', fileInput.files[0]);
@@ -54,6 +54,15 @@ export const Config = () => {
             });
 
             const uploadData = await uploadRequest.json();
+
+            if(uploadData.status == "success" && uploadData){
+                delete uploadData.user.password;
+
+                setAuth(uploadData.user);
+                setSaved("saved");
+            } else {
+                setSaved("Error")
+            }
 
         }
 
