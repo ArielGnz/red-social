@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import avatar from '../../assets/img/user.png'
 
 export const Peopel = () => {
   return (
@@ -37,9 +38,15 @@ export const Peopel = () => {
 
           <div className="post__buttons">
 
-            <a href="#" className="post__button">
-              <i className="fa-solid fa-trash-can"></i>
+            <a href="#" className="post__button post__button--green" >
+              Seguir
             </a>
+
+            {/*
+            <a href="#" className="post__button post__button--green" >
+              Dejar de Seguir
+            </a>
+            */}
 
           </div>
 
