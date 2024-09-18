@@ -45,6 +45,8 @@ export const Peopel = () => {
 
                 <div className="post__image-user">
                   <a href="#" className="post__image-link">
+                    {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="post__user-image" alt="Foto de perfil" />}
+                    {user.image == "default.png" && <img src={avatar} className="post__user-image" alt="Foto de perfil" />}
                     <img src={avatar} className="post__user-image" alt="Foto de perfil" />
                   </a>
                 </div>
