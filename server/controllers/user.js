@@ -193,7 +193,7 @@ const list = async (req, res) => {
     console.log(followUserIds);
 
     return res.status(200).send({
-      status: "Success",
+      status: "success",
       users: users,
       total: totalUsers,
       page: page,
