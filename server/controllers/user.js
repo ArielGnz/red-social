@@ -162,10 +162,12 @@ const profile = async (req, res) => {
 
 
 const list = async (req, res) => {
+  
   let page = 1;
   if (req.params.page) {
-    page = parseInt(req.params.page, 10);
+    page = req.params.page;
   }
+  page = parseInt(page);
 
   let itemPerPage = 5;
 

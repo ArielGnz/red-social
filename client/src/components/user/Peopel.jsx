@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import avatar from '../../assets/img/user.png'
 import { Global } from '../../helpers/Global';
 
 export const Peopel = () => {
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   const getUsers = async() => {
     
@@ -12,9 +16,14 @@ export const Peopel = () => {
         "Content-Type": "application/json",
         "Authorization": localStorage.getItem("token")
       }
-    })
+    });
+
+    const data = await request.json();
+    console.log(data);
 
   }
+
+  
 
   return (
     <>
