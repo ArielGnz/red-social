@@ -172,11 +172,14 @@ const list = async (req, res) => {
   let itemPerPage = 5;
 
   try {
+
     const totalUsers = await User.countDocuments();
     const users = await User.find()
+      .select("-password -email -role -__V")
       .sort('_id')
       .skip((page - 1) * itemPerPage)
       .limit(itemPerPage);
+
 
     if (!users || users.length === 0) {
       return res.status(404).send({
@@ -184,8 +187,10 @@ const list = async (req, res) => {
         message: "No hay usuarios disponibles"
       });
     }
+    
 
-    const followInfo = await followService.followThisUser(req.user.id, id);
+    let followUserIds = await followService.followUserIds(req.user.id);
+    console.log(followUserIds);
 
     return res.status(200).send({
       status: "Success",
@@ -193,8 +198,8 @@ const list = async (req, res) => {
       total: totalUsers,
       page: page,
       pages: Math.ceil(totalUsers / itemPerPage),
-      following: followInfo.following,
-      follower: followInfo.follower
+      user_following: followUserIds.following,
+      user_follow_me: followUserIds.followers
 
     });
 
