@@ -1,7 +1,21 @@
 import React from 'react';
 import avatar from '../../assets/img/user.png'
+import { Global } from '../../helpers/Global';
 
 export const Peopel = () => {
+
+  const getUsers = async() => {
+    
+    const request = await fetch(Global.url + "user/list/1", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    })
+
+  }
+
   return (
     <>
       <header className="content__header">
