@@ -180,7 +180,6 @@ const list = async (req, res) => {
       .skip((page - 1) * itemPerPage)
       .limit(itemPerPage);
 
-
     if (!users || users.length === 0) {
       return res.status(404).send({
         status: "Error",
@@ -188,9 +187,7 @@ const list = async (req, res) => {
       });
     }
     
-
     let followUserIds = await followService.followUserIds(req.user.id);
-    console.log(followUserIds);
 
     return res.status(200).send({
       status: "success",
