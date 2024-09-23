@@ -13,7 +13,7 @@ export const Peopel = () => {
 
   const getUsers = async () => {
 
-    const request = await fetch(Global.url + "user/list/1", {
+    const request = await fetch(Global.url + 'user/list/' + page, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -27,6 +27,14 @@ export const Peopel = () => {
       setUsers(data.users);
     }
 
+  }
+
+  const nextPage = () => {
+    let next = page + 1;
+    setPage(next);
+    getUsers();
+
+    console.log(page, users)
   }
 
   return (
@@ -88,7 +96,7 @@ export const Peopel = () => {
       </div>
 
       <div className="content__container-btn">
-        <button className="content__btn-more-post">
+        <button className="content__btn-more-post" onClick={nextPage}>
           Ver mas Personas
         </button>
       </div>
