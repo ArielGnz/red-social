@@ -4,7 +4,8 @@ import { Global } from '../../helpers/Global';
 
 export const Peopel = () => {
 
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     getUsers();
