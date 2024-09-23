@@ -8,10 +8,10 @@ export const Peopel = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    getUsers();
+    getUsers(1);
   }, []);
 
-  const getUsers = async (nextPage) => {
+  const getUsers = async (nextPage = 1) => {
 
     const request = await fetch(Global.url + 'user/list/' + nextPage, {
       method: "GET",
