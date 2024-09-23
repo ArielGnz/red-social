@@ -11,9 +11,9 @@ export const Peopel = () => {
     getUsers();
   }, []);
 
-  const getUsers = async () => {
+  const getUsers = async (nextPage) => {
 
-    const request = await fetch(Global.url + 'user/list/' + page, {
+    const request = await fetch(Global.url + 'user/list/' + nextPage, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -23,8 +23,13 @@ export const Peopel = () => {
 
     const data = await request.json();
 
-    if (data.users && data.status == "success") {
-      setUsers(data.users);
+    if (data.users && data.status == "success"){
+      let newUsers = data.users;
+      if(users.length >= 1){
+        newUsers = [...users, ...data.users];
+      }
+
+      setUsers(newUsers);
     }
 
   }
@@ -32,7 +37,7 @@ export const Peopel = () => {
   const nextPage = () => {
     let next = page + 1;
     setPage(next);
-    getUsers();
+    getUsers(next);
 
     console.log(page, users)
   }
