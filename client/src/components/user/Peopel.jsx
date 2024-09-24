@@ -6,7 +6,7 @@ export const Peopel = () => {
 
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
-  const [more, srtMore] = useState(true);
+  const [more, setMore] = useState(true);
 
   useEffect(() => {
     getUsers(1);
@@ -24,13 +24,17 @@ export const Peopel = () => {
 
     const data = await request.json();
 
-    if (data.users && data.status == "success"){
+    if (data.users && data.status == "success") {
       let newUsers = data.users;
-      if(users.length >= 1){
+      if (users.length >= 1) {
         newUsers = [...users, ...data.users];
       }
 
       setUsers(newUsers);
+
+      if (users.length >= (data.total - data.users.length)) {
+        setMore(false);
+      }
     }
 
   }
@@ -101,11 +105,15 @@ export const Peopel = () => {
 
       </div>
 
-      <div className="content__container-btn">
-        <button className="content__btn-more-post" onClick={nextPage}>
-          Ver mas Personas
-        </button>
-      </div>
+      {more &&
+
+        <div className="content__container-btn">
+          <button className="content__btn-more-post" onClick={nextPage}>
+            Ver mas Personas
+          </button>
+        </div>
+      }
+      <br />
     </>
   )
 }
