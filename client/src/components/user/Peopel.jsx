@@ -6,6 +6,7 @@ export const Peopel = () => {
 
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
+  const [more, srtMore] = useState(true);
 
   useEffect(() => {
     getUsers(1);
