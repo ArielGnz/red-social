@@ -45,8 +45,28 @@ export const Peopel = () => {
     let next = page + 1;
     setPage(next);
     getUsers(next);
+  }
 
-    console.log(page, users)
+  const follow = async(userId) =>{
+    
+    const request = await fetch(Global.url + "follow/save", {
+      method: "POST",
+      body: JSON.stringify({followed: userId}),
+      headers: {
+        "Content-Type": "application/json", 
+        "Authorization": localStorage.getItem("token")
+      }
+    });
+
+    const data = await request.json();
+
+    if(data.status == "success"){
+      setFollowing([...following, userId]);
+    }
+  }
+
+  const unfollow = async(userId) =>{
+
   }
 
   return (
@@ -90,17 +110,17 @@ export const Peopel = () => {
               <div className="post__buttons">
 
                 {!following.includes(user._id) &&
-                  <a href="#" className="post__button post__button--green"
+                  <button className="post__button post__button--green"
                     onClick={() => follow(user._id)}>
                     Seguir
-                  </a>
+                  </button>
                 }
 
                 {following.includes(user._id) &&
-                  <a href="#" className="post__button post__button--green"
+                  <button className="post__button post__button--green"
                     onClick={() => unfollow(user._id)} >
                     Dejar de Seguir
-                  </a>
+                  </button>
                 }
 
               </div>
