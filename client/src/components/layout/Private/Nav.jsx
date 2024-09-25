@@ -7,8 +7,10 @@ import { Global } from '../../../helpers/Global';
 export const Nav = () => {
 
     const {auth} = useAuth();
+    
 
     return (
+        
         <nav className="navbar__container-lists">
 
             <ul className="container-lists__menu-list">
@@ -16,6 +18,7 @@ export const Nav = () => {
                     <NavLink to="/social" className="menu-list__link">
                         <i className="fa-solid fa-house"></i>
                         <span className="menu-list__title">Inicio</span>
+                        
                     </NavLink>
                 </li>
 
