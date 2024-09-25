@@ -32,6 +32,7 @@ export const Peopel = () => {
       }
 
       setUsers(newUsers);
+      setFollowing(data.user_following);
 
       if (users.length >= (data.total - data.users.length)) {
         setMore(false);
@@ -88,15 +89,19 @@ export const Peopel = () => {
 
               <div className="post__buttons">
 
-                <a href="#" className="post__button post__button--green" >
-                  Seguir
-                </a>
+                {!following.includes(user._id) &&
+                  <a href="#" className="post__button post__button--green"
+                    onClick={() => follow(user._id)}>
+                    Seguir
+                  </a>
+                }
 
-                {/*
-            <a href="#" className="post__button post__button--green" >
-              Dejar de Seguir
-            </a>
-            */}
+                {following.includes(user._id) &&
+                  <a href="#" className="post__button post__button--green"
+                    onClick={() => unfollow(user._id)} >
+                    Dejar de Seguir
+                  </a>
+                }
 
               </div>
 
