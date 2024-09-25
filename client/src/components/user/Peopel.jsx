@@ -67,6 +67,13 @@ export const Peopel = () => {
 
   const unfollow = async(userId) =>{
 
+    const request = await fetch(Global.url + 'follow/unfollow/' + userId, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    }) 
   }
 
   return (
