@@ -68,7 +68,7 @@ const unfollow = async (req, res) => {
         }
 
         return res.status(200).send({
-            status: "Success",
+            status: "success",
             identity: req.user,
             message: "Ha dejado de seguir al usuario"
         });
@@ -103,7 +103,7 @@ const following = (req, res) => {
                     let followUserIds = await followService.followUserIds(req.user.id);
 
                     return res.status(200).send({
-                        status: "Success",
+                        status: "success",
                         message: "Listados de usuarios que estoy siguiendo",
                         follows,
                         total,
@@ -153,7 +153,7 @@ const followers = (req, res) => {
                     let followUserIds = await followService.followUserIds(req.user.id);
 
                     return res.status(200).send({
-                        status: "Success",
+                        status: "success",
                         message: "Listados de usuarios que me siguen",
                         follows,
                         total,

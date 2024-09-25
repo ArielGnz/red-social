@@ -73,7 +73,14 @@ export const Peopel = () => {
         "Content-Type": "application/json",
         "Authorization": localStorage.getItem("token")
       }
-    }) 
+    });
+    
+    const data = await request.json();
+
+    if(data.status == "success"){
+      let filtrar = following.filter(userFollowing => userId !== userFollowing);
+      setFollowing(filtrar);
+    }
   }
 
   return (
