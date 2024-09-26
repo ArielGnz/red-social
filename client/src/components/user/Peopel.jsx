@@ -39,7 +39,7 @@ export const Peopel = () => {
       if (users.length >= (data.total - data.users.length)) {
         setMore(false);
       }
-      
+
     }
 
   }
@@ -122,8 +122,8 @@ export const Peopel = () => {
                 </div>
 
               </div>
-              
-              
+
+              {user._id != auth._id &&
                 <div className="post__buttons">
 
                   {!following.includes(user._id) &&
@@ -131,7 +131,7 @@ export const Peopel = () => {
                       onClick={() => follow(user._id)}>
                       Seguir
                     </button>
-                    
+
                   }
 
                   {following.includes(user._id) &&
@@ -142,7 +142,8 @@ export const Peopel = () => {
                   }
 
                 </div>
-              
+              }
+
 
             </article>
           )
