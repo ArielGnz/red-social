@@ -5,7 +5,7 @@ import useAuth from '../../hooks/useAuth';
 
 export const Peopel = () => {
 
-  const { auth } = useAuth;
+  const { auth } = useAuth();
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [more, setMore] = useState(true);
@@ -35,12 +35,11 @@ export const Peopel = () => {
 
       setUsers(newUsers);
       setFollowing(data.user_following);
-      console.log(users._id)
 
       if (users.length >= (data.total - data.users.length)) {
         setMore(false);
       }
-      console.log(users)
+      
     }
 
   }
