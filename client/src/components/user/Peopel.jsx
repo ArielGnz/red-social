@@ -45,14 +45,7 @@ export const Peopel = () => {
 
   }
 
-  const nextPage = () => {
-    let next = page + 1;
-    setPage(next);
-    getUsers(next);
-  }
-
   
-
   return (
     <>
       <header className="content__header">
@@ -61,10 +54,12 @@ export const Peopel = () => {
       </header>
 
       <UserList users={users} 
-                setUsers={setUsers} 
+                getUsers={getUsers} 
                 following={following}
                 setFollowing={setFollowing}
-                
+                more={more}
+                page={page}
+                setPage={setPage}
       />
 
       

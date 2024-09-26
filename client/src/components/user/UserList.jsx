@@ -3,7 +3,7 @@ import useAuth from '../../hooks/useAuth';
 import avatar from '../../assets/img/user.png'
 import { Global } from '../../helpers/Global';
 
-export const UserList = ({ users, setUsers, following, setFollowing }) => {
+export const UserList = ({ users, getUsers, following, setFollowing, page, setPage, more }) => {
 
     const { auth } = useAuth();
 
@@ -42,6 +42,12 @@ export const UserList = ({ users, setUsers, following, setFollowing }) => {
             setFollowing(filtrar);
         }
     }
+
+    const nextPage = () => {
+        let next = page + 1;
+        setPage(next);
+        getUsers(next);
+      }
 
     return (
         <>
