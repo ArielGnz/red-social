@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import avatar from '../../assets/img/user.png'
 import { Global } from '../../helpers/Global';
+import { useParams } from 'react-router-dom';
 
 import { UserList } from '../user/UserList';
 
@@ -11,6 +12,7 @@ export const Followers = () => {
   const [page, setPage] = useState(1);
   const [more, setMore] = useState(true);
   const [following, setFollowing] = useState([]);
+  const params = useParams();
 
   useEffect(() => {
     getUsers(1);
@@ -18,7 +20,9 @@ export const Followers = () => {
 
   const getUsers = async (nextPage = 1) => {
 
-    const request = await fetch(Global.url + 'user/list/' + nextPage, {
+    const userId = params.userId;
+
+    const request = await fetch(Global.url + 'follow/followers/' + userId + '/' + nextPage, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -27,6 +31,13 @@ export const Followers = () => {
     });
 
     const data = await request.json();
+
+    let cleanUsers = [];
+    data.follows.forEach(follow => {
+        cleanUsers = [...cleanUsers, follow.user]
+    });
+
+    data.users = cleanUsers;
 
     if (data.users && data.status == "success") {
       let newUsers = data.users;
@@ -49,7 +60,7 @@ export const Followers = () => {
   return (
     <>
       <header className="content__header">
-        <h1 className="content__title">Gente</h1>
+        <h1 className="content__title">SEGUIDORES DE "USER"</h1>
 
       </header>
 
@@ -62,7 +73,6 @@ export const Followers = () => {
                 setPage={setPage}
       />
 
-      
       <br />
     </>
   )
