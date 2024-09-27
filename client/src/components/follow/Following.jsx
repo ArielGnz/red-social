@@ -6,7 +6,6 @@ import { UserList } from '../user/UserList';
 
 export const Following = () => {
 
-  
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [more, setMore] = useState(true);
@@ -31,16 +30,24 @@ export const Following = () => {
 
     const data = await request.json();
 
-    if (data.follows && data.status == "success") {
-      let newUsers = data.follows;
+    let cleanUsers = [];
+    data.follows.forEach(follow => {
+        cleanUsers = [...cleanUsers, follow.followed]
+    });
+
+    data.users = cleanUsers;
+
+
+    if (data.users && data.status == "success") {
+      let newUsers = data.users;
       if (users.length >= 1) {
-        newUsers = [...users, ...data.follows];
+        newUsers = [...users, ...data.users];
       }
 
       setUsers(newUsers);
       setFollowing(data.user_following);
 
-      if (users.length >= (data.total - data.follows.length)) {
+      if (users.length >= (data.total - data.users.length)) {
         setMore(false);
       }
 
