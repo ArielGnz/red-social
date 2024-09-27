@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import avatar from '../../assets/img/user.png'
 import { Global } from '../../helpers/Global';
 
 import { UserList } from './UserList';
 
 export const Peopel = () => {
 
-  
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [more, setMore] = useState(true);
