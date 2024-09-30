@@ -15,6 +15,15 @@ export const SideBar = () => {
 
         let newPublication = form;
         newPublication.user = auth._id;
+
+        const request = await fetch(Global.url + "publication/save", {
+            method: "POST",
+            body: JSON.stringify(newPublication),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }
+        });
     }
 
     return (
