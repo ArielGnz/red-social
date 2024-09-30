@@ -3,10 +3,16 @@ import avatar from '../../../assets/img/user.png';
 import useAuth from '../../../hooks/useAuth'
 import { Global } from '../../../helpers/Global';
 import { Link } from 'react-router-dom';
+import { useForm } from '../../../hooks/useForm';
 
 export const SideBar = () => {
 
     const {auth, counters} = useAuth();
+    const {form, changed} = useForm({});
+
+    const savePublication = async(e) => {
+        e.preventDefault();
+    }
 
     return (
         <aside className="layout__aside">
