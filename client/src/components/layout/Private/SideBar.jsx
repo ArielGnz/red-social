@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import avatar from '../../../assets/img/user.png';
 import useAuth from '../../../hooks/useAuth'
 import { Global } from '../../../helpers/Global';
@@ -7,10 +7,11 @@ import { useForm } from '../../../hooks/useForm';
 
 export const SideBar = () => {
 
-    const {auth, counters} = useAuth();
-    const {form, changed} = useForm({});
+    const { auth, counters } = useAuth();
+    const { form, changed } = useForm({});
+    const [stored, setStored] = useState("not_stored");
 
-    const savePublication = async(e) => {
+    const savePublication = async (e) => {
         e.preventDefault();
 
         let newPublication = form;
@@ -24,6 +25,14 @@ export const SideBar = () => {
                 "Authorization": localStorage.getItem("token")
             }
         });
+
+        const data = await request.json();
+
+        if (data.status == "success") {
+            setStored("stored");
+        } else {
+            setStored("Error")
+        }
     }
 
     return (
@@ -40,7 +49,7 @@ export const SideBar = () => {
                     <div className="profile-info__general-info">
                         <div className="general-info__container-avatar">
                             {auth.image != "default.png" && <img src={Global.url + "user/avatar/" + auth.image} className="container-avatar__img" alt="Foto de perfil" />}
-                            {auth.image == "default.png" && <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />} 
+                            {auth.image == "default.png" && <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />}
                         </div>
 
                         <div className="general-info__container-names">
@@ -79,11 +88,14 @@ export const SideBar = () => {
 
                 <div className="aside__container-form">
 
+                    {stored == "stored" ? <strong className='alert alert-success'> "Publicacion guardada correctamente!!" </strong> : " "}
+                    {stored == "Error" ? <strong className='alert alert-danger'> "Error al guardar la Publicacion" </strong> : " "}
+
                     <form className="container-form__form-post" onSubmit={savePublication}>
 
                         <div className="form-post__inputs">
                             <label htmlFor="text" className="form-post__label">¿Que estas pesando hoy?</label>
-                            <textarea name="text" className="form-post__textarea" onChange={changed}/>
+                            <textarea name="text" className="form-post__textarea" onChange={changed} />
                         </div>
 
                         <div className="form-post__inputs">
@@ -91,7 +103,7 @@ export const SideBar = () => {
                             <input type="file" name="file0" id='file' className="form-post__image" />
                         </div>
 
-                        <input type="submit" value="Enviar" className="form-post__btn-submit" disabled />
+                        <input type="submit" value="Enviar" className="form-post__btn-submit" />
 
                     </form>
 
