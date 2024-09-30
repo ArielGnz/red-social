@@ -12,6 +12,9 @@ export const SideBar = () => {
 
     const savePublication = async(e) => {
         e.preventDefault();
+
+        let newPublication = form;
+        newPublication.user = auth._id;
     }
 
     return (
@@ -67,16 +70,16 @@ export const SideBar = () => {
 
                 <div className="aside__container-form">
 
-                    <form className="container-form__form-post">
+                    <form className="container-form__form-post" onSubmit={savePublication}>
 
                         <div className="form-post__inputs">
-                            <label htmlFor="post" className="form-post__label">¿Que estas pesando hoy?</label>
-                            <textarea name="post" className="form-post__textarea"></textarea>
+                            <label htmlFor="text" className="form-post__label">¿Que estas pesando hoy?</label>
+                            <textarea name="text" className="form-post__textarea" onChange={changed}/>
                         </div>
 
                         <div className="form-post__inputs">
-                            <label htmlFor="image" className="form-post__label">Sube tu foto</label>
-                            <input type="file" name="image" className="form-post__image" />
+                            <label htmlFor="file" className="form-post__label">Sube tu foto</label>
+                            <input type="file" name="file0" id='file' className="form-post__image" />
                         </div>
 
                         <input type="submit" value="Enviar" className="form-post__btn-submit" disabled />
