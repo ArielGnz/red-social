@@ -4,6 +4,8 @@ import { Global } from '../../helpers/Global';
 import { useParams } from 'react-router-dom';
 import { UserList } from '../user/UserList';
 import useAuth from '../../hooks/useAuth';
+import { getProfile } from '../../helpers/GetProfile';
+
 
 export const Following = () => {
 
@@ -11,14 +13,14 @@ export const Following = () => {
   const [page, setPage] = useState(1);
   const [more, setMore] = useState(true);
   const [following, setFollowing] = useState([]);
-  const params = useParams();
   const [userProfile, setUserProfile] = useState({});
   const { auth } = useAuth();
+  const params = useParams();
 
 
   useEffect(() => {
     getUsers(1);
-    //getProfile();
+    getProfile(params.userId, setUserProfile);
   }, []);
 
   const getUsers = async (nextPage = 1) => {
@@ -58,6 +60,8 @@ export const Following = () => {
 
     }
 
+    console.log(userProfile)
+
   }
 
   // const getProfile = async () => {
@@ -83,7 +87,7 @@ export const Following = () => {
   return (
     <>
       <header className="content__header">
-        <h1 className="content__title">USUARIOS QUE SIGUE {auth.name}</h1>
+        <h1 className="content__title">USUARIOS QUE SIGUE {userProfile.name}</h1>
 
       </header>
 

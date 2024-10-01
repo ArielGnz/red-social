@@ -143,7 +143,7 @@ const profile = async (req, res) => {
     const followInfo = await followService.followThisUser(req.user.id, id);
 
     return res.status(200).send({
-      status: "Success",
+      status: "success",
       user: userProfile,
       following: followInfo.following,
       follower: followInfo.follower
