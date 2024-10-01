@@ -11,6 +11,8 @@ export const Following = () => {
   const [more, setMore] = useState(true);
   const [following, setFollowing] = useState([]);
   const params = useParams();
+  const [userProfile, setUserProfile] = useState({});
+
 
   useEffect(() => {
     getUsers(1);
@@ -32,7 +34,7 @@ export const Following = () => {
 
     let cleanUsers = [];
     data.follows.forEach(follow => {
-        cleanUsers = [...cleanUsers, follow.followed]
+      cleanUsers = [...cleanUsers, follow.followed]
     });
 
     data.users = cleanUsers;
@@ -55,7 +57,24 @@ export const Following = () => {
 
   }
 
-  
+  const getProfile = async () => {
+
+    const request = await fetch(Global.url + 'user/profile/' + params.userId , {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
+
+    const data = await request.json();
+
+    if(data.status == "success"){
+      setUserProfile(data.user)
+    }
+  }
+
+
   return (
     <>
       <header className="content__header">
@@ -63,16 +82,16 @@ export const Following = () => {
 
       </header>
 
-      <UserList users={users} 
-                getUsers={getUsers} 
-                following={following}
-                setFollowing={setFollowing}
-                more={more}
-                page={page}
-                setPage={setPage}
+      <UserList users={users}
+        getUsers={getUsers}
+        following={following}
+        setFollowing={setFollowing}
+        more={more}
+        page={page}
+        setPage={setPage}
       />
 
-      
+
       <br />
     </>
   )

@@ -4,13 +4,14 @@ import useAuth from '../../../hooks/useAuth'
 import { Global } from '../../../helpers/Global';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../../hooks/useForm';
+import { param } from '../../../../../server/routes/publication';
 
 export const SideBar = () => {
 
     const { auth, counters } = useAuth();
     const { form, changed } = useForm({});
     const [stored, setStored] = useState("not_stored");
-
+   
     const savePublication = async (e) => {
         e.preventDefault();
 
@@ -66,6 +67,7 @@ export const SideBar = () => {
 
         }
     }
+
 
     return (
         <aside className="layout__aside">
