@@ -59,7 +59,11 @@ export const SideBar = () => {
                 setStored("Erorr")
             }
 
-            console.log(uploadData)
+            if(data.status == "success" && uploadData.status == "success"){
+                const myForm = document.querySelector("#form");
+                myForm.reset();
+            }
+
         }
     }
 
@@ -119,7 +123,7 @@ export const SideBar = () => {
                     {stored == "stored" ? <strong className='alert alert-success'> "Publicacion guardada correctamente!!" </strong> : " "}
                     {stored == "Error" ? <strong className='alert alert-danger'> "Error al guardar la Publicacion" </strong> : " "}
 
-                    <form className="container-form__form-post" onSubmit={savePublication}>
+                    <form className="container-form__form-post" id='form' onSubmit={savePublication}>
 
                         <div className="form-post__inputs">
                             <label htmlFor="text" className="form-post__label">¿Que estas pesando hoy?</label>
