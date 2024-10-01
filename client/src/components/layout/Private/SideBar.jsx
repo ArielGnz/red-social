@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import avatar from '../../../assets/img/user.png';
-import useAuth from '../../../hooks/useAuth'
+import useAuth from '../../../hooks/useAuth';
 import { Global } from '../../../helpers/Global';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../../hooks/useForm';
-import { param } from '../../../../../server/routes/publication';
+
 
 export const SideBar = () => {
 

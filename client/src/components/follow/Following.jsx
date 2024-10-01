@@ -3,6 +3,7 @@ import avatar from '../../assets/img/user.png'
 import { Global } from '../../helpers/Global';
 import { useParams } from 'react-router-dom';
 import { UserList } from '../user/UserList';
+import useAuth from '../../hooks/useAuth';
 
 export const Following = () => {
 
@@ -12,10 +13,12 @@ export const Following = () => {
   const [following, setFollowing] = useState([]);
   const params = useParams();
   const [userProfile, setUserProfile] = useState({});
+  const { auth } = useAuth();
 
 
   useEffect(() => {
     getUsers(1);
+    //getProfile();
   }, []);
 
   const getUsers = async (nextPage = 1) => {
@@ -57,28 +60,30 @@ export const Following = () => {
 
   }
 
-  const getProfile = async () => {
+  // const getProfile = async () => {
 
-    const request = await fetch(Global.url + 'user/profile/' + params.userId , {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": localStorage.getItem("token")
-      }
-    });
+  //   const request = await fetch(Global.url + 'user/profile/' + params.userId , {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Authorization": localStorage.getItem("token")
+  //     }
+  //   });
 
-    const data = await request.json();
+  //   const data = await request.json();
 
-    if(data.status == "success"){
-      setUserProfile(data.user)
-    }
-  }
+  //   if(data.status == "success"){
+  //     setUserProfile(data.user)
+  //   }
+
+  //   console.log(data.user);
+  // }
 
 
   return (
     <>
       <header className="content__header">
-        <h1 className="content__title">USUARIOS QUE SIGU "USER"</h1>
+        <h1 className="content__title">USUARIOS QUE SIGUE {auth.name}</h1>
 
       </header>
 
