@@ -33,6 +33,13 @@ export const SideBar = () => {
         } else {
             setStored("Error")
         }
+
+        const fileInput = document.querySelector("#file");
+
+        if(data.status == "success" && fileInput.file[0]){
+            const formData = new FormData();
+            formData.append("file0", fileInput.files[0]);
+        }
     }
 
     return (
