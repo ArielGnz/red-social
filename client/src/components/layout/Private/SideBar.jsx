@@ -14,6 +14,8 @@ export const SideBar = () => {
     const savePublication = async (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+
         let newPublication = form;
         newPublication.user = auth._id;
 
@@ -22,7 +24,7 @@ export const SideBar = () => {
             body: JSON.stringify(newPublication),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
+                "Authorization": token
             }
         });
 
@@ -36,9 +38,28 @@ export const SideBar = () => {
 
         const fileInput = document.querySelector("#file");
 
-        if(data.status == "success" && fileInput.file[0]){
+        if(data.status == "success" && fileInput.files[0]){
+
             const formData = new FormData();
             formData.append("file0", fileInput.files[0]);
+
+            const uploadRequest = await fetch(Global.url + "publication/upload/" + data.publicationStored._id, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "Authorization": token
+                }
+            });
+
+            const uploadData = await uploadRequest.json();
+
+            if(uploadData == "success"){
+                setStored("stored")
+            } else {
+                setStored("Erorr")
+            }
+
+            console.log(uploadData)
         }
     }
 
