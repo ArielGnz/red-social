@@ -60,8 +60,6 @@ export const Following = () => {
 
     }
 
-    console.log(userProfile)
-
   }
 
   // const getProfile = async () => {

@@ -16,6 +16,4 @@ export const getProfile = async (userId, setState) => {
         setState(data.user)
     }
 
-    console.log(data);
-
 }
