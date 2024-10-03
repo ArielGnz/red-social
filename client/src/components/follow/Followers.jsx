@@ -12,6 +12,7 @@ export const Followers = () => {
   const [page, setPage] = useState(1);
   const [more, setMore] = useState(true);
   const [following, setFollowing] = useState([]);
+  const [userProfile, setUserProfile] = useState({});
   const params = useParams();
 
   useEffect(() => {
