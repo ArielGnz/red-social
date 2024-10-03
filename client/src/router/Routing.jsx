@@ -11,6 +11,7 @@ import { Peopel } from '../components/user/Peopel';
 import { Config } from '../components/user/Config';
 import { Following } from '../components/follow/Following';
 import { Followers } from '../components/follow/Followers';
+import { Profile } from '../components/user/Profile';
 
 const Routing = () => {
   return (
@@ -32,6 +33,7 @@ const Routing = () => {
             <Route path='ajustes' element={<Config />} />
             <Route path='siguiendo/:userId' element={<Following />} />
             <Route path='seguidores/:userId' element={<Followers />} />
+            <Route path='perfil/:userId' element={<Profile />} />
           </Route>
 
           <Route path='*' element={
