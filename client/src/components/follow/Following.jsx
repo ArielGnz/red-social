@@ -4,7 +4,7 @@ import { Global } from '../../helpers/Global';
 import { useParams } from 'react-router-dom';
 import { UserList } from '../user/UserList';
 import useAuth from '../../hooks/useAuth';
-import { getProfile } from '../../helpers/GetProfile';
+import { GetProfile } from '../../helpers/GetProfile';
 
 
 export const Following = () => {
@@ -20,7 +20,7 @@ export const Following = () => {
 
   useEffect(() => {
     getUsers(1);
-    getProfile(params.userId, setUserProfile);
+    GetProfile(params.userId, setUserProfile);
   }, []);
 
   const getUsers = async (nextPage = 1) => {

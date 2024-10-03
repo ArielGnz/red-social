@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import avatar from '../../assets/img/user.png'
 import { Global } from '../../helpers/Global';
 import { useParams } from 'react-router-dom';
+import { GetProfile } from '../../helpers/GetProfile';
 
 import { UserList } from '../user/UserList';
 
@@ -17,6 +18,7 @@ export const Followers = () => {
 
   useEffect(() => {
     getUsers(1);
+    GetProfile(params.userId, setUserProfile)
   }, []);
 
   const getUsers = async (nextPage = 1) => {
@@ -61,7 +63,7 @@ export const Followers = () => {
   return (
     <>
       <header className="content__header">
-        <h1 className="content__title">SEGUIDORES DE "USER"</h1>
+        <h1 className="content__title">SEGUIDORES DE {userProfile.name}</h1>
 
       </header>
 
