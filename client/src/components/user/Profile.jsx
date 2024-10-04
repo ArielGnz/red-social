@@ -3,12 +3,51 @@ import avatar from '../../assets/img/user.png'
 
 export const Profile = () => {
     return (
+        
         <>
-        <h1>PROFILE</h1>
-            <header className="content__header">
-                <h1 className="content__title">NOMBRE DEL USUARIO</h1>
-                <button className="content__button">SEGUIR</button>
+            <header className="aside__profile-info">
+
+                <div className="profile-info__general-info">
+                    <div className="general-info__container-avatar">
+                        <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />
+                    </div>
+
+                    <div className="general-info__container-names">
+                        <h1 href="#" className="container-names__name">Victor Robles</h1>
+                        <p className="container-names__nickname">VictorWeb</p>
+                        <button className="content__button">SEGUIR</button>
+                    </div>
+                </div>
+
+                <div className="profile-info__stats">
+
+                    <div className="stats__following">
+                        <a href="#" className="following__link">
+                            <span className="following__title">Siguiendo</span>
+                            <span className="following__number">10</span>
+                        </a>
+                    </div>
+                    <div className="stats__following">
+                        <a href="#" className="following__link">
+                            <span className="following__title">Seguidores</span>
+                            <span className="following__number">13</span>
+                        </a>
+                    </div>
+
+
+                    <div className="stats__following">
+                        <a href="#" className="following__link">
+                            <span className="following__title">Publicaciones</span>
+                            <span className="following__number">17</span>
+                        </a>
+                    </div>
+
+
+                </div>
             </header>
+
+
+
 
             <div className="content__posts">
 
