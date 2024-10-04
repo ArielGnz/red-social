@@ -3,7 +3,7 @@ import avatar from '../../assets/img/user.png'
 
 export const Profile = () => {
     return (
-        
+
         <>
             <header className="aside__profile-info">
 
@@ -13,9 +13,13 @@ export const Profile = () => {
                     </div>
 
                     <div className="general-info__container-names">
-                        <h1 href="#" className="container-names__name">Victor Robles</h1>
-                        <p className="container-names__nickname">VictorWeb</p>
-                        <button className="content__button">SEGUIR</button>
+                        <p href="#" className="container-names__name">
+                            <h1>Victor Robles</h1>
+                            <button className="content__button content__button--rigth">SEGUIR</button>
+                        </p>
+                        <h2 className="container-names__nickname">VictorWeb</h2>
+                        <p>Bio</p>
+                        
                     </div>
                 </div>
 
