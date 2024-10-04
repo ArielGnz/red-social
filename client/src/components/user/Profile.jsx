@@ -1,8 +1,9 @@
 import React from 'react'
+import avatar from '../../assets/img/user.png'
 
 export const Profile = () => {
-  return (
-    <>
+    return (
+        <>
             <header className="content__header">
                 <h1 className="content__title">Timeline</h1>
                 <button className="content__button">Mostrar nuevas</button>
@@ -16,7 +17,7 @@ export const Profile = () => {
 
                         <div className="post__image-user">
                             <a href="#" className="post__image-link">
-                                <img src={avatar} className="post__user-image" alt="Foto de perfil"/>
+                                <img src={avatar} className="post__user-image" alt="Foto de perfil" />
                             </a>
                         </div>
 
@@ -51,7 +52,7 @@ export const Profile = () => {
 
                         <div className="post__image-user">
                             <a href="#" className="post__image-link">
-                                <img src={avatar} className="post__user-image" alt="Foto de perfil"/>
+                                <img src={avatar} className="post__user-image" alt="Foto de perfil" />
                             </a>
                         </div>
 
@@ -85,7 +86,7 @@ export const Profile = () => {
 
                         <div className="post__image-user">
                             <a href="#" className="post__image-link">
-                                <img src={avatar} className="post__user-image" alt="Foto de perfil"/>
+                                <img src={avatar} className="post__user-image" alt="Foto de perfil" />
                             </a>
                         </div>
 
@@ -121,7 +122,7 @@ export const Profile = () => {
 
                         <div className="post__image-user">
                             <a href="#" className="post__image-link">
-                                <img src={avatar} className="post__user-image" alt="Foto de perfil"/>
+                                <img src={avatar} className="post__user-image" alt="Foto de perfil" />
                             </a>
                         </div>
 
@@ -157,5 +158,5 @@ export const Profile = () => {
                 </button>
             </div>
         </>
-  )
+    )
 }
