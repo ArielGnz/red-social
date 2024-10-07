@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import avatar from '../../assets/img/user.png';
 import { GetProfile } from '../../helpers/GetProfile';
+import { useParams } from 'react-router-dom';
 
 export const Profile = () => {
 
     const [user, setUser] = useState({});
+    const params = useParams();
 
     useEffect(() => {
-        GetProfile();
+        GetProfile(params.userId, setUser);
     }, []);
 
 
@@ -22,12 +24,12 @@ export const Profile = () => {
                     </div>
 
                     <div className="general-info__container-names">
-                        <p href="#" className="container-names__name">
-                            <h1>Victor Robles</h1>
+                        <div className="container-names__name">
+                            <h1>{user.name} {user.surname}</h1>
                             <button className="content__button content__button--rigth">SEGUIR</button>
-                        </p>
-                        <h2 className="container-names__nickname">VictorWeb</h2>
-                        <p>Bio</p>
+                        </div>
+                        <h2 className="container-names__nickname">{user.nick}</h2>
+                        <p>{user.bio}</p>
                         
                     </div>
                 </div>
