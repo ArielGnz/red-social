@@ -382,6 +382,7 @@ const counters = async (req, res) => {
     const publicationsCount = await Publication.countDocuments({ user: userId });
 
     return res.status(200).send({
+      status: "success",
       userId,
       following: followingCount,
       followed: followedCount,
