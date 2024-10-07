@@ -3,6 +3,7 @@ import avatar from '../../assets/img/user.png';
 import { GetProfile } from '../../helpers/GetProfile';
 import { useParams } from 'react-router-dom';
 import { Global } from '../../helpers/Global';
+import { Link } from 'react-router-dom';
 
 export const Profile = () => {
 
@@ -25,13 +26,11 @@ export const Profile = () => {
         });
 
         const data = await request.json();
-        console.log(data)
 
         if(data.status == "success"){
             setCounters(data);
         }
 
-        
     }
 
 
@@ -60,24 +59,24 @@ export const Profile = () => {
                 <div className="profile-info__stats">
 
                     <div className="stats__following">
-                        <a href="#" className="following__link">
+                        <Link to={'/social/siguiendo/' + user._id} className="following__link">
                             <span className="following__title">Siguiendo</span>
                             <span className="following__number">{counters.following}</span>
-                        </a>
+                        </Link>
                     </div>
                     <div className="stats__following">
-                        <a href="#" className="following__link">
+                        <Link to={'/social/seguidores/' + user._id} className="following__link">
                             <span className="following__title">Seguidores</span>
                             <span className="following__number">{counters.followed}</span>
-                        </a>
+                        </Link>
                     </div>
 
 
                     <div className="stats__following">
-                        <a href="#" className="following__link">
+                        <Link to={'/social/perfil/' + user._id} className="following__link">
                             <span className="following__title">Publicaciones</span>
                             <span className="following__number">{counters.publications}</span>
-                        </a>
+                        </Link>
                     </div>
 
 
