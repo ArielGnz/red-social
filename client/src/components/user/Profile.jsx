@@ -16,6 +16,11 @@ export const Profile = () => {
         getCounters();
     }, []);
 
+    useEffect(() => {
+        GetProfile(params.userId, setUser);
+        getCounters();
+    }, [params]);
+
     const getCounters = async() => {
         const request = await fetch(Global.url + "user/counters/" + params.userId, {
             method: "GET",
