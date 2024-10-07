@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import avatar from '../../assets/img/user.png';
 import { GetProfile } from '../../helpers/GetProfile';
 import { useParams } from 'react-router-dom';
+import { Global } from '../../helpers/Global';
 
 export const Profile = () => {
 
@@ -20,7 +21,8 @@ export const Profile = () => {
 
                 <div className="profile-info__general-info">
                     <div className="general-info__container-avatar">
-                        <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />
+                    {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="container-avatar__img" alt="Foto de perfil" />}
+                            {user.image == "default.png" && <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />}
                     </div>
 
                     <div className="general-info__container-names">
