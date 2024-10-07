@@ -1,7 +1,16 @@
-import React from 'react'
-import avatar from '../../assets/img/user.png'
+import React, { useEffect, useState } from 'react'
+import avatar from '../../assets/img/user.png';
+import { GetProfile } from '../../helpers/GetProfile';
 
 export const Profile = () => {
+
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        GetProfile();
+    }, []);
+
+
     return (
 
         <>
