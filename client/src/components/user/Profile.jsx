@@ -81,6 +81,18 @@ export const Profile = () => {
         }
     }
 
+    const getPublications = async(nextPage = 1) => {
+        const request = await fetch(Global.url + "publication/user/" + params.userId + "/" + nextPage , {
+            method: "GET",
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : localStorage.getItem("token")
+            }
+        });
+
+        const data = await request.json();
+    }
+
 
     return (
 
