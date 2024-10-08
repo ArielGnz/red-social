@@ -4,9 +4,11 @@ import { GetProfile } from '../../helpers/GetProfile';
 import { useParams } from 'react-router-dom';
 import { Global } from '../../helpers/Global';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 export const Profile = () => {
 
+    const { auth } = useAuth();
     const [user, setUser] = useState({});
     const [counters, setCounters] = useState({});
     const params = useParams();
@@ -21,7 +23,7 @@ export const Profile = () => {
         getCounters();
     }, [params]);
 
-    const getCounters = async() => {
+    const getCounters = async () => {
         const request = await fetch(Global.url + "user/counters/" + params.userId, {
             method: "GET",
             headers: {
@@ -32,7 +34,7 @@ export const Profile = () => {
 
         const data = await request.json();
 
-        if(data.status == "success"){
+        if (data.status == "success") {
             setCounters(data);
         }
 
@@ -46,18 +48,20 @@ export const Profile = () => {
 
                 <div className="profile-info__general-info">
                     <div className="general-info__container-avatar">
-                    {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="container-avatar__img" alt="Foto de perfil" />}
-                            {user.image == "default.png" && <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />}
+                        {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="container-avatar__img" alt="Foto de perfil" />}
+                        {user.image == "default.png" && <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />}
                     </div>
 
                     <div className="general-info__container-names">
                         <div className="container-names__name">
                             <h1>{user.name} {user.surname}</h1>
-                            <button className="content__button content__button--rigth">SEGUIR</button>
+                            {user._id != auth._id &&
+                                <button className="content__button content__button--rigth">SEGUIR</button>
+                            }
                         </div>
                         <h2 className="container-names__nickname">{user.nick}</h2>
                         <p>{user.bio}</p>
-                        
+
                     </div>
                 </div>
 
