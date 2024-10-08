@@ -46,6 +46,41 @@ export const Profile = () => {
 
     }
 
+    const follow = async (userId) => {
+
+        const request = await fetch(Global.url + "follow/save", {
+            method: "POST",
+            body: JSON.stringify({ followed: userId }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }
+        });
+
+        const data = await request.json();
+
+        if (data.status == "success") {
+           setIFollow(true);
+        }
+    }
+
+    const unfollow = async (userId) => {
+
+        const request = await fetch(Global.url + 'follow/unfollow/' + userId, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }
+        });
+
+        const data = await request.json();
+
+        if (data.status == "success") {
+            setIFollow(false);
+        }
+    }
+
 
     return (
 
@@ -64,9 +99,9 @@ export const Profile = () => {
                             {user._id != auth._id &&
                                
                                 (iFollow ?
-                                    <button className="content__button content__button--rigth post__button">DEJAR DE SEGUIR</button>
+                                    <button onClick={() => unfollow(user._id)} className="content__button content__button--rigth post__button">DEJAR DE SEGUIR</button>
                                 :
-                                    <button className="content__button content__button--rigth">SEGUIR</button>
+                                    <button onClick={() => follow(user._id)} className="content__button content__button--rigth">SEGUIR</button>
                                 )
                             }
 
