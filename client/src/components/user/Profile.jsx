@@ -12,16 +12,19 @@ export const Profile = () => {
     const [user, setUser] = useState({});
     const [counters, setCounters] = useState({});
     const [iFollow, setIFollow] = useState(false);
+    const [publications, setPublications] = useState([]);
     const params = useParams();
 
     useEffect(() => {
         getDataUser();
         getCounters();
+        getPublications();
     }, []);
 
     useEffect(() => {
         getDataUser();
         getCounters();
+        getPublications();
     }, [params]);
 
     const getDataUser = async() => {
@@ -91,6 +94,10 @@ export const Profile = () => {
         });
 
         const data = await request.json();
+
+        if(data.status == "success"){
+            setPublications(data);
+        }
     }
 
 
