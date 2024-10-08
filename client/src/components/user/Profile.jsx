@@ -11,17 +11,23 @@ export const Profile = () => {
     const { auth } = useAuth();
     const [user, setUser] = useState({});
     const [counters, setCounters] = useState({});
+    const [iFollow, setIFollow] = useState(false);
     const params = useParams();
 
     useEffect(() => {
-        GetProfile(params.userId, setUser);
+        getDataUser();
         getCounters();
     }, []);
 
     useEffect(() => {
-        GetProfile(params.userId, setUser);
+        getDataUser();
         getCounters();
     }, [params]);
+
+    const getDataUser = async() => {
+        let dataUser = await GetProfile(params.userId, setUser);
+        if(dataUser.following && dataUser.following._id) setIFollow(true);
+    }
 
     const getCounters = async () => {
         const request = await fetch(Global.url + "user/counters/" + params.userId, {
@@ -56,8 +62,14 @@ export const Profile = () => {
                         <div className="container-names__name">
                             <h1>{user.name} {user.surname}</h1>
                             {user._id != auth._id &&
-                                <button className="content__button content__button--rigth">SEGUIR</button>
+                               
+                                (iFollow ?
+                                    <button className="content__button content__button--rigth post__button">DEJAR DE SEGUIR</button>
+                                :
+                                    <button className="content__button content__button--rigth">SEGUIR</button>
+                                )
                             }
+
                         </div>
                         <h2 className="container-names__nickname">{user.nick}</h2>
                         <p>{user.bio}</p>
