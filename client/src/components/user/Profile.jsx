@@ -13,6 +13,7 @@ export const Profile = () => {
     const [counters, setCounters] = useState({});
     const [iFollow, setIFollow] = useState(false);
     const [publications, setPublications] = useState([]);
+    const [page, setPage] = useState(1);
     const params = useParams();
 
     useEffect(() => {
