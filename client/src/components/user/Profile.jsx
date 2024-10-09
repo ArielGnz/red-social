@@ -97,10 +97,22 @@ export const Profile = () => {
         const data = await request.json();
 
         if (data.status == "success") {
-            setPublications(data.publications);
 
+            let newPublications = data.publications;
+
+            if(publications.length >= 1){
+                newPublications = [...publications, ...newPublications];
+            }
+
+            setPublications(newPublications);
         }
 
+    }
+
+    const nextPage = () => {
+        let next = page + 1;
+        setPage(next);
+        getPublications(next); 
     }
 
 
@@ -170,7 +182,7 @@ export const Profile = () => {
 
                     return (
 
-                        <article className="posts__post">
+                        <article className="posts__post" key={publication._id}>
 
                             <div className="post__container">
 
@@ -213,7 +225,7 @@ export const Profile = () => {
             </div>
 
             <div className="content__container-btn">
-                <button className="content__btn-more-post">
+                <button className="content__btn-more-post" onClick={nextPage}>
                     Ver mas publicaciones
                 </button>
             </div>
