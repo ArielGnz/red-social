@@ -20,13 +20,13 @@ export const Profile = () => {
     useEffect(() => {
         getDataUser();
         getCounters();
-        getPublications();
+        getPublications(1, true);
     }, []);
 
     useEffect(() => {
         getDataUser();
         getCounters();
-        getPublications();
+        getPublications(1, true);
     }, [params]);
 
     const getDataUser = async () => {
@@ -86,7 +86,7 @@ export const Profile = () => {
         }
     }
 
-    const getPublications = async (nextPage = 1) => {
+    const getPublications = async (nextPage = 1, newProfile = false) => {
         const request = await fetch(Global.url + "publication/user/" + params.userId + "/" + nextPage, {
             method: "GET",
             headers: {
@@ -101,8 +101,13 @@ export const Profile = () => {
 
             let newPublications = data.publications;
 
-            if (publications.length >= 1) {
+            if (!newProfile && publications.length >= 1) {
                 newPublications = [...publications, ...newPublications];
+            }
+
+            if(newProfile){
+                newPublications = data.publications;
+                setMore(true);
             }
 
             setPublications(newPublications);
