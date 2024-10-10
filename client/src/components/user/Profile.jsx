@@ -14,6 +14,7 @@ export const Profile = () => {
     const [iFollow, setIFollow] = useState(false);
     const [publications, setPublications] = useState([]);
     const [page, setPage] = useState(1);
+    const [more, setMore] = useState(true);
     const params = useParams();
 
     useEffect(() => {
@@ -100,11 +101,15 @@ export const Profile = () => {
 
             let newPublications = data.publications;
 
-            if(publications.length >= 1){
+            if (publications.length >= 1) {
                 newPublications = [...publications, ...newPublications];
             }
 
             setPublications(newPublications);
+
+            if (publications.length >= (data.total - data.publications.length)) {
+                setMore(false);
+            }
         }
 
     }
@@ -112,7 +117,7 @@ export const Profile = () => {
     const nextPage = () => {
         let next = page + 1;
         setPage(next);
-        getPublications(next); 
+        getPublications(next);
     }
 
 
@@ -224,11 +229,13 @@ export const Profile = () => {
 
             </div>
 
-            <div className="content__container-btn">
-                <button className="content__btn-more-post" onClick={nextPage}>
-                    Ver mas publicaciones
-                </button>
-            </div>
+            {more &&
+                <div className="content__container-btn">
+                    <button className="content__btn-more-post" onClick={nextPage}>
+                        Ver mas publicaciones
+                    </button>
+                </div>
+            }
         </>
     )
 }
