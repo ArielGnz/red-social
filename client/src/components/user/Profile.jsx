@@ -88,6 +88,7 @@ export const Profile = () => {
     }
 
     const getPublications = async (nextPage = 1, newProfile = false) => {
+        
         const request = await fetch(Global.url + "publication/user/" + params.userId + "/" + nextPage, {
             method: "GET",
             headers: {
@@ -208,8 +209,6 @@ export const Profile = () => {
             </header>
 
 
-
-
             <div className="content__posts">
 
                 {publications.map(publication => {
@@ -237,6 +236,8 @@ export const Profile = () => {
                                     </div>
 
                                     <h4 className="post__content">{publication.text}</h4>
+
+                                    {publication.file && <img src={Global.url + "publication/media/" + publication.file} />}
 
                                 </div>
 

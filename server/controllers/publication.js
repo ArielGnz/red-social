@@ -105,6 +105,7 @@ const remove = async (req, res) => {
 }
 
 const user = async (req, res) => {
+
     try {
         const userId = req.params.id;
         let page = 1;
@@ -117,8 +118,11 @@ const user = async (req, res) => {
             .sort("-created_at")
             .populate('user', '-password -__v -role -email');
 
+            
+
         const publications = await query.skip((page - 1) * itemsPerPage).limit(itemsPerPage).exec();
         const total = await Publication.countDocuments({ "user": userId });
+        console.log(publications);
 
         if (!publications || publications.length <= 0) {
             return res.status(404).send({
