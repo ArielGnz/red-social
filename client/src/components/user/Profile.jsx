@@ -128,7 +128,14 @@ export const Profile = () => {
     }
 
     const deletePublication = async(publicationId) => {
-
+        
+        const request = await fetch(Global.url + "publication/remote/" + publicationId, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }
+        })
     }
  
 
