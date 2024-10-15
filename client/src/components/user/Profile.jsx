@@ -127,6 +127,10 @@ export const Profile = () => {
         getPublications(next);
     }
 
+    const deletePublication = async(publicationId) => {
+
+    }
+ 
 
     return (
 
