@@ -117,12 +117,11 @@ const user = async (req, res) => {
         const query = Publication.find({ "user": userId })
             .sort("-created_at")
             .populate('user', '-password -__v -role -email');
-
-            
+  
 
         const publications = await query.skip((page - 1) * itemsPerPage).limit(itemsPerPage).exec();
         const total = await Publication.countDocuments({ "user": userId });
-        console.log(publications);
+       
 
         if (!publications || publications.length <= 0) {
             return res.status(404).send({
