@@ -1,10 +1,39 @@
-import React from 'react'
+import React from 'react';
+import avatar from '../../assets/img/user.png';
+import { Global } from '../../helpers/Global';
+import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
-export const PublicationList = () => {
+export const PublicationList = ({publications, getPublications, page, setPage, more, setMore}) => {
 
+    const { auth } = useAuth();
+
+    const deletePublication = async (publicationId) => {
+
+        const request = await fetch(Global.url + "publication/remove/" + publicationId, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }
+        });
+
+        const data = await request.json();
+
+        setPage(1);
+        setMore(true);
+        getPublications(1, true);
+
+    }
+
+    const nextPage = () => {
+        let next = page + 1;
+        setPage(next);
+        getPublications(next);
+    }
 
     return (
-        
+
         <>
             <div className="content__posts">
 

@@ -127,30 +127,6 @@ export const Profile = () => {
 
     }
 
-    const nextPage = () => {
-        let next = page + 1;
-        setPage(next);
-        getPublications(next);
-    }
-
-    const deletePublication = async(publicationId) => {
-        
-        const request = await fetch(Global.url + "publication/remove/" + publicationId, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
-            }
-        });
-
-        const data = await request.json();
-
-        setPage(1);
-        setMore(true);
-        getPublications(1, true);
-
-    }
- 
 
     return (
 
@@ -210,8 +186,14 @@ export const Profile = () => {
             </header>
 
 
-            <PublicationList />
-
+            <PublicationList 
+                publications={publications}
+                getPublications={getPublications}
+                page={page}
+                setPage={setPage}
+                more={more}
+                setMore={setMore}
+            />
             
         </>
     )
