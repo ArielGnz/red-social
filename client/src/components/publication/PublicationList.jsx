@@ -53,6 +53,7 @@ export const PublicationList = ({publications, getPublications, page, setPage, m
                                     </Link>
                                 </div>
 
+
                                 <div className="post__body">
 
                                     <div className="post__user-info">

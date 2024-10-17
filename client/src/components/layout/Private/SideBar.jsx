@@ -61,10 +61,10 @@ export const SideBar = () => {
             }
 
             if(data.status == "success" && uploadData.status == "success"){
+                console.log(data.status)
                 const myForm = document.querySelector("#form");
                 myForm.reset();
             }
-
         }
     }
 
