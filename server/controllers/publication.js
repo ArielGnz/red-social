@@ -240,7 +240,7 @@ const feed = async (req, res) => {
 
         const myFollows = await followService.followUserIds(req.user.id);
 
-        const publication =  await Publication.find({ user: myFollows.following })
+        const publications =  await Publication.find({ user: myFollows.following })
             .populate("user", "-password -role -__v -email")
             .sort("-created_at")
             .skip((page - 1) * itemsPerPage)
@@ -248,7 +248,7 @@ const feed = async (req, res) => {
                    
         const total = await Publication.countDocuments({ user: myFollows.following });
 
-        if (!publication || publication.length === 0) {
+        if (!publications || publications.length === 0) {
             return res.status(500).send({
                 status: "error",
                 message: "No hay publicaciones para mostrar",
@@ -262,7 +262,7 @@ const feed = async (req, res) => {
             total,
             page,
             pages: Math.ceil(total / itemsPerPage),
-            publication
+            publications
         });
 
     } catch (error) {

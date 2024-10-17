@@ -99,7 +99,6 @@ export const Profile = () => {
         });
 
         const data = await request.json();
-        console.log(data);
 
         if (data.status == "success") {
 

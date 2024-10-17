@@ -30,7 +30,7 @@ export const Feed = () => {
 
         if (data.status == "success") {
 
-            let newPublications = data.publication;
+            let newPublications = data.publications;
 
             if (publications.length >= 1) {
                 newPublications = [...publications, ...data.publications];
