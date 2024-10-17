@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-import avatar from '../../assets/img/user.png';
-import { GetProfile } from '../../helpers/GetProfile';
+// import avatar from '../../assets/img/user.png';
+// import { GetProfile } from '../../helpers/GetProfile';
 import { useParams } from 'react-router-dom';
 import { Global } from '../../helpers/Global';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,43 @@ export const Feed = () => {
     const [page, setPage] = useState(1);
     const [more, setMore] = useState(true);
     const params = useParams();
+
+    const getPublications = async (nextPage = 1) => {
+        
+        const request = await fetch(Global.url + "publication/feed/" + nextPage, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }
+        });
+
+        const data = await request.json();
+
+        if (data.status == "success") {
+
+            let newPublications = data.publication;
+
+            if (publications.length >= 1) {
+                newPublications = [...publications, ...data.publications];
+            }
+
+            setPublications(newPublications);
+
+            if (publications.length >= (data.total - data.publications.length)) {
+                setMore(false);
+            }
+
+            if(data.pages <= 1){
+                setMore(false);
+            }
+        }
+    }
+
+    useEffect(() => {
+        getPublications(1, true);
+    }, []);
+
 
     return (
         <>

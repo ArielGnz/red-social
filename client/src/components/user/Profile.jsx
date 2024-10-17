@@ -99,13 +99,14 @@ export const Profile = () => {
         });
 
         const data = await request.json();
+        console.log(data);
 
         if (data.status == "success") {
 
             let newPublications = data.publications;
 
             if (!newProfile && publications.length >= 1) {
-                newPublications = [...publications, ...newPublications];
+                newPublications = [...publications, ...data.publications];
             }
 
             if(newProfile){
