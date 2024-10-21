@@ -7,6 +7,7 @@ const jwt = require("../services/jwt");
 const fs = require("fs");
 const path = require("path");
 const followService = require("../services/followService");
+const validate = require("../helpers/validate");
 //const mongoosePagination = require("mongoose-pagination");
 
 const pruebaUser = (req, res) => {
