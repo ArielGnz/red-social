@@ -12,12 +12,19 @@ const validate = (params) => {
 
     let nick = !validator.isEmpty(params.nick) &&
         validator.isLength(params.nick, { min: 3, max: undefined });
-       
+
+    let email = !validator.isEmpty(params.email) &&
+        validator.isEmail(params.email);
+
+    let password = !validator.isEmpty(params.password);
+
+    let bio = validator.isLength(params.bio, { min: undefined, max: 255 });
 
 
-
-    if (!name) {
-        throw new Error("Error en la validacion del Nombre")
+    if (!name || !surname || !nick || !email || !password || !bio) {
+        throw new Error("Error en la validacion del registro")
+    } else {
+        console.log("Validacion superada con exito")
     }
 }
 

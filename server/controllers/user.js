@@ -18,6 +18,8 @@ const pruebaUser = (req, res) => {
 }
 
 const register = async (req, res) => {
+  
+  try{
   // Registro de usuario
   let params = req.body;
 
@@ -29,7 +31,9 @@ const register = async (req, res) => {
     });
   }
 
-  try {
+  validate(params);
+
+  
     const users = await User.find({
       $or: [
         { email: params.email.toLowerCase() },
