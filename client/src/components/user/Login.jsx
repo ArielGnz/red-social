@@ -74,7 +74,7 @@ export const Login = () => {
 
     <div className='flex w-full h-screen'>
 
-      <div className=''>
+      <div className='w-full flex items-center justify-center lg:w-1/2'>
         <form className='' onSubmit={loginUser}>
 
           <div className=''>
@@ -89,6 +89,9 @@ export const Login = () => {
 
           <input type="submit" value="Identificate" className='btn btn-success' />
         </form>
+      </div>
+      <div className='hidden lg:flex h-full bg-gray-200'>
+        <div>HOLA</div>
       </div>
 
     </div>
