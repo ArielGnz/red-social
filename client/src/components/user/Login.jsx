@@ -29,7 +29,7 @@ export const Login = () => {
     if (data.status == "Success") {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user))
-      
+
       setSaved("login")
 
       setAuth(data.user);
@@ -42,10 +42,9 @@ export const Login = () => {
     }
   }
 
-  return (
-    <>
-      <header className="content__header content__header--public">
-        <h1 className="content__title">Login</h1>
+
+  {/* <header className="content__header content__header--public">
+        <h1 className="lg:text-center text-4xl">Login</h1>
       </header>
 
       <div className="content__posts">
@@ -67,7 +66,31 @@ export const Login = () => {
 
           <input type="submit" value="Identificate" className='btn btn-success' />
         </form>
+        
+      </div> */}
+
+
+  return (
+
+    <div className='flex w-full h-screen'>
+
+      <div className=''>
+        <form className='' onSubmit={loginUser}>
+
+          <div className=''>
+            <label htmlFor="email">Email</label>
+            <input type="email" name='email' onChange={changed} />
+          </div>
+
+          <div className=''>
+            <label htmlFor="password">Contraseña</label>
+            <input type="password" name='password' onChange={changed} />
+          </div>
+
+          <input type="submit" value="Identificate" className='btn btn-success' />
+        </form>
       </div>
-    </>
+
+    </div>
   )
 }
