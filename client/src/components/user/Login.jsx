@@ -90,8 +90,8 @@ export const Login = () => {
           <input type="submit" value="Identificate" className='btn btn-success' />
         </form>
       </div>
-      <div className='hidden lg:flex h-full bg-gray-200'>
-        <div>HOLA</div>
+      <div className='hidden lg:flex h-full items-center justify-center bg-gray-200'>
+        <div className='w-60 h-60 bg-gradient-to-tr from-violet-500 to-pink-500 rounded-full'/>
       </div>
 
     </div>
