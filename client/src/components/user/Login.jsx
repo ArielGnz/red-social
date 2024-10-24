@@ -76,32 +76,40 @@ export const Login = () => {
 
       <div className='w-full flex items-center justify-center lg:w-1/2'>
 
-        <form className='bg-white px-10 py-20 rounded-3xl' onSubmit={loginUser}>
+        <form className='bg-white px-10 py-20 rounded-3xl border-2 border-gray-100' onSubmit={loginUser}>
 
-        <div><h1 className='text-5xl font-semibold'>Welcome Login</h1></div>
+          <div><h1 className='text-5xl font-semibold'>Welcome Login</h1></div>
 
           <div className='mt-8'>
             <label htmlFor="email" className='text-lg font-medium'>Email</label>
-            <input 
-                  type="email"  
-                  name='email' 
-                  onChange={changed} 
-                  className='w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent'
-                  placeholder='Email' />
+            <input
+              type="email"
+              name='email'
+              onChange={changed}
+              className='w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent'
+              placeholder='Email' />
           </div>
 
-          <div className=''>
+          <div className='text-lg font-medium'>
             <label htmlFor="password">Contraseña</label>
-            <input type="password" name='password' onChange={changed} className='' placeholder='Contraseña'/>
+            <input type="password"
+              name='password'
+              onChange={changed}
+              className='w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent'
+              placeholder='Contraseña' />
           </div>
 
-          <input type="submit" value="Identificate" className='btn btn-success' />
+          <div className='mt-8 border-2 text-center'>
+            <input type="submit" value="Identificate" className='btn btn-success' />
+          </div>
+          
         </form>
+
       </div>
 
       <div className='hidden realtive lg:flex h-full w-1/2 items-center justify-center bg-gray-200'>
-        <div className='w-60 h-60 bg-gradient-to-tr from-violet-500 to-pink-500 rounded-full animate-spin'/>
-        <div className='w-1/2 h-[380px] absolute bottom-0 bg-white/10 backdrop-blur-lg'/>
+        <div className='w-60 h-60 bg-gradient-to-tr from-violet-500 to-pink-500 rounded-full animate-spin' />
+        <div className='w-1/2 h-[380px] absolute bottom-0 bg-white/10 backdrop-blur-lg' />
       </div>
 
     </div>
