@@ -3,8 +3,9 @@ import avatar from '../../../assets/img/user.png'
 import { NavLink } from 'react-router-dom'
 
 export const Nav = () => {
+
     return (
-        <nav className="navbar__container-lists">
+        <nav className="bg-red-500 navbar__container-lists">
 
             <ul className="container-lists__menu-list">
                 <li className="menu-list__item">
