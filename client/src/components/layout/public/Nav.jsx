@@ -5,24 +5,24 @@ import { NavLink } from 'react-router-dom'
 export const Nav = () => {
 
     return (
-        <nav className="bg-red-500 navbar__container-lists">
+        <nav className="bg-red-500 h-[50px] navbar__container-lists">
 
-            <ul className="container-lists__menu-list">
-                <li className="menu-list__item">
+            <div className=" flex justify-between items-center mx-6 container-lists__menu-list">
+                <button className="font-medium mx-6 menu-list__item">
                     <NavLink to='/login' className="menu-list__link">
                         <i className="fa-solid fa-user"></i>
                         <span className="menu-list__title">Login</span>
                     </NavLink>
-                </li>
+                </button>
 
-                <li className="menu-list__item">
+                <button className="font-medium menu-list__item">
                     <NavLink to='/registro' className="menu-list__link">
                         <i className="fa-solid fa-users"></i>
                         <span className="menu-list__title">Register</span>
                     </NavLink>
-                </li>
+                </button>
 
-            </ul>
+            </div>
 
         </nav>
     )
