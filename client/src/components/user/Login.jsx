@@ -74,9 +74,9 @@ export const Login = () => {
 
       <div className='w-full flex items-center justify-center lg:w-1/2'>
 
-        <form className='bg-white px-10 py-20 rounded-3xl border-2 border-gray-100' onSubmit={loginUser}>
+        <form className='bg-white border-2 border-gray-300 px-10 py-20 rounded-3xl border-2 border-gray-100' onSubmit={loginUser}>
 
-          <div><h1 className='text-5xl font-semibold'>Welcome Login</h1></div>
+          <div><h1 className='text-5xl font-semibold'>Welcome</h1></div>
 
           <div className='mt-8'>
             <label htmlFor="email" className='text-lg font-medium'>Email</label>
@@ -101,7 +101,7 @@ export const Login = () => {
             <button 
               type="submit" 
               value="Sign In" 
-              className='active:scale-[.98] active:duration-75 py-3 text-white text-lg font-bold mt-8 border-2 text-center bg-violet-500 rounded-xl w-full'>Sign In
+              className='active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out py-3 text-white text-lg font-bold mt-8 border-2 text-center bg-violet-500 rounded-xl w-full'>Sign In
             </button>
           {/* </div> */}
 
