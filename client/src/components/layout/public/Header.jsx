@@ -5,10 +5,10 @@ export const Header = () => {
 
     return (
 
-        <header className="w-full flex justify-between items-center bg-blue-500 h-[50px] lg:fixed">
+        <header className="w-full flex justify-between items-center bg-violet-500 h-[50px] lg:fixed">
 
             <div>
-                <a className="mx-4 font-medium">REACTSOCIAL</a>
+                <a className="mx-4 font-medium text-gray-200">REACTSOCIAL</a>
             </div>
 
             <Nav />
