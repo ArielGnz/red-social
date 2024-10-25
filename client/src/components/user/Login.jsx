@@ -13,7 +13,6 @@ export const Login = () => {
     e.preventDefault();
 
     let userToLogin = form;
-    console.log(form)
 
     const request = await fetch(Global.url + 'user/login', {
       method: "POST",
@@ -24,8 +23,7 @@ export const Login = () => {
     })
 
     const data = await request.json();
-    console.log(data);
-
+    
     if (data.status == "Success") {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user))
@@ -86,23 +84,27 @@ export const Login = () => {
               type="email"
               name='email'
               onChange={changed}
-              className='w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent'
-              placeholder='Email' />
+              className='w-full border-2 border-gray-200 rounded-xl p-4 mt-1 bg-transparent'
+              placeholder='Enter your email' />
           </div>
 
-          <div className='text-lg font-medium'>
-            <label htmlFor="password">Contraseña</label>
+          <div className='mt-2'>
+            <label htmlFor="password" className='text-lg font-medium'>Contraseña</label>
             <input type="password"
               name='password'
               onChange={changed}
-              className='w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent'
-              placeholder='Contraseña' />
+              className='w-full border-2 border-gray-200 rounded-xl p-4 mt-1 bg-transparent'
+              placeholder='Enter your password' />
           </div>
 
-          <div className='mt-8 border-2 text-center'>
-            <input type="submit" value="Identificate" className='btn btn-success' />
-          </div>
-          
+          {/* <div className='mt-8 border-2 text-center bg-violet-500 rounded-xl'> */}
+            <button 
+              type="submit" 
+              value="Sign In" 
+              className='active:scale-[.98] active:duration-75 py-3 text-white text-lg font-bold mt-8 border-2 text-center bg-violet-500 rounded-xl w-full'>Sign In
+            </button>
+          {/* </div> */}
+
         </form>
 
       </div>
