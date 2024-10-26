@@ -7,7 +7,7 @@ const jwt = require("../services/jwt");
 const fs = require("fs");
 const path = require("path");
 const followService = require("../services/followService");
-const validate = require("../helpers/validate");
+//const validate = require("../helpers/validate");
 //const mongoosePagination = require("mongoose-pagination");
 
 const pruebaUser = (req, res) => {
@@ -31,8 +31,7 @@ const register = async (req, res) => {
     });
   }
 
-  validate(params);
-
+  //validate(params);
   
     const users = await User.find({
       $or: [

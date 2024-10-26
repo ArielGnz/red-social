@@ -9,6 +9,7 @@ export default function Register() {
     const [saved, setSaved] = useState("not_saved");
 
     const saveUser = async (e) => {
+
         e.preventDefault();
 
         let newUSer = form;
@@ -31,48 +32,48 @@ export default function Register() {
 
     }
 
-    <>
-        <header className="content__header content__header--public">
-            <h1 className="content__title">Registro</h1>
-        </header>
+    // <>
+    //     <header className="content__header content__header--public">
+    //         <h1 className="content__title">Registro</h1>
+    //     </header>
 
-        <div className="content__posts">
+    //     <div className="content__posts">
 
-            {saved == "saved" ? <strong className='alert alert-success'> "Usuario registrado correctamente!!" </strong> : " "}
-            {saved == "Error" ? <strong className='alert alert-danger'> "Error al registrar el usuario" </strong> : " "}
+    //         {saved == "saved" ? <strong className='alert alert-success'> "Usuario registrado correctamente!!" </strong> : " "}
+    //         {saved == "Error" ? <strong className='alert alert-danger'> "Error al registrar el usuario" </strong> : " "}
 
-            <form className='register-form' onSubmit={saveUser}>
+    //         <form className='register-form' onSubmit={saveUser}>
 
-                <div className='form-group'>
-                    <label htmlFor="name">Nombre</label>
-                    <input type="text" name='name' onChange={changed} />
-                </div>
+    //             <div className='form-group'>
+    //                 <label htmlFor="name">Nombre</label>
+    //                 <input type="text" name='name' onChange={changed} />
+    //             </div>
 
-                <div className='form-group'>
-                    <label htmlFor="surname">Apellido</label>
-                    <input type="text" name='surname' onChange={changed} />
-                </div>
+    //             <div className='form-group'>
+    //                 <label htmlFor="surname">Apellido</label>
+    //                 <input type="text" name='surname' onChange={changed} />
+    //             </div>
 
-                <div className='form-group'>
-                    <label htmlFor="nick">Nick</label>
-                    <input type="text" name='nick' onChange={changed} />
-                </div>
+    //             <div className='form-group'>
+    //                 <label htmlFor="nick">Nick</label>
+    //                 <input type="text" name='nick' onChange={changed} />
+    //             </div>
 
-                <div className='form-group'>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" name='email' onChange={changed} />
-                </div>
+    //             <div className='form-group'>
+    //                 <label htmlFor="email">Email</label>
+    //                 <input type="email" name='email' onChange={changed} />
+    //             </div>
 
-                <div className='form-group'>
-                    <label htmlFor="password">Contraseña</label>
-                    <input type="password" name='password' onChange={changed} />
-                </div>
+    //             <div className='form-group'>
+    //                 <label htmlFor="password">Contraseña</label>
+    //                 <input type="password" name='password' onChange={changed} />
+    //             </div>
 
-                <input type="submit" value="Registrate" className='btn btn-success' />
+    //             <input type="submit" value="Registrate" className='btn btn-success' />
 
-            </form>
-        </div>
-    </>
+    //         </form>
+    //     </div>
+    // </>
 
     return (
 
@@ -81,6 +82,9 @@ export default function Register() {
             <div className='w-full flex items-center justify-center lg:w-1/2'>
 
                 <form className='' onSubmit={saveUser}>
+
+                    {saved == "saved" ? <strong className='text-xl font-bold text-green-500'> "Usuario registrado correctamente!!" </strong> : " "}
+                    {saved == "Error" ? <strong className='text-xl font-bold text-red-500'> "Error al registrar el usuario" </strong> : " "}
 
                     <div><h1 className='text-5xl font-semibold'>Registrate!</h1></div>
 
@@ -144,9 +148,9 @@ export default function Register() {
 
             </div>
 
-            
+
             <div className='relative hidden lg:flex h-full w-1/2 items-center justify-center bg-violet-200 z-0'>
-            
+
                 <img src={fondo10} alt="" className='w-full h-full object-cover object-center z-0' />
 
                 <div className='absolute inset-0 flex items-center justify-center z-1'>

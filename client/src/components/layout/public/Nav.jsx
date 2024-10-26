@@ -15,14 +15,14 @@ export const Nav = () => {
 
                 <li className='mx-8 font-medium text-gray-200 text-xl'>
                     <NavLink to='/login' className="menu-list__link">
-                        <span className=" text-center menu-list__title">Login</span>
+                        <span className="hover:text-white">Login</span>
                     </NavLink>
 
                 </li>
 
                 <li className='mx-8 font-medium text-gray-200 text-xl'>
                     <NavLink to='/registro' className="menu-list__link">
-                        <span className="menu-list__title">Register</span>
+                        <span className="hover:text-white">Register</span>
                     </NavLink>
                 </li>
 
