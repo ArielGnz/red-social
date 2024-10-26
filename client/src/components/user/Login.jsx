@@ -41,33 +41,6 @@ export const Login = () => {
   }
 
 
-  {/* <header className="content__header content__header--public">
-        <h1 className="lg:text-center text-4xl">Login</h1>
-      </header>
-
-      <div className="content__posts">
-
-        {saved == "login" ? <strong className='alert alert-success'> "Usuario identificado correctamente!!" </strong> : " "}
-        {saved == "Error" ? <strong className='alert alert-danger'> "Error al ingresar el usuario o contraseña" </strong> : " "}
-
-        <form className='form-login' onSubmit={loginUser}>
-
-          <div className='form-group'>
-            <label htmlFor="email">Email</label>
-            <input type="email" name='email' onChange={changed} />
-          </div>
-
-          <div className='form-group'>
-            <label htmlFor="password">Contraseña</label>
-            <input type="password" name='password' onChange={changed} />
-          </div>
-
-          <input type="submit" value="Identificate" className='btn btn-success' />
-        </form>
-        
-      </div> */}
-
-
   return (
 
     <div className='flex w-full h-screen '>

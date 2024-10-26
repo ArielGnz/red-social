@@ -144,13 +144,12 @@ export default function Register() {
 
             </div>
 
-            <div className='relative hidden lg:flex h-full w-1/2 items-center justify-center bg-violet-200'>
-                {/* <div className='w-60 h-60 bg-gradient-to-tr from-violet-500 to-pink-500 rounded-full animate-spin' /> */}
-                {/* <div className='w-1/2 h-[800px] bottom-0 bg-white/10 backdrop-blur-lg' /> */}
+            
+            <div className='relative hidden lg:flex h-full w-1/2 items-center justify-center bg-violet-200 z-0'>
+            
+                <img src={fondo10} alt="" className='w-full h-full object-cover object-center z-0' />
 
-                <img src={fondo10} alt="" className='w-full h-full object-cover object-center' />
-
-                <div className='absolute inset-0 flex items-center justify-center'>
+                <div className='absolute inset-0 flex items-center justify-center z-1'>
                     <h1 className='text-white text-4xl font-bold'>Título Aquí</h1>
                 </div>
 
