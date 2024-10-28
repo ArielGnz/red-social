@@ -2,15 +2,19 @@ import React from 'react'
 import { Nav } from './Nav'
 
 export const Header = () => {
-    return (
-        <header className="layout__navbar">
 
-            <div className="navbar__header">
-                <a href="#" className="navbar__title">REACTSOCIAL</a>
+    return (
+        
+        <header className="w-full flex justify-between items-center bg-violet-500 h-[50px] lg:fixed z-10">
+            
+            <div>
+                <a className="mx-4 font-medium text-gray-200 hover:text-white">REACTSOCIAL</a>
             </div>
 
-            <Nav />
-
+            <div>
+                <Nav />
+            </div>
+            
         </header>
     )
 }

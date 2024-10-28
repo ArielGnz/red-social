@@ -154,11 +154,10 @@ export default function Register() {
 
                 <img src={fondo10} alt="" className='w-full h-full object-cover object-center z-0' />
 
-                <div className='absolute inset-0 flex items-center justify-center z-1'>
+                {/* <div className='absolute inset-0 flex items-center justify-center z-1'>
                     <h1 className='text-white text-4xl font-bold'>Título Aquí</h1>
-                    {/* <img src={logo1} alt="" className='absolute'/> */}
-                    
-                </div>
+                    <img src={logo1} alt="" className='absolute'/>
+                </div> */}
 
             </div>
 
