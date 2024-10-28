@@ -53,7 +53,7 @@ export const Login = () => {
 
           <div><h3 className='font-semibold mt-4'>!Hola! te damos la bienvenida</h3></div>
 
-          <div><p className='font-semibold'>Completa tus datos y empeza a explorar</p></div>
+          <div><p className='font-semibold'>Completa tus datos y comenza a explorar</p></div>
 
           <div className='mt-8'>
             <label htmlFor="email" className='text-lg font-medium'>Email</label>
