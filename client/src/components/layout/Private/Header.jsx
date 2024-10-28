@@ -5,7 +5,7 @@ export const Header = () => {
 
     return (
         
-        <header className="w-full flex justify-between items-center bg-violet-500 h-[50px] lg:fixed z-10">
+        <header className="w-full flex justify-between items-center bg-violet-500 h-[250px] lg:h-[50px] lg:fixed z-10">
             
             <div>
                 <a className="mx-4 font-medium text-gray-200 hover:text-white">REACTSOCIAL</a>

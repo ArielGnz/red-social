@@ -77,10 +77,11 @@ export const Nav = () => {
 
     return (
 
-        <nav className="flex mx-4 items-center w-full h-[40px] z-10">
+        <nav className="h-[200px] flex mx-4 items-center w-full lg:h-[40px] z-10">
 
-            <div id='menu' className={`flex flex-col lg:flex ${menuVisible? 'flex': 'hidden'}`}>
-                <ul className=" lg:flex space-x-4">
+            <div id='menu' className={`flex flex-col lg:flex-row ${menuVisible? 'flex': 'hidden'}`}>
+                
+                <ul className="flex flex-col lg:flex-row space-x-4">
                     <li className="font-medium text-gray-200 hover:text-white">
                         <NavLink to="/social">
                             <span>Inicio</span>
@@ -101,7 +102,7 @@ export const Nav = () => {
 
                 </ul>
 
-                <ul className="flex space-x-4">
+                <ul className="flex flex-col lg:flex-row space-x-4">
                     <li className="font-medium text-gray-200 hover:text-white">
                         <NavLink to={"/social/perfil/" + auth._id}>
                             {/* {auth.image != "default.png" && <img src={Global.url + "user/avatar/" + auth.image} className="list-end__img" alt="Foto de perfil" />}
