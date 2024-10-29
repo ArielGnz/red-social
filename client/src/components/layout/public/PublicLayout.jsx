@@ -8,6 +8,7 @@ const PublicLayout = () => {
   const {auth} = useAuth();
 
   return (
+
     <div>
       
       <Header />
@@ -19,6 +20,7 @@ const PublicLayout = () => {
             <Navigate to="/social" />
         } 
       </section>
+      
     </div>
   )
 }

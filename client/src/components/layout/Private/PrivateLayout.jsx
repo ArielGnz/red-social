@@ -13,6 +13,7 @@ const PrivateLayout = () => {
     } else {
 
         return (
+            
             <div>
                 {/*Cabecera*/}
                 <Header />
