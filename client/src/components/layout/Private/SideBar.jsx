@@ -150,10 +150,6 @@ export const SideBar = () => {
 
         <aside className="h-screen  mt-20">
 
-            {/* <header className="">
-                <h1 className="text-red-500">Hola, {auth.name}</h1>
-            </header> */}
-
             <div className="">
 
                 <div className="">
@@ -171,24 +167,24 @@ export const SideBar = () => {
                     </div>
 
 
-                    <div className="flex justify-between border-4">
+                    <div className="flex justify-between">
 
-                        <div className="border-2">
-                            <Link to={'/social/siguiendo/' + auth._id} href="#" className="">
+                        <div className="">
+                            <Link to={'/social/siguiendo/' + auth._id} className="flex flex-col items-center">
                                 <span className="">Siguiendo</span>
                                 <span className="">{counters.following}</span>
                             </Link>
                         </div>
 
                         <div className="">
-                            <Link to={'social/seguidores/' + auth._id} href="#" className="">
+                            <Link to={'social/seguidores/' + auth._id} className="flex flex-col items-center">
                                 <span className="">Seguidores</span>
                                 <span className="">{counters.followed}</span>
                             </Link>
                         </div>
 
                         <div className="">
-                            <NavLink to={"/social/perfil/" + auth._id} className="">
+                            <NavLink to={"/social/perfil/" + auth._id} className="flex flex-col items-center">
                                 <span className="">Publicaciones</span>
                                 <span className="">{counters.publications}</span>
                             </NavLink>
