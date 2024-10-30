@@ -33,7 +33,7 @@ const PrivateLayout = () => {
 
                     </div>
 
-                    <div className='hidden lg:flex w-1/4 h-[640px] border-4'>
+                    <div className='hidden lg:flex w-1/4 h-[640px] '>
                         {/*contenido principal*/}
                         <SideBar />
                     </div>

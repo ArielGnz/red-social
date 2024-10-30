@@ -87,7 +87,7 @@ export const SideBar = () => {
 
             <div className="">
 
-                <div className="">
+                <div className="border-4 p-4">
 
                     <div className="flex mb-3">
                         <div className="">
@@ -104,23 +104,23 @@ export const SideBar = () => {
 
                     <div className="flex justify-between font-semibold mt-6">
 
-                        <div className="text-gray-600 hover:text-black text-lg">
+                        <div className="text-gray-600 hover:text-black text-lg ">
                             <Link to={'/social/siguiendo/' + auth._id} className="flex flex-col items-center">
-                                <span className="">Siguiendo</span>
+                                <span className="border-b-2">Siguiendo</span>
                                 <span className="mt-2">{counters.following}</span>
                             </Link>
                         </div>
 
                         <div className="text-gray-600 hover:text-black text-lg">
                             <Link to={'/social/seguidores/' + auth._id} className="flex flex-col items-center">
-                                <span className="">Seguidores</span>
+                                <span className="border-b-2">Seguidores</span>
                                 <span className="mt-2">{counters.followed}</span>
                             </Link>
                         </div>
 
                         <div className="text-gray-600 hover:text-black text-lg">
                             <NavLink to={"/social/perfil/" + auth._id} className="flex flex-col items-center">
-                                <span className="">Publicaciones</span>
+                                <span className="border-b-2">Publicaciones</span>
                                 <span className="mt-2">{counters.publications}</span>
                             </NavLink>
                         </div>
@@ -129,7 +129,7 @@ export const SideBar = () => {
                 </div>
 
 
-                <div className="mt-4">
+                <div className="mt-4 border-4 p-4">
 
                     {stored == "stored" ? <strong className='text-green-500'> "Publicacion guardada correctamente!!" </strong> : " "}
                     {stored == "Error" ? <strong className='text-red-400'> "Error al guardar la Publicacion" </strong> : " "}
@@ -142,11 +142,11 @@ export const SideBar = () => {
                         </div>
 
                         <div className="font-semibold text-gray-600 mt-4">
-                            <label htmlFor="file" className="mt-2">Sube tu foto</label>
+                            <label htmlFor="file" className="mt-2">Sube una Imagen!</label>
                             <input type="file" name="file0" id='file' className="mt-2" />
                         </div>
 
-                        <input type="submit" value="Enviar" className="rounded-md border-2 px-4 bg-gray-200 hover:bg-gray-300 text-lg font-semibold text-gray-600 mt-2" />
+                        <input type="submit" value="Enviar" className="rounded-md border-2 px-4 bg-gray-200 hover:bg-gray-300 text-lg font-semibold text-gray-600 mt-4" />
 
                     </form>
 
