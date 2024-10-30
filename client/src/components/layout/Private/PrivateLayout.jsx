@@ -6,25 +6,6 @@ import useAuth from '../../../hooks/useAuth'
 
 const PrivateLayout = () => {
 
-    // <div>
-
-    //     {/*Cabecera*/}
-    //     <Header />
-
-    //     {/*contenido principal*/}
-    //     <section className='layout__content'>
-    //         {auth._id ?
-    //             <Outlet />
-    //             :
-    //             <Navigate to="/login/" />
-    //         }
-    //     </section>
-
-    //     {/*contenido principal*/}
-    //     <SideBar />
-
-    // </div>
-
     const { auth, loading } = useAuth();
 
     if (loading) {
@@ -40,7 +21,7 @@ const PrivateLayout = () => {
 
                 <div className='flex w-[100%] px-2 '>
 
-                    <div className='w-4/5'>
+                    <div className='w-3/4'>
                         {/*contenido principal*/}
                         <section>
                             {auth._id ?
@@ -52,7 +33,7 @@ const PrivateLayout = () => {
 
                     </div>
 
-                    <div className='hidden lg:flex w-1/5 border-4'>
+                    <div className='hidden lg:flex w-1/4 h-[640px] border-4'>
                         {/*contenido principal*/}
                         <SideBar />
                     </div>
