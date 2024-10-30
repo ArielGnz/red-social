@@ -17,11 +17,11 @@ export const Feed = () => {
     const params = useParams();
 
     const getPublications = async (nextPage = 1, showNews = false) => {
-        
-        if(showNews){
+
+        if (showNews) {
             setPublications([]);
             setPage(1),
-            nextPage = 1;
+                nextPage = 1;
         }
 
         const request = await fetch(Global.url + "publication/feed/" + nextPage, {
@@ -48,7 +48,7 @@ export const Feed = () => {
                 setMore(false);
             }
 
-            if(data.pages <= 1){
+            if (data.pages <= 1) {
                 setMore(false);
             }
         }
@@ -60,13 +60,15 @@ export const Feed = () => {
 
 
     return (
-        <>
+
+        <div className='mt-20'>
+
             <header className="content__header">
                 <h1 className="content__title">Timeline</h1>
                 <button className="content__button" onClick={() => getPublications(1, true)}>Mostrar nuevas</button>
             </header>
 
-            <PublicationList 
+            <PublicationList
                 publications={publications}
                 getPublications={getPublications}
                 page={page}
@@ -74,6 +76,8 @@ export const Feed = () => {
                 more={more}
                 setMore={setMore}
             />
-        </>
+
+        </div>
+
     )
 }

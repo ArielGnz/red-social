@@ -38,9 +38,9 @@ const PrivateLayout = () => {
                 {/*Cabecera*/}
                 <Header />
 
-                <div className='flex'>
+                <div className='flex w-[100%] px-2 '>
 
-                    <div className='w-2/3'>
+                    <div className='w-4/5'>
                         {/*contenido principal*/}
                         <section>
                             {auth._id ?
@@ -52,7 +52,7 @@ const PrivateLayout = () => {
 
                     </div>
 
-                    <div className='1/3'>
+                    <div className='hidden lg:flex w-1/5 border-4'>
                         {/*contenido principal*/}
                         <SideBar />
                     </div>
