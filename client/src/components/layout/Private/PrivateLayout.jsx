@@ -21,7 +21,7 @@ const PrivateLayout = () => {
 
                 <div className='flex w-[100%] px-2 '>
 
-                    <div className='w-3/4'>
+                    <div className='w-full lg:w-3/4'>
                         {/*contenido principal*/}
                         <section>
                             {auth._id ?
