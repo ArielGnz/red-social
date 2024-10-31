@@ -45,9 +45,10 @@ export const Peopel = () => {
 
   
   return (
+
     <>
       <header className="content__header">
-        <h1 className="content__title">Gente</h1>
+        <h1 className="content__title">USUARIOS</h1>
 
       </header>
 
@@ -60,7 +61,6 @@ export const Peopel = () => {
                 setPage={setPage}
       />
 
-      
       <br />
     </>
   )

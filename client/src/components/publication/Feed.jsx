@@ -61,12 +61,12 @@ export const Feed = () => {
 
     return (
 
-        <div className='mt-20'>
+        <div className='mt-[90px]'>
 
-            <header className="">
+            {/* <header className="">
                 <h1 className="">Timeline</h1>
                 <button className="" onClick={() => getPublications(1, true)}>Mostrar nuevas</button>
-            </header>
+            </header> */}
 
             <PublicationList
                 publications={publications}

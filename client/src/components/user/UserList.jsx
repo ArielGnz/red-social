@@ -51,44 +51,115 @@ export const UserList = ({ users, getUsers, following, setFollowing, page, setPa
         getUsers(next);
       }
 
+
+
+    //   <div className="content__posts">
+
+    //             {users.map(user => {
+    //                 return (
+    //                     <article className="posts__post" key={user._id}>
+
+    //                         <div className="post__container">
+
+    //                             <div className="post__image-user">
+    //                                 <Link to={"/social/perfil/" + user._id} className="post__image-link">
+    //                                     {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="post__user-image" alt="Foto de perfil" />}
+    //                                     {user.image == "default.png" && <img src={avatar} className="post__user-image" alt="Foto de perfil" />}
+    //                                     <img src={avatar} className="post__user-image" alt="Foto de perfil" />
+    //                                 </Link>
+    //                             </div>
+
+    //                             <div className="post__body">
+
+    //                                 <div className="post__user-info">
+    //                                     <Link to={"/social/perfil/" + user._id} className="user-info__name">{user.name} {user.surname}</Link>
+    //                                     <span className="user-info__divider"> | </span>
+    //                                     <a href="#" className="user-info__create-date"><ReactTimeAgo date={user.created_at} /></a>
+    //                                 </div>
+
+    //                                 <h4 className="post__content">{user.bio}</h4>
+
+    //                             </div>
+
+    //                         </div>
+
+    //                         {user._id != auth._id &&
+    //                             <div className="post__buttons">
+
+    //                                 {!following.includes(user._id) &&
+    //                                     <button className="post__button post__button--green"
+    //                                         onClick={() => follow(user._id)}>
+    //                                         Seguir
+    //                                     </button>
+
+    //                                 }
+
+    //                                 {following.includes(user._id) &&
+    //                                     <button className="post__button post__button--green"
+    //                                         onClick={() => unfollow(user._id)} >
+    //                                         Dejar de Seguir
+    //                                     </button>
+    //                                 }
+
+    //                             </div>
+    //                         }
+
+
+    //                     </article>
+    //                 )
+    //             })}
+
+    //         </div>
+
+    //         {more &&
+
+    //             <div className="content__container-btn">
+    //                 <button className="content__btn-more-post" onClick={nextPage}>
+    //                     Ver mas Personas
+    //                 </button>
+    //             </div>
+    //         }
+
     return (
+
         <>
 
-            <div className="content__posts">
+            <div className="mt-[66px]">
 
                 {users.map(user => {
+
                     return (
-                        <article className="posts__post" key={user._id}>
+                        <article className="border-4 p-2 m-2" key={user._id}>
 
-                            <div className="post__container">
+                            <div className="">
 
-                                <div className="post__image-user">
-                                    <Link to={"/social/perfil/" + user._id} className="post__image-link">
-                                        {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="post__user-image" alt="Foto de perfil" />}
-                                        {user.image == "default.png" && <img src={avatar} className="post__user-image" alt="Foto de perfil" />}
-                                        <img src={avatar} className="post__user-image" alt="Foto de perfil" />
+                                <div className="">
+                                    <Link to={"/social/perfil/" + user._id} className="">
+                                        {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="" alt="Foto de perfil" />}
+                                        {user.image == "default.png" && <img src={avatar} className="" alt="Foto de perfil" />}
+                                        {/* <img src={avatar} className="post__user-image" alt="Foto de perfil" /> */}
                                     </Link>
                                 </div>
 
-                                <div className="post__body">
+                                <div className="">
 
-                                    <div className="post__user-info">
-                                        <Link to={"/social/perfil/" + user._id} className="user-info__name">{user.name} {user.surname}</Link>
-                                        <span className="user-info__divider"> | </span>
-                                        <a href="#" className="user-info__create-date"><ReactTimeAgo date={user.created_at} /></a>
+                                    <div className="">
+                                        <Link to={"/social/perfil/" + user._id} className="">{user.name} {user.surname}</Link>
+                                        <span className=""> | </span>
+                                        <a className=""><ReactTimeAgo date={user.created_at} /></a>
                                     </div>
 
-                                    <h4 className="post__content">{user.bio}</h4>
+                                    <h4 className="">{user.bio}</h4>
 
                                 </div>
 
                             </div>
 
                             {user._id != auth._id &&
-                                <div className="post__buttons">
+                                <div className="">
 
                                     {!following.includes(user._id) &&
-                                        <button className="post__button post__button--green"
+                                        <button className=""
                                             onClick={() => follow(user._id)}>
                                             Seguir
                                         </button>
@@ -96,7 +167,7 @@ export const UserList = ({ users, getUsers, following, setFollowing, page, setPa
                                     }
 
                                     {following.includes(user._id) &&
-                                        <button className="post__button post__button--green"
+                                        <button className=""
                                             onClick={() => unfollow(user._id)} >
                                             Dejar de Seguir
                                         </button>
@@ -114,8 +185,8 @@ export const UserList = ({ users, getUsers, following, setFollowing, page, setPa
 
             {more &&
 
-                <div className="content__container-btn">
-                    <button className="content__btn-more-post" onClick={nextPage}>
+                <div className="">
+                    <button className="" onClick={nextPage}>
                         Ver mas Personas
                     </button>
                 </div>
