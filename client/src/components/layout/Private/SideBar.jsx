@@ -87,7 +87,7 @@ export const SideBar = () => {
 
             <div className="">
 
-                <div className="border-4 p-4">
+                <div className="border-4 rounded-md p-4">
 
                     <div className="flex mb-3">
                         <div className="">
@@ -129,7 +129,7 @@ export const SideBar = () => {
                 </div>
 
 
-                <div className="mt-4 border-4 p-4">
+                <div className="mt-4 border-4 rounded-md p-4">
 
                     {stored == "stored" ? <strong className='text-green-500'> "Publicacion guardada correctamente!!" </strong> : " "}
                     {stored == "Error" ? <strong className='text-red-400'> "Error al guardar la Publicacion" </strong> : " "}
