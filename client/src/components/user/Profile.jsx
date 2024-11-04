@@ -89,7 +89,7 @@ export const Profile = () => {
     }
 
     const getPublications = async (nextPage = 1, newProfile = false) => {
-        
+
         const request = await fetch(Global.url + "publication/user/" + params.userId + "/" + nextPage, {
             method: "GET",
             headers: {
@@ -108,7 +108,7 @@ export const Profile = () => {
                 newPublications = [...publications, ...data.publications];
             }
 
-            if(newProfile){
+            if (newProfile) {
                 newPublications = data.publications;
                 setMore(true);
                 setPage(1);
@@ -120,7 +120,7 @@ export const Profile = () => {
                 setMore(false);
             }
 
-            if(data.pages <= 1){
+            if (data.pages <= 1) {
                 setMore(false);
             }
         }
@@ -131,53 +131,60 @@ export const Profile = () => {
     return (
 
         <div className='mt-[100px] mx-4'>
-            <header className="aside__profile-info">
 
-                <div className="profile-info__general-info">
-                    <div className="general-info__container-avatar">
-                        {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="container-avatar__img" alt="Foto de perfil" />}
-                        {user.image == "default.png" && <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />}
+            <header className="">
+
+                <div className="flex">
+                    <div className="">
+                        {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="w-[80px] h-[80px] rounded-full" alt="Foto de perfil" />}
+                        {user.image == "default.png" && <img src={avatar} className="w-[80px] h-[80px] rounded-full" alt="Foto de perfil" />}
                     </div>
 
-                    <div className="general-info__container-names">
-                        <div className="container-names__name">
-                            <h1>{user.name} {user.surname}</h1>
-                            {user._id != auth._id &&
+                    <div className="mx-4 font-semibold text-gray-600">
+                        <div className="">
+                            <h1 className='text-2xl'>{user.name} {user.surname}</h1>
+                            <div className='flex mt-2'>
+                                
+                                <h2 className="text-lg">{user.nick}</h2>
 
-                                (iFollow ?
-                                    <button onClick={() => unfollow(user._id)} className="content__button content__button--rigth post__button">DEJAR DE SEGUIR</button>
-                                    :
-                                    <button onClick={() => follow(user._id)} className="content__button content__button--rigth">SEGUIR</button>
-                                )
-                            }
+                                {user._id != auth._id &&
+
+                                    (iFollow ?
+                                        <button onClick={() => unfollow(user._id)} className="mx-2 bg-gray-400 hover:text-white rounded-md px-2 border-2">Dejar de Seguir</button>
+                                        :
+                                        <button onClick={() => follow(user._id)} className="mx-2 bg-green-600 hover:text-white rounded-md px-2 border-2">Seguir</button>
+                                    )
+                                }
+                            </div>
 
                         </div>
-                        <h2 className="container-names__nickname">{user.nick}</h2>
+
                         <p>{user.bio}</p>
 
                     </div>
+
                 </div>
 
-                <div className="profile-info__stats">
+                <div className="">
 
-                    <div className="stats__following">
-                        <Link to={'/social/siguiendo/' + user._id} className="following__link">
-                            <span className="following__title">Siguiendo</span>
-                            <span className="following__number">{counters.following}</span>
+                    <div className="">
+                        <Link to={'/social/siguiendo/' + user._id} className="">
+                            <span className="">Siguiendo</span>
+                            <span className="">{counters.following}</span>
                         </Link>
                     </div>
-                    <div className="stats__following">
-                        <Link to={'/social/seguidores/' + user._id} className="following__link">
-                            <span className="following__title">Seguidores</span>
-                            <span className="following__number">{counters.followed}</span>
+                    <div className="">
+                        <Link to={'/social/seguidores/' + user._id} className="">
+                            <span className="">Seguidores</span>
+                            <span className="">{counters.followed}</span>
                         </Link>
                     </div>
 
 
-                    <div className="stats__following">
-                        <Link to={'/social/perfil/' + user._id} className="following__link">
-                            <span className="following__title">Publicaciones</span>
-                            <span className="following__number">{counters.publications}</span>
+                    <div className="">
+                        <Link to={'/social/perfil/' + user._id} className="">
+                            <span className="">Publicaciones</span>
+                            <span className="">{counters.publications}</span>
                         </Link>
                     </div>
 
@@ -186,7 +193,7 @@ export const Profile = () => {
             </header>
 
 
-            <PublicationList 
+            <PublicationList
                 publications={publications}
                 getPublications={getPublications}
                 page={page}
@@ -194,7 +201,7 @@ export const Profile = () => {
                 more={more}
                 setMore={setMore}
             />
-            
+
         </div >
     )
 }
