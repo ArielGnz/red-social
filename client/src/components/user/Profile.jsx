@@ -130,7 +130,7 @@ export const Profile = () => {
 
     return (
 
-        <>
+        <div className='mt-[100px] mx-4'>
             <header className="aside__profile-info">
 
                 <div className="profile-info__general-info">
@@ -195,6 +195,6 @@ export const Profile = () => {
                 setMore={setMore}
             />
             
-        </>
+        </div >
     )
 }
