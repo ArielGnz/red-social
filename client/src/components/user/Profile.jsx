@@ -135,18 +135,18 @@ export const Profile = () => {
             <header className="">
 
                 <div className="flex justify-center">
-                    
+
                     <div className="">
-                        {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="w-[80px] h-[80px] rounded-full" alt="Foto de perfil" />}
-                        {user.image == "default.png" && <img src={avatar} className="w-[80px] h-[80px] rounded-full" alt="Foto de perfil" />}
+                        {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="w-[100px] h-[100px] rounded-full" alt="Foto de perfil" />}
+                        {user.image == "default.png" && <img src={avatar} className="w-[100px] h-[100px] rounded-full" alt="Foto de perfil" />}
                     </div>
 
                     <div className="mx-4 font-semibold text-gray-600">
                         <div className="">
-                            <h1 className='text-2xl'>{user.name} {user.surname}</h1>
-                            <div className='flex mt-2'>
-                                
-                                <h2 className="text-lg">{user.nick}</h2>
+                            <h1 className='text-3xl'>{user.name} {user.surname}</h1>
+                            <div className='flex mt-4'>
+
+                                <h2 className="text-xl">{user.nick}</h2>
 
                                 {user._id != auth._id &&
 
@@ -160,35 +160,33 @@ export const Profile = () => {
 
                         </div>
 
-                       
-
                     </div>
 
                 </div>
 
-                <div className="">
+                <div className="mt-4 flex justify-center">
 
-                <p>{user.bio}</p>
+                    <p>{user.bio}</p>
 
-                    <div className="">
-                        <Link to={'/social/siguiendo/' + user._id} className="">
+                    <div className="mx-6 font-semibold text-lg text-gray-600">
+                        <Link to={'/social/siguiendo/' + user._id} className="flex flex-col ">
                             <span className="">Siguiendo</span>
-                            <span className="">{counters.following}</span>
+                            <span className="mx-auto">{counters.following}</span>
                         </Link>
                     </div>
 
-                    <div className="">
-                        <Link to={'/social/seguidores/' + user._id} className="">
+                    <div className="mx-6 font-semibold text-lg text-gray-600">
+                        <Link to={'/social/seguidores/' + user._id} className="flex flex-col ">
                             <span className="">Seguidores</span>
-                            <span className="">{counters.followed}</span>
+                            <span className="mx-auto">{counters.followed}</span>
                         </Link>
                     </div>
 
 
-                    <div className="">
-                        <Link to={'/social/perfil/' + user._id} className="">
+                    <div className="mx-6 font-semibold text-lg text-gray-600">
+                        <Link to={'/social/perfil/' + user._id} className="flex flex-col ">
                             <span className="">Publicaciones</span>
-                            <span className="">{counters.publications}</span>
+                            <span className="mx-auto">{counters.publications}</span>
                         </Link>
                     </div>
 
