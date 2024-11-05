@@ -134,7 +134,8 @@ export const Profile = () => {
 
             <header className="">
 
-                <div className="flex">
+                <div className="flex justify-center">
+                    
                     <div className="">
                         {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="w-[80px] h-[80px] rounded-full" alt="Foto de perfil" />}
                         {user.image == "default.png" && <img src={avatar} className="w-[80px] h-[80px] rounded-full" alt="Foto de perfil" />}
@@ -159,7 +160,7 @@ export const Profile = () => {
 
                         </div>
 
-                        <p>{user.bio}</p>
+                       
 
                     </div>
 
@@ -167,12 +168,15 @@ export const Profile = () => {
 
                 <div className="">
 
+                <p>{user.bio}</p>
+
                     <div className="">
                         <Link to={'/social/siguiendo/' + user._id} className="">
                             <span className="">Siguiendo</span>
                             <span className="">{counters.following}</span>
                         </Link>
                     </div>
+
                     <div className="">
                         <Link to={'/social/seguidores/' + user._id} className="">
                             <span className="">Seguidores</span>
