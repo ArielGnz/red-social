@@ -69,9 +69,10 @@ export const UserList = ({ users, getUsers, following, setFollowing, page, setPa
 
                                 <div className="mx-auto">
                                     <Link to={"/social/perfil/" + user._id} className="">
+                                        
                                         {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="w-[90px] h-[90px] rounded-full" alt="Foto de perfil" />}
                                         {user.image == "default.png" && <img src={avatar} className="w-[90px] h-[90px] rounded-full" alt="Foto de perfil" />}
-                                        {/* <img src={avatar} className="post__user-image" alt="Foto de perfil" /> */}
+                                        
                                     </Link>
                                 </div>
 

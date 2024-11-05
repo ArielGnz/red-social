@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import useAuth from '../../hooks/useAuth';
 import { Global } from '../../helpers/Global';
 import { SerializeForm } from '../../helpers/SerializeForm';
-import avatar from '../../assets/img/user.png'
+import avatar from '../../assets/img/user.png';
 
 export const Config = () => {
 
-    const {auth ,setAuth} = useAuth();
+    const { auth, setAuth } = useAuth();
 
     const [saved, setSaved] = useState("not_saved");
 
@@ -30,18 +30,18 @@ export const Config = () => {
         const data = await request.json();
         console.log(data)
 
-        if(data.status == "success" && data.user){
+        if (data.status == "success" && data.user) {
             delete data.user.password;
             setAuth(data.user);
             setSaved("saved");
-            
+
         } else {
             setSaved("Error")
         }
 
         const fileInput = document.querySelector("#file");
 
-        if(data.status == "success" && fileInput.files[0]){
+        if (data.status == "success" && fileInput.files[0]) {
 
             const formData = new FormData();
             formData.append('file0', fileInput.files[0]);
@@ -56,7 +56,7 @@ export const Config = () => {
 
             const uploadData = await uploadRequest.json();
 
-            if(uploadData.status == "success" && uploadData){
+            if (uploadData.status == "success" && uploadData) {
                 delete uploadData.user.password;
 
                 setAuth(uploadData.user);
@@ -70,10 +70,12 @@ export const Config = () => {
     }
 
     return (
-        <>
-            <header className="content__header content__header--public">
+
+        <div className='flex justify-center mt-6 border-4 lg:mt-[90px]'>
+
+            {/* <header className="content__header content__header--public">
                 <h1 className="content__title">Ajustes</h1>
-            </header>
+            </header> */}
 
             <div className='content__posts'>
 
@@ -128,6 +130,6 @@ export const Config = () => {
                 <br />
 
             </div>
-        </>
+        </div>
     )
 }
