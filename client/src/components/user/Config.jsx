@@ -71,7 +71,7 @@ export const Config = () => {
 
     return (
 
-        <div className='flex justify-center mt-6 border-4 lg:mt-[90px] lg:w-[600px] lg:mx-auto rounded-md'>
+        <div className='bg-gray-200 flex justify-center mt-6 border-4 lg:mt-[90px] lg:w-[600px] lg:mx-auto rounded-md'>
 
             {/* <header className="content__header content__header--public">
                 <h1 className="content__title">Ajustes</h1>
