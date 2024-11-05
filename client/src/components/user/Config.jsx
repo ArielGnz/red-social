@@ -71,7 +71,7 @@ export const Config = () => {
 
     return (
 
-        <div className='flex justify-center mt-6 border-4 lg:mt-[90px]'>
+        <div className='flex justify-center mt-6 border-4 lg:mt-[90px] lg:w-[600px] lg:mx-auto rounded-md'>
 
             {/* <header className="content__header content__header--public">
                 <h1 className="content__title">Ajustes</h1>
@@ -82,41 +82,41 @@ export const Config = () => {
                 {saved == "saved" ? <strong className=''> "Usuario Actualizado correctamente!!" </strong> : " "}
                 {saved == "Error" ? <strong className=''> "Error al Actualizar el usuario" </strong> : " "}
 
-                <form className='font-semibold text-gray-600 mt-4' onSubmit={updateUser}>
+                <form className='font-semibold text-lg text-gray-600 mt-4' onSubmit={updateUser}>
 
-                    <div className='mt-4 w-full '>
-                        <label htmlFor="name">Nombre: </label>
-                        <input type="text" name='name' defaultValue={auth.name} />
+                    <div className='mt-4 w-full flex justify-between '>
+                        <label htmlFor="name" className='w-[1/4]'>Nombre: </label>
+                        <input className='w-[300px] px-2 rounded-md'type="text" name='name' defaultValue={auth.name} />
                     </div>
 
-                    <div className='mt-4 w-full '>
+                    <div className='mt-4 w-full flex justify-between'>
                         <label htmlFor="surname">Apellido: </label>
-                        <input type="text" name='surname' defaultValue={auth.surname} />
+                        <input className='w-[300px] px-2 rounded-md' type="text" name='surname' defaultValue={auth.surname} />
                     </div>
 
-                    <div className='mt-4 w-full '>
+                    <div className='mt-4 w-full flex justify-between'>
                         <label htmlFor="nick">Nick: </label>
-                        <input type="text" name='nick' defaultValue={auth.nick} />
+                        <input className='w-[300px] px-2 rounded-md' type="text" name='nick' defaultValue={auth.nick} />
                     </div>
 
-                    <div className='mt-4 w-full '>
+                    <div className='mt-4 w-full flex justify-between'>
                         <label htmlFor="bio">Bio: </label>
-                        <textarea name='bio' defaultValue={auth.bio} />
+                        <textarea className='w-[300px] h-[100px] px-2 rounded-md' name='bio' defaultValue={auth.bio} />
                     </div>
 
-                    <div className='mt-4 w-full '>
+                    <div className='mt-4 w-full flex justify-between'>
                         <label htmlFor="email">Email: </label>
-                        <input type="email" name='email' defaultValue={auth.email} />
+                        <input className='w-[300px] px-2 rounded-md' type="email" name='email' defaultValue={auth.email} />
                     </div>
 
-                    <div className='mt-4 w-full '>
+                    <div className='mt-4 w-full flex justify-between'>
                         <label htmlFor="password">Contraseña: </label>
-                        <input type="password" name='password' />
+                        <input className='w-[300px] px-2 rounded-md' type="password" name='password' />
                     </div>
 
-                    <div className='mt-4 w-full '>
+                    <div className='mt-4 w-full'>
                         <label htmlFor="file0">Avatar</label>
-                        <div className="">
+                        <div className="flex justify-center mt-2">
                             {auth.image != "default.png" && <img src={Global.url + "user/avatar/" + auth.image} className="" alt="Foto de perfil" />}
                             {auth.image == "default.png" && <img src={avatar} className="" alt="Foto de perfil" />}
                         </div>
@@ -126,7 +126,7 @@ export const Config = () => {
 
                     <br />
 
-                    <input type="submit" value="Actualizar" className='' />
+                    <input type="submit" value="Actualizar" className='border-2 px-4 py-2 rounded-md bg-green-600 text-white cursor-pointer' />
 
                 </form>
                 <br />
