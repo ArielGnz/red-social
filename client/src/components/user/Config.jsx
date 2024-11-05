@@ -77,55 +77,57 @@ export const Config = () => {
                 <h1 className="content__title">Ajustes</h1>
             </header> */}
 
-            <div className='content__posts'>
+            <div className=''>
 
-                {saved == "saved" ? <strong className='alert alert-success'> "Usuario Actualizado correctamente!!" </strong> : " "}
-                {saved == "Error" ? <strong className='alert alert-danger'> "Error al Actualizar el usuario" </strong> : " "}
+                {saved == "saved" ? <strong className=''> "Usuario Actualizado correctamente!!" </strong> : " "}
+                {saved == "Error" ? <strong className=''> "Error al Actualizar el usuario" </strong> : " "}
 
-                <form className='config-form' onSubmit={updateUser}>
+                <form className='font-semibold text-gray-600 mt-4' onSubmit={updateUser}>
 
-                    <div className='form-group'>
-                        <label htmlFor="name">Nombre</label>
+                    <div className='mt-4 w-full '>
+                        <label htmlFor="name">Nombre: </label>
                         <input type="text" name='name' defaultValue={auth.name} />
                     </div>
 
-                    <div className='form-group'>
-                        <label htmlFor="surname">Apellido</label>
+                    <div className='mt-4 w-full '>
+                        <label htmlFor="surname">Apellido: </label>
                         <input type="text" name='surname' defaultValue={auth.surname} />
                     </div>
 
-                    <div className='form-group'>
-                        <label htmlFor="nick">Nick</label>
+                    <div className='mt-4 w-full '>
+                        <label htmlFor="nick">Nick: </label>
                         <input type="text" name='nick' defaultValue={auth.nick} />
                     </div>
 
-                    <div className='form-group'>
-                        <label htmlFor="bio">Bio</label>
+                    <div className='mt-4 w-full '>
+                        <label htmlFor="bio">Bio: </label>
                         <textarea name='bio' defaultValue={auth.bio} />
                     </div>
 
-                    <div className='form-group'>
-                        <label htmlFor="email">Email</label>
+                    <div className='mt-4 w-full '>
+                        <label htmlFor="email">Email: </label>
                         <input type="email" name='email' defaultValue={auth.email} />
                     </div>
 
-                    <div className='form-group'>
-                        <label htmlFor="password">Contraseña</label>
+                    <div className='mt-4 w-full '>
+                        <label htmlFor="password">Contraseña: </label>
                         <input type="password" name='password' />
                     </div>
 
-                    <div className='form-group'>
+                    <div className='mt-4 w-full '>
                         <label htmlFor="file0">Avatar</label>
-                        <div className="general-info__container-avatar">
-                            {auth.image != "default.png" && <img src={Global.url + "user/avatar/" + auth.image} className="container-avatar__img" alt="Foto de perfil" />}
-                            {auth.image == "default.png" && <img src={avatar} className="container-avatar__img" alt="Foto de perfil" />}
+                        <div className="">
+                            {auth.image != "default.png" && <img src={Global.url + "user/avatar/" + auth.image} className="" alt="Foto de perfil" />}
+                            {auth.image == "default.png" && <img src={avatar} className="" alt="Foto de perfil" />}
                         </div>
                         <br />
                         <input type="file" name='file0' id='file' />
                     </div>
+
                     <br />
 
-                    <input type="submit" value="Actualizar" className='btn btn-success' />
+                    <input type="submit" value="Actualizar" className='' />
+
                 </form>
                 <br />
 
