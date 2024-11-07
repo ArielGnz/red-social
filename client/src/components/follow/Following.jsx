@@ -62,31 +62,11 @@ export const Following = () => {
 
   }
 
-  // const getProfile = async () => {
-
-  //   const request = await fetch(Global.url + 'user/profile/' + params.userId , {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Authorization": localStorage.getItem("token")
-  //     }
-  //   });
-
-  //   const data = await request.json();
-
-  //   if(data.status == "success"){
-  //     setUserProfile(data.user)
-  //   }
-
-  //   console.log(data.user);
-  // }
-
 
   return (
     <>
-      <header className="content__header">
-        <h1 className="content__title">USUARIOS QUE SIGUE {userProfile.name}</h1>
-
+      <header className="flex">
+        <h1 className="mx-auto font-semibold text-gray-600 text-2xl mt-[85px]">Usuarios que sigue {userProfile.name}</h1>
       </header>
 
       <UserList users={users}
@@ -98,8 +78,6 @@ export const Following = () => {
         setPage={setPage}
       />
 
-
-      <br />
     </>
   )
 }

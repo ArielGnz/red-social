@@ -47,8 +47,8 @@ export const Peopel = () => {
   return (
 
     <>
-      <header className="content__header">
-        <h1 className="content__title">USUARIOS</h1>
+      <header className="flex">
+        <h1 className="mx-auto font-semibold text-gray-600 text-2xl mt-[85px]">USUARIOS</h1>
 
       </header>
 

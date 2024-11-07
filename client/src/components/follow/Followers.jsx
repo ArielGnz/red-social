@@ -61,10 +61,11 @@ export const Followers = () => {
 
   
   return (
-    <>
-      <header className="content__header">
-        <h1 className="content__title">SEGUIDORES DE {userProfile.name}</h1>
+    
+    <div className=''>
 
+      <header className="flex">
+        <h1 className="mx-auto font-semibold text-gray-600 text-2xl mt-[85px]">Seguidores de {userProfile.name}</h1>
       </header>
 
       <UserList users={users} 
@@ -76,7 +77,6 @@ export const Followers = () => {
                 setPage={setPage}
       />
 
-      <br />
-    </>
+    </div>
   )
 }
