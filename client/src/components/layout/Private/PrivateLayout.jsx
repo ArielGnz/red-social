@@ -1,8 +1,8 @@
-import React from 'react'
-import { Header } from './Header'
-import { Navigate, Outlet, useLoaderData } from 'react-router-dom'
-import { SideBar } from './SideBar'
-import useAuth from '../../../hooks/useAuth'
+import React from 'react';
+import { Header } from './Header';
+import { Navigate, Outlet } from 'react-router-dom';
+import { SideBar } from './SideBar';
+import useAuth from '../../../hooks/useAuth';
 
 const PrivateLayout = () => {
 
