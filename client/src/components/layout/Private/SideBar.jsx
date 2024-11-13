@@ -54,16 +54,17 @@ export const SideBar = () => {
             });
 
             const uploadData = await uploadRequest.json();
+            //console.log(uploadData.status)
 
-            if(uploadData == "success"){
+            if(uploadData.status == "success"){
                 setStored("stored")
             } else {
-                setStored("Erorr")
+                setStored("erorr")
             }
         
 
             if(data.status == "success" && (!fileInput.files[0] || uploadData.status == "success")){
-                console.log("publication and upload success")
+                //console.log("publication and upload success")
                 const myForm = document.querySelector("#form");
                 myForm.reset();
             }
@@ -72,15 +73,14 @@ export const SideBar = () => {
     }
 
     useEffect(() => {
-        
-        if (stored) {
-          const timer = setTimeout(() => {
-            setStored(null); // Limpiar el mensaje después de 3 segundos
-          }, 3000);
-          return () => clearTimeout(timer); // Limpiar el temporizador cuando se desmonte o cambie el estado
+        if (stored === "stored" || stored === "error") {
+            const timer = setTimeout(() => {
+                setStored(null); // Limpiar el mensaje después de 6 segundos
+            }, 6000);
+            return () => clearTimeout(timer); // Limpiar el temporizador al desmontar o cambiar de estado
         }
-      }, [stored]);
-
+    }, [stored]);
+  
 
     return (
 
@@ -132,8 +132,8 @@ export const SideBar = () => {
 
                 <div className="mt-4 border-4 rounded-md p-4">
 
-                    {stored == "stored" ? <strong className='text-green-500'> "Publicacion guardada correctamente!!" </strong> : " "}
-                    {stored == "Error" ? <strong className='text-red-400'> "Error al guardar la Publicacion" </strong> : " "}
+                    {stored == "stored" ? <strong className='text-green-500 text-xl'> "Publicacion guardada correctamente!!" </strong> : " "}
+                    {stored == "error" ? <strong className='text-red-400 text-xl'> "Error al guardar la Publicacion" </strong> : " "}
 
                     <form className="" id='form' onSubmit={savePublication}>
 
