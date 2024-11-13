@@ -60,13 +60,14 @@ export const SideBar = () => {
             } else {
                 setStored("Erorr")
             }
-        }
+        
 
-            if(data.status == "success" || uploadData.status == "success"){
-                console.log(data.status)
+            if(data.status == "success" && (!fileInput.files[0] || uploadData.status == "success")){
+                console.log("publication and upload success")
                 const myForm = document.querySelector("#form");
                 myForm.reset();
             }
+        }
         
     }
 
@@ -75,7 +76,7 @@ export const SideBar = () => {
         if (stored) {
           const timer = setTimeout(() => {
             setStored(null); // Limpiar el mensaje después de 3 segundos
-          }, 2000);
+          }, 3000);
           return () => clearTimeout(timer); // Limpiar el temporizador cuando se desmonte o cambie el estado
         }
       }, [stored]);
