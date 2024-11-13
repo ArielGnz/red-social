@@ -44,7 +44,6 @@ export const Following = () => {
 
     data.users = cleanUsers;
 
-
     if (data.users && data.status == "success") {
       let newUsers = data.users;
       if (users.length >= 1) {

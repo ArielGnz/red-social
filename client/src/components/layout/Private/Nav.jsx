@@ -33,11 +33,11 @@ export const Nav = () => {
                         </NavLink>
                     </li>
 
-                    <li className="font-medium px-6 text-gray-200 hover:text-white">
+                    {/* <li className="font-medium px-6 text-gray-200 hover:text-white">
                         <NavLink to="/social/feed">
                             <span>Timeline</span>
                         </NavLink>
-                    </li>
+                    </li> */}
 
                     <li className="font-medium px-6 text-gray-200 hover:text-white">
                         <NavLink to="/social/gente">
@@ -47,8 +47,8 @@ export const Nav = () => {
 
                     <li className="font-medium px-6 text-gray-200 hover:text-white">
                         <NavLink to={"/social/perfil/" + auth._id}>
-                            {/* {auth.image != "default.png" && <img src={Global.url + "user/avatar/" + auth.image} className="list-end__img" alt="Foto de perfil" />}
-                            {auth.image == "default.png" && <img src={avatar} className="list-end__img" alt="Foto de perfil" />} */}
+                            {auth.image != "default.png" && <img src={Global.url + "user/avatar/" + auth.image} className="w-[50px] h-[40px] rounded-full " alt="Foto de perfil" />}
+                            {auth.image == "default.png" && <img src={avatar} className="w-[50px] h-[40px] rounded-full " alt="Foto de perfil" />}
                         </NavLink>
                     </li>
                     <li className="font-medium px-6 text-gray-200 hover:text-white">

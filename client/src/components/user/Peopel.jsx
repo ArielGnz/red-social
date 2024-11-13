@@ -43,7 +43,6 @@ export const Peopel = () => {
 
   }
 
-  
   return (
 
     <>

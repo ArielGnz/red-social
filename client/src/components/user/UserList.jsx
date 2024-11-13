@@ -55,7 +55,6 @@ export const UserList = ({ users, getUsers, following, setFollowing, page, setPa
     return (
 
         <>
-
             <div className="mt-[66px] flex flex-wrap w-[470px] lg:w-full lg:justify-center">
 
                 {users.map(user => {

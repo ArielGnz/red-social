@@ -68,6 +68,10 @@ export const Followers = () => {
         <h1 className="mx-auto font-semibold text-gray-600 text-2xl mt-[85px]">Seguidores de {userProfile.name}</h1>
       </header>
 
+      {users.length == 0 && 
+        <h1 className='mt-10 flex justify-center font-semibold text-gray-500 text-xl'>ESTE USUARIO NO TIENE SEGUIDORES</h1>
+      }
+
       <UserList users={users} 
                 getUsers={getUsers} 
                 following={following}
@@ -76,7 +80,7 @@ export const Followers = () => {
                 page={page}
                 setPage={setPage}
       />
-
+    
     </div>
   )
 }
